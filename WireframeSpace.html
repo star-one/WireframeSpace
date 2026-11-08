@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>UXSpace</title>
+<title>WireframeSpace</title>
 <style>
 :root{--bg:#eef1f4;--panel:#fff;--fg:#1d2733;--mut:#5d6b7a;--bd:#c5cdd6;--ac:#1f5fbf;--card:#fff;--note:#fff4c2;--noteb:#d4b02a;--notef:#4d3d00;--code:#f7f9fb;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -13,9 +13,9 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
 [hidden]{display:none!important}
-header{padding:14px 16px 0}
+header{padding:14px 16px 0;background-color: #3a4282; color: #ddd; border-bottom: 3px solid var(--noteb); margin-bottom: 2rem;}
 h1{font-size:20px;margin:0 0 2px;letter-spacing:-.01em}
-header p{margin:0;color:var(--mut);font-size:14px}
+header p{margin:0;color:#ddd;font-size:14px}
 nav.tabs{display:flex;gap:4px;padding:12px 16px 0;border-bottom:1px solid var(--bd);overflow-x:auto}
 nav.tabs button{font:inherit;font-weight:600;background:none;border:0;border-bottom:3px solid transparent;color:var(--mut);padding:8px 12px;cursor:pointer}
 nav.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--ac)}
@@ -44,7 +44,6 @@ main{padding:16px}
 .app-f{border-top:1px solid var(--bd);margin-top:24px;padding:16px;font-size:13px;color:var(--mut);display:flex;flex-direction:column;gap:6px}
 .app-f p{margin:0}
 .app-f a{color:var(--ac)}
-#flowstart,#flowdepth{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg)}
 #tut{border:2px solid var(--ac);border-radius:10px;padding:12px;margin:0 0 12px;background:var(--panel)}
 #tut h3{margin:0 0 4px;font-size:16px}
 #tut p{margin:4px 0 8px;color:var(--mut)}
@@ -71,9 +70,6 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 .act{border-radius:8px;font-weight:600}
 .bar label{font-size:14px;color:var(--mut);margin-left:auto}
 .cap{text-align:center;color:var(--mut);font-size:13px;margin-bottom:6px}
-#flow{overflow-x:auto;background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:12px}
-#flow svg{max-width:100%;height:auto}
-#flowsrc{margin-top:12px;background:var(--code);border:1px solid var(--bd);border-radius:8px;padding:12px;overflow-x:auto}
 /* wireframe styles, shared with the exported HTML */
 .wf{font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--fg,#1d2733)}
 .wf .screen{max-width:420px;margin:0 auto;background:var(--card,#fff);border:1px solid var(--bd,#c5cdd6);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px}
@@ -88,10 +84,10 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 .wf .l{color:var(--ac,#1f5fbf);text-decoration:underline;font-size:14px}
 .wf .img{min-height:110px;border:1px dashed var(--bd,#c5cdd6);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--mut,#5d6b7a);background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(128,128,128,.12) 10px 11px)}
 .wf hr{border:0;border-top:1px solid var(--bd,#c5cdd6);width:100%;margin:0}
-.wf .card{border:1px solid var(--bd,#c5cdd6);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.wf .card{border:2px solid var(--bd,#c5cdd6);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px;box-shadow: 1px 1px 5px lightgrey;}
 .wf .column,.wf .form{display:flex;flex-direction:column;gap:10px}
 .wf .nav,.wf .inline{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.wf .section{display:flex;flex-direction:column;gap:12px;border:1px solid var(--bd,#c5cdd6);border-radius:8px;padding:12px}
+.wf .section{display:flex;flex-direction:column;gap:12px;border:1px dotted var(--bd,#c5cdd6);border-radius:8px;padding:12px}
 .wf .columns{display:grid;gap:12px}
 .wf .columns>*{min-width:0}
 .wf .columns>.column{border:1px dashed var(--bd,#c5cdd6);border-radius:6px;padding:8px}
@@ -109,17 +105,26 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 
 .wf .note{background:var(--note,#fff4c2);border-left:3px solid var(--noteb,#d4b02a);color:var(--notef,#4d3d00);padding:6px 10px;font-size:13px;border-radius:0 4px 4px 0}
 .wf .unk{color:#b3261e;font-size:13px}
+.wf .screen{position:relative}
+.wf .mtray{margin-top:16px;border:2px dashed var(--bd,#c5cdd6);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:12px}
+.wf .mt-h{font-size:12px;font-weight:700;color:var(--mut,#5d6b7a);text-transform:uppercase;letter-spacing:.04em}
+.wf .mframe{display:flex;flex-direction:column;gap:4px}
+.wf .mcap{font-size:13px;color:var(--mut,#5d6b7a)}
+.wf .mback{background:rgba(0,0,0,.45);border-radius:8px;padding:24px 12px;display:flex;justify-content:center}
+.wf .mover{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;justify-content:center;align-items:flex-start;padding:60px 16px 16px;border-radius:inherit}
+.wf .mover .modal,.wf .mback .modal{width:min(420px,100%)}
+.stl{font-size:14px;color:var(--mut)}
+.sticky .bar input[type=text]{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);min-width:0;width:150px}
 </style>
 </head>
 <body>
 <header>
-<h1>UXSpace</h1>
-<p>Describe screens in text. Preview them, click through, then export for an AI.</p>
-<div class="bar" style="margin:8px 0 0"><input id="pname" type="text" placeholder="Project name" aria-label="Project name" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);min-width:0;width:min(260px,100%)"><button class="act" id="sample">Load sample</button><button class="act" id="tutload">Load tutorial</button><button class="act" id="clear">Clear</button><button class="act" id="psave">Save project</button><button class="act" id="pload">Load project</button><input type="file" id="pfile" accept=".json,application/json,.txt" hidden><span class="imgmsg"></span></div>
+<h1>WireframeSpace</h1>
+<p style="margin:1em 0;">Build working interactive wireframe designs with a simple form, tweak them in a Mermaid-like text format. Preview, click, then export for user testing and further development.</p>
 </header>
+<div class="bar" style="margin:0 1em;"><input id="pname" type="text" placeholder="Project name" aria-label="Project name" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);min-width:0;width:min(260px,100%)"><button class="act" id="psave">Save project</button><button class="act" id="pload">Load project</button><input type="file" id="pfile" accept=".txt,.wfspace,text/plain" hidden><button class="act" id="sample">Load sample</button><button class="act" id="tutload">Load tutorial</button><button class="act" id="clear">Clear</button><span class="imgmsg"></span></div>
 <nav class="tabs" role="tablist">
 <button data-t="build" aria-selected="true">Build</button>
-<button data-t="flow" aria-selected="false">Flow</button>
 <button data-t="exp" aria-selected="false">Export</button>
 </nav>
 <main>
@@ -130,18 +135,18 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 <div class="fgrid">
 <label>Within screen<select id="fs"></select></label>
 <label>Inside<select id="fc"></select></label>
-<label>Element<select id="ft"><optgroup label="Content"><option value="heading">Heading</option><option value="text">Text</option><option value="paragraph">Paragraph (Lorem ipsum)</option><option value="image">Image</option><option value="divider">Divider</option><option value="table">Table</option></optgroup><optgroup label="Form controls"><option value="input">Input</option><option value="select">Select</option><option value="checkbox">Checkbox</option></optgroup><optgroup label="Actions"><option value="button">Button</option><option value="link">Link</option><option value="tabs">Tabs</option></optgroup><optgroup label="Layout"><option value="section">Section (full-width band)</option><option value="columns">Columns (side by side, stack on mobile)</option><option value="column">Column (one column inside Columns)</option><option value="card">Card (bordered box)</option><option value="inline">Inline group (side by side, no box)</option></optgroup><optgroup label="Special"><option value="form">Form</option><option value="nav">Nav</option><option value="modal">Modal</option></optgroup><optgroup label="Reuse and notes"><option value="use">Use shared component</option><option value="note">Note</option></optgroup></select></label>
+<label>Element<select id="ft"><optgroup label="Layout"><option value="section">Section (full-width band)</option><option value="columns">Columns (side by side, stack on mobile)</option><option value="column">Column (one column inside Columns)</option><option value="card">Card (bordered box)</option><option value="inline">Inline group (side by side, no box)</option></optgroup><optgroup label="Content"><option value="heading">Heading</option><option value="text">Text</option><option value="paragraph">Paragraph (Lorem ipsum)</option><option value="image">Image</option><option value="divider">Divider</option><option value="table">Table</option></optgroup><optgroup label="Forms"><option value="form">Form</option><option value="input">Input</option><option value="select">Select</option><option value="checkbox">Checkbox</option></optgroup><optgroup label="Special"><option value="nav">Nav</option><option value="link">Link</option><option value="links">Example links (Link 1, Link 2, Link 3)</option><option value="button">Button</option><option value="modal">Modal</option><option value="tabs">Tabs</option></optgroup><optgroup label="Utility"><option value="use">Use shared component</option><option value="note">Note</option></optgroup></select></label>
 <label><span id="fll">Label</span><input id="fl" type="text" placeholder="Name it, to find it later"><select id="fls" hidden></select></label>
-<label>Goes to<select id="fto" disabled></select></label>
+<label>On click<select id="fto" disabled></select></label>
 <label><span id="fxl">Extra</span><input id="fx" type="text" placeholder="(optional)"><select id="fly" hidden><option value="1:1">2 equal columns</option><option value="1:1:1">3 equal columns</option><option value="1:1:1:1">4 equal columns</option><option value="2:1">Main + sidebar (2:1)</option><option value="3:1">Main + narrow sidebar (3:1)</option><option value="1:2">Sidebar + main (1:2)</option><option value="1:3">Narrow sidebar + main (1:3)</option><option value="1:2:1">Sidebar + main + sidebar (1:2:1)</option></select></label>
-<label>Position<select id="fp"></select></label>
+<label>Position<select id="fp"></select></label><label id="strow" hidden>Shown in<select id="fst"></select></label>
 </div>
 <div class="bar" id="newrow" hidden><input id="fns" type="text" placeholder="New screen name"><button class="act" id="fnew">Create</button></div>
 <div class="bar"><button class="act" id="fadd">Add element</button></div>
 </fieldset>
 <fieldset><legend>Edit</legend>
 <div class="bar"><select id="fm" aria-label="Element to move or delete"></select><button class="act" id="fup">Up</button><button class="act" id="fdn">Down</button><button class="act" id="fdel">Delete</button><button class="act" id="fundo">Undo</button><button class="act" id="fredo">Redo</button></div>
-<div class="fgrid"><label>Label<input id="vl" type="text"></label><label>Goes to<select id="vto"></select></label><label><span id="vxl">Extra</span><select id="vly" hidden></select><input id="vx" type="text" hidden></label><div class="bar" style="align-items:end"><button class="act" id="vapply">Apply values</button></div></div>
+<div class="fgrid"><label>Label<input id="vl" type="text"></label><label>On click<select id="vto"></select></label><label id="vstrow" hidden>Shown in<select id="vst"></select></label><label><span id="vxl">Extra</span><select id="vly" hidden></select><input id="vx" type="text" hidden></label><div class="bar" style="align-items:end"><button class="act" id="vapply">Apply values</button></div></div>
 <div class="bar"><select id="fmt" aria-label="Move into"></select><button class="act" id="fmv">Move into</button></div>
 </fieldset></div>
 <div class="ed"><div id="hl" aria-hidden="true"></div><textarea id="src" spellcheck="false" aria-label="Wireframe spec"></textarea></div>
@@ -164,6 +169,11 @@ Elements:   heading "Text"   text "Text"   paragraph (Lorem ipsum, or give text)
             tabs items=Overview|Tasks|Files
             button "Label" -> "Screen"   (style=secondary)
             link "Label" -> "Screen"
+            button "Label" opens "Modal title"    (modals sit at the bottom of a screen)
+            button "Close" closes                 (inside a modal)
+            button "Retry" state=Error            (switches this screen to a state)
+States:     screen "Name" states=Default|Empty|Error
+            any element: show-in=Empty   or   hide-in=Error|Loading
             note "Why or how it should behave"
 
 -&gt; "Screen" makes any button or link navigate in the preview.
@@ -173,127 +183,93 @@ Notes become requirements in the AI handoff.</pre></details>
 
 <section class="sticky">
 <div class="bar"><button class="act" id="back" aria-label="Back" title="Back">←</button><div id="screens" style="display:contents"></div></div>
+<div class="bar" id="stbar"></div>
 <div class="bar"><button class="chip" data-d="mobile" aria-pressed="true">Mobile</button><button class="chip" data-d="wide" aria-pressed="false">Widescreen</button><span class="vsep" aria-hidden="true"></span><button class="chip" data-m="select" aria-pressed="true">Edit</button><button class="chip" data-m="play" aria-pressed="false">Run</button><label><input type="checkbox" id="shownotes" checked> Show notes</label></div>
 <div class="cap" id="cap"></div>
 <div class="wf" id="stage"></div>
-<div class="bar" style="margin:12px 0 0"><span>Save image of</span><select id="imgscope"><option value="cur">current screen</option><option value="all">all screens</option></select><select id="imgdir" hidden><option value="v">stacked vertically</option><option value="h">side by side</option></select><button class="act" id="png">Save PNG</button><button class="act" id="svg">Save SVG</button><span class="imgmsg"></span></div>
+<div class="bar" style="margin:12px 0 0"><span>Save image of</span><select id="imgscope"><option value="cur">current screen (current state, plus its modals)</option><option value="all">all screens (every state and modal)</option></select><select id="imgdir" hidden><option value="v">stacked vertically</option><option value="h">side by side</option></select><button class="act" id="png">Save PNG</button><button class="act" id="svg">Save SVG</button><span class="imgmsg"></span></div>
 </section>
 </div>
 
-<section data-pane="flow" hidden>
-<div class="bar"><label style="margin-left:0">Start from <select id="flowstart"></select></label><select id="flowdepth" hidden><option value="1">1 level</option><option value="2" selected>2 levels</option><option value="3">3 levels</option><option value="all">all levels</option></select><label style="margin-left:0"><input type="checkbox" id="flowshared"> Show shared links on every screen</label><button class="act" id="fpng">Save PNG</button><button class="act" id="fsvg">Save SVG</button><span class="imgmsg"></span></div>
-<div id="flow"></div>
-<pre id="flowsrc"></pre>
-</section>
 
 <section data-pane="exp" hidden>
 <div class="bar">
 <button class="chip" data-x="ai" aria-pressed="true">AI handoff</button>
-<button class="chip" data-x="html" aria-pressed="false">HTML wireframe for testing</button>
+<button class="chip" data-x="html" aria-pressed="false">Shareable HTML wireframe</button>
 
 <button class="act" id="dl" style="margin-left:auto">Download</button><button class="act" id="copy">Copy</button><span class="imgmsg"></span>
 </div>
-<div class="fgrid" id="aiopts" style="margin:0 0 12px"><label>Build target<select id="aitarget"><option value="demo">Demo: HTML/CSS/JS with sample content and stock images</option><option value="starter">Starter: empty HTML/CSS/JS files</option><option value="php">PHP + MySQL project files</option><option value="fw">Framework project files</option></select></label><label id="fwrow" hidden>Framework<select id="aifw"><option>React</option><option>Next.js</option><option>Vue</option><option>Nuxt</option><option>Angular</option><option>SvelteKit</option><option>Laravel</option><option>Django</option><option>Ruby on Rails</option></select></label><label style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="airef" style="width:auto"> Include reference wireframe HTML</label><label style="grid-column:1/-1">Reference URLs for the design (optional, one per line)<textarea id="airefs" rows="2" placeholder="https://example.com" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);width:100%;min-width:0;padding:7px 8px"></textarea></label></div>
+<div class="fgrid" id="aiopts" style="margin:0 0 12px"><label>Build target<select id="aitarget"><option value="demo">Demo: HTML/CSS/JS with sample content and stock images</option><option value="starter">Starter: empty HTML/CSS/JS files</option><option value="php">PHP + MySQL project files</option><option value="fw">Framework project files</option><option value="existing">Apply to existing code</option></select></label><label id="scoperow" hidden>Apply to<select id="aiscope"><option value="all">All screens</option><option value="cur">Current screen only (the one shown in the preview)</option></select></label><label id="fwrow" hidden>Framework<select id="aifw"><option>React</option><option>Next.js</option><option>Vue</option><option>Nuxt</option><option>Angular</option><option>SvelteKit</option><option>Laravel</option><option>Django</option><option>Ruby on Rails</option></select></label><label style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="airef" style="width:auto"> Include reference wireframe HTML</label><label style="grid-column:1/-1">Reference URLs for the design (optional, one per line)<textarea id="airefs" rows="2" placeholder="https://example.com" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);width:100%;min-width:0;padding:7px 8px"></textarea></label></div>
 <textarea id="out" readonly spellcheck="false" aria-label="Export"></textarea>
 </section>
 </main>
 
-<footer class="app-f"><p>A personal project by Simon Gray. If you enjoy this, you might like some of my music on <a href="https://music.youtube.com/channel/UCrjMIoxnq99mDNAVFrSDAtQ?feature=share" target="_blank" rel="noopener">YouTube Music</a>, on <a href="https://open.spotify.com/artist/5CIBF9NCIxs4BwDytgXH8K" target="_blank" rel="noopener">Spotify</a>, on <a href="https://itunes.apple.com/gb/artist/the-winterval-conspiracy/915956596" target="_blank" rel="noopener">Apple Music</a>, and on <a href="https://www.amazon.co.uk/The-Winterval-Conspiracy/e/B00OT38POW/" target="_blank" rel="noopener">Amazon</a>. I’ve also got videos on <a href="https://www.youtube.com/@wintervalconspiracy" target="_blank" rel="noopener">YouTube</a>. If you like it enough to give me some money, you can do that via <a href="http://winterval.org.uk/" target="_blank" rel="noopener">Bandcamp</a>.</p><p>Made with Claude · <a href="https://github.com/star-one/UXSpace" target="_blank" rel="noopener">UXSpace on GitHub</a></p></footer>
+<footer style="border-top: 3px solid #b8842c;" class="app-f"><p>A project by Simon Gray. If you enjoy this, you might like some of my music on <a href="https://music.youtube.com/channel/UCrjMIoxnq99mDNAVFrSDAtQ?feature=share" target="_blank" rel="noopener">YouTube Music</a>, on <a href="https://open.spotify.com/artist/5CIBF9NCIxs4BwDytgXH8K" target="_blank" rel="noopener">Spotify</a>, on <a href="https://itunes.apple.com/gb/artist/the-winterval-conspiracy/915956596" target="_blank" rel="noopener">Apple Music</a>, and on <a href="https://www.amazon.co.uk/The-Winterval-Conspiracy/e/B00OT38POW/" target="_blank" rel="noopener">Amazon</a>. I’ve also got videos on <a href="https://www.youtube.com/@wintervalconspiracy" target="_blank" rel="noopener">YouTube</a>. If you like it enough to give me some money, you can do that via <a href="http://winterval.org.uk/" target="_blank" rel="noopener">Bandcamp</a>. Made with Claude · <a href="https://github.com/star-one/WireframeSpace" target="_blank" rel="noopener">WireframeSpace on GitHub</a></p></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 const SAMPLE=`# Lines starting with # are comments.
 # A shared component is defined once, then reused with "use".
-component "Top nav"
-  nav
-    text "Projectspace"
-    link "Home" -> "Home"
-    link "Projects" -> "Projects"
-    link "Sign out" -> "Login"
-
 screen "Home"
-  use "Top nav"
-  section "Welcome"
-    heading "Plan work together"
-    paragraph
-    image "Hero illustration"
-    inline
-      button "Get started" -> "Login"
-      button "View projects" style=secondary -> "Projects"
-  section "Why Projectspace"
-    columns layout=1:1:1
-      card
-        heading "Plan"
-        text "Break work into projects."
-      card
-        heading "Track"
-        text "See progress at a glance."
-      card
-        heading "Share"
-        text "Keep everyone in step."
+  use "Header"
+  section "Intro"
+    columns "Intro text" layout=2:1
+      column "Main"
+        paragraph
+      column "Sidebar"
+        image
+  section "Featured events"
+    columns layout=1:1:1:1
+      column "Featured 1"
+        card "Featured 1"
+          image "Thumbnail 1"
+          paragraph "Blah 1"
+      column "Featured 2"
+        card "Featured 2"
+          image "Thumbnail 2"
+          text "Blah 2"
+      column "Featured 3"
+        card "Featured 3"
+          image "Thumbnail 3"
+          text "Blah 3"
+      column "Featured 4"
+        card "Featured 4"
+          image "Thumbnail 4"
+          text "Blah 4"
+  use "Footer"
 
-screen "Login"
-  card
-    heading "Welcome back"
-    form
-      input "Email" type=email id=email
-      input "Password" type=password
-      checkbox "Keep me signed in"
-      button "Sign in" -> "Projects"
-    link "Continue as guest" -> "Projects"
-    note "Lock the account after 5 failed attempts"
+component "Footer"
+  columns layout=1:1:1
+    column "Credits"
+      heading "Credits"
+      links count=3
+    column "Social links"
+      heading "Social"
+      links count=3
+    column "Utility links"
+      heading "About"
+      links count=3
 
-screen "Projects"
-  use "Top nav"
-  heading "Your projects"
-  section "Filters"
-    inline
-      select "Status" options=All|Planning|In progress|Done
-      input "Search" type=search
-  columns layout=1:1
-    card
-      image "Project thumbnail"
-      heading "Website redesign"
-      text "Due 12 Dec"
-      button "Open" -> "Project details"
-    card
-      heading "Mobile app"
-      text "Due 20 Jan"
-      button "Open" -> "Project details"
-  divider
-  button "New project" -> "Project details"
-  note "Show only projects the user can access"
+component "Header"
+  heading "EventSpace"
+  nav "Main nav"
+    link "Home"
+    link "Events"
+    link "Submit event"
+    link "My Events"
+    input "Search" type=search
 
-screen "Project details"
-  use "Top nav"
-  heading "Website redesign"
-  tabs items=Overview|Tasks|Files
-  columns layout=2:1
-    column
-      image "Gantt chart"
-      table "Tasks" cols=Task|Owner|Due rows=3
-    column
-      card
-        heading "Details"
-        text "Owner: Sam"
-        text "Due: 12 Dec"
-      section "Actions"
-        button "Save changes" -> "Projects"
-        button "Delete project" style=secondary
-  modal "Delete this project?"
-    text "This cannot be undone."
-    inline
-      button "Delete" -> "Projects"
-      button "Cancel" style=secondary
-  note "Tabs only show the layout here; each would switch content"
+screen "Events list"
+  use "Header"
+  image "Hero image"
+
 `;
 const WFCSS=[...document.styleSheets[0].cssRules].map(r=>r.cssText).filter(t=>t.startsWith('.wf')).join('\n');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const F=String.fromCharCode(96).repeat(3);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const slug=s=>String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const TYPES=new Set(['screen','card','section','column','form','nav','columns','inline','modal','table','tabs','component','use','paragraph','heading','text','input','select','checkbox','image','divider','button','link','note']);
+const TYPES=new Set(['screen','card','section','column','form','nav','columns','inline','modal','table','tabs','links','component','use','paragraph','heading','text','input','select','checkbox','image','divider','button','link','note']);
 const ta=$('#src');
 try{ta.value=localStorage.getItem('wfw-spec')||''}catch(e){ta.value=''}
 
@@ -304,12 +280,14 @@ function parse(src){
     if(!line||line[0]==='#')return;
     const ind=Math.floor(raw.match(/^ */)[0].length/2);
     const n={type:'',label:'',attrs:{},to:'',children:[],line:i+1};
-    for(const t of line.matchAll(/"([^"]*)"|->\s*(?:"([^"]*)"|(\S+))|(\w+)=("[^"]*"|\S+)|(\S+)/g)){
+    for(const t of line.matchAll(/"([^"]*)"|->\s*(?:"([^"]*)"|(\S+))|([\w-]+)=("[^"]*"|\S+)|opens\s+"([^"]*)"|(closes)(?=\s|$)|(\S+)/g)){
       if(t[1]!==undefined)n.label=t[1];
       else if(t[2]!==undefined||t[3])n.to=t[2]??t[3];
       else if(t[4])n.attrs[t[4]]=t[5].replace(/^"|"$/g,'');
-      else if(!n.type)n.type=t[6].toLowerCase();
-      else if(!n.label)n.label=t[6];
+      else if(t[6]!==undefined)n.opens=t[6];
+      else if(t[7])n.closes=true;
+      else if(!n.type)n.type=t[8].toLowerCase();
+      else if(!n.label)n.label=t[8];
     }
     
     if(n.type==='grid'){n.type='columns';n.attrs.layout=Array(+n.attrs.cols||2).fill(1).join(':');delete n.attrs.cols}
@@ -324,17 +302,34 @@ function parse(src){
   const ids=new Set(screens.map(s=>slug(s.label)));
   const walk=(n,s)=>{if(n.to&&!ids.has(slug(n.to)))errs.push(`Line ${n.line}: no screen called “${n.to}”`);if(n.type==='use'&&!COMPS[slug(n.label)])errs.push(`Line ${n.line}: no component called “${n.label}”`);n.children.forEach(c=>walk(c,s))};
   [...screens,...comps].forEach(s=>walk(s,s));
+  [...screens,...comps].forEach(t=>{
+    const ms=all(t).filter(k=>k.type==='modal'),mn=new Set(ms.map(m=>slug(m.label)));
+    [t,...all(t)].forEach(k=>{if(k.opens&&!mn.has(slug(k.opens)))errs.push(`Line ${k.line}: no modal called \u201c${k.opens}\u201d on this screen`)});
+    if(t.type==='screen'){
+      const op=new Set(),seen=new Set(),addO=x=>[x,...all(x)].forEach(k=>{if(k.opens)op.add(slug(k.opens));if(k.type==='use'){const c=COMPS[slug(k.label)];if(c&&!seen.has(c)){seen.add(c);addO(c)}}});
+      addO(t);
+      ms.forEach(m=>{if(!op.has(slug(m.label)))errs.push(`Line ${m.line}: nothing opens the modal \u201c${m.label}\u201d`)});
+    }
+  });
   return{screens,comps,errs};
 }
 
 let PV=false;
-function R(n,notes){const h=R0(n,notes);return PV&&h&&n.type!=='use'?h.replace(/^<(\w+)/,'<$1 data-l="'+n.line+'"'):h}
+let CURST=null,EXP=false,SKIPM=false,OPEN=null;
+const STATE={};
+function R(n,notes){
+  if(CURST&&!vis(n))return'';
+  const h=R0(n,notes);if(!h||n.type==='use')return h;
+  const at=(PV?' data-l="'+n.line+'"':'')+(EXP&&n.attrs['show-in']?' data-in="'+esc(n.attrs['show-in'])+'"':'')+(EXP&&n.attrs['hide-in']?' data-out="'+esc(n.attrs['hide-in'])+'"':'');
+  return at?h.replace(/^<(\w+)/,'<$1'+at):h;
+}
 function R0(n,notes){
-  const to=n.to?` data-to="${esc(slug(n.to))}"`:'';
+  const to=(n.to?` data-to="${esc(slug(n.to))}"`:'')+(n.opens?` data-opens="${esc(slug(n.opens))}"`:'')+(n.closes?' data-closes="1"':'')+(n.attrs.state?` data-state="${esc(n.attrs.state)}"`:'');
   const kids=()=>n.children.map(c=>R(c,notes)).join('');
   const a=n.attrs;
   switch(n.type){
     case 'heading':return `<h3>${esc(n.label)}</h3>`;
+    case 'links':return `<div class="inline">${Array.from({length:Math.min(+a.count||3,8)},(_,i)=>`<a class="l" href="#">Link ${i+1}</a>`).join('')}</div>`;
     case 'paragraph':return `<p>${esc(n.label||LOREM)}</p>`;
     case 'text':return `<p>${esc(n.label)}</p>`;
     case 'input':return `<label class="f"><span>${esc(n.label)}</span><input type="${esc(a.type||'text')}" placeholder="${esc(a.placeholder||'')}"${a.id?` id="${esc(a.id)}"`:''}></label>`;
@@ -347,7 +342,7 @@ function R0(n,notes){
     case 'note':return notes?`<div class="note">${esc(n.label)}</div>`:'';
     case 'section':return `<div class="section">${n.label?`<div class="st">${esc(n.label)}</div>`:''}${kids()}</div>`;
     case 'use':return(COMPS[slug(n.label)]||{children:[]}).children.map(c=>R(c,notes)).join('');
-    case 'modal':return `<div class="modal"><div class="st">${esc(n.label||'Modal')}</div>${kids()}</div>`;
+    case 'modal':return SKIPM?'':modalBox(n,notes);
     case 'table':{const cs=(a.cols||'Column 1|Column 2').split('|'),rn=+a.rows||3;return `<table>${n.label?`<caption>${esc(n.label)}</caption>`:''}<tr>${cs.map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${Array.from({length:rn},()=>`<tr>${cs.map(()=>'<td>Text</td>').join('')}</tr>`).join('')}</table>`}
     case 'tabs':return `<div class="wtabs">${(a.items||'Tab 1|Tab 2').split('|').map((t,i)=>`<button class="${i?'':'on'}">${esc(t)}</button>`).join('')}</div>`;
     case 'column':case 'card':case 'nav':case 'form':case 'inline':return `<div class="${n.type}">${kids()}</div>`;
@@ -361,7 +356,7 @@ const refresh=()=>{
   data=parse(ta.value);
   $('#errs').innerHTML=data.errs.map(e=>`<li>${esc(e)}</li>`).join('');
   try{localStorage.setItem('wfw-spec',ta.value)}catch(e){}
-  fillForm();fillMore();if(T==='build')showPrev();renderTut(true);
+  fillForm();fillMore();fillStates();if(T==='build')showPrev();renderTut(true);
 };
 ta.addEventListener('input',refresh);
 ta.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();const s=ta.selectionStart;ta.setRangeText('  ',s,ta.selectionEnd,'end')}});
@@ -370,23 +365,32 @@ function tab(t){
   T=t;refresh();
   $$('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==t);
   $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));
-  if(t==='flow')showFlow();if(t==='exp')showExp();
+  if(t==='exp')showExp();
 }
 $$('nav.tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
 
 function go(id,push=true){
   if(push&&cur)hist.push(cur);
-  cur=id;showPrev();syncToScreen();
+  cur=id;OPEN=null;showPrev();syncToScreen();
 }
 function showPrev(){
   const ss=data.screens;
-  if(!ss.length){$('#stage').innerHTML='<div class="welcome"><h3>Welcome to UXSpace</h3><p>Plan screens and flows as text, preview them, then hand them to an AI to build. This project is empty. Choose how to start:</p><div class="bar"><button class="act" data-go="tut">Start the tutorial</button><button class="act" data-go="sample">Load the sample project</button></div><p>Or start from scratch: in the Add box, open <b>Within screen</b>, choose <b>+ Add new screen…</b>, type a name and press <b>Create</b>. To continue earlier work, use <b>Load project</b> at the top.</p></div>';$('#screens').innerHTML='';return}
+  if(!ss.length){$('#stage').innerHTML='<div class="welcome screen"><h3>Welcome to WireframeSpace</h3><p>Build working interactive wireframe designs with a simple form, tweak them in a Mermaid-like text format. Preview, click, then export for user testing and further development. This project is empty. Choose how to start:</p><div class="bar"><button class="act" data-go="tut">Start the tutorial</button><button class="act" data-go="sample">Load the sample project</button></div><p>Or start from scratch: in the Add box, open <b>Within screen</b>, choose <b>+ Add new screen…</b>, type a name and press <b>Create</b>. To continue earlier work, use <b>Load project</b> at the top.</p></div>';$('#screens').innerHTML='';$('#stbar').innerHTML='';return}
   if(!ss.some(s=>slug(s.label)===cur))cur=slug(ss[0].label);
   $('#screens').innerHTML=ss.map(s=>`<button class="chip" aria-pressed="${slug(s.label)===cur}" data-id="${slug(s.label)}">${esc(s.label)}</button>`).join('');
   $$('#screens .chip').forEach(c=>c.onclick=()=>go(c.dataset.id));
   const s=ss.find(s=>slug(s.label)===cur);
   $('#cap').textContent=s.label;
-  $('#stage').innerHTML=`<div class="screen${D==='wide'?' wide':''}">${(PV=true,s.children.map(c=>R(c,$('#shownotes').checked)).join('')+(PV=false,''))}</div>`;hilite();
+  drawStates(s);
+  {
+    const nt=$('#shownotes').checked;
+    PV=true;CURST=stateOf(s);
+    const page=pageHTML(s,nt),ms=allModals(s),op=(M==='play'&&OPEN)?ms.find(m=>slug(m.label)===OPEN):null;
+    const ov=op?`<div class="mover">${R(op,nt)}</div>`:'';
+    const tray=(M!=='play'&&ms.length)?`<div class="mtray"><div class="mt-h">Modals on this screen (each opens over a dimmed page)</div>${ms.map(m=>`<div class="mframe"><div class="mcap">Modal \u201c${esc(m.label)}\u201d \u00b7 opened by ${openersOf(s,m)}</div><div class="mback">${R(m,nt)}</div></div>`).join('')}</div>`:'';
+    PV=false;CURST=null;
+    $('#stage').innerHTML=`<div class="screen${D==='wide'?' wide':''}">${page}${ov}</div>${tray}`;hilite();
+  }
 }
 $('#stage').addEventListener('click',e=>{
   const t=e.target.closest('[data-to]');
@@ -409,84 +413,16 @@ function edges(){
   });
   return out;
 }
-const q=s=>String(s).replace(/"/g,"'");
-function walkTree(n,fn,expand,inC,seen){
-  fn(n,inC);
-  if(n.type==='use'){const c=COMPS[slug(n.label)];if(expand&&c&&!seen.has(c)){seen.add(c);c.children.forEach(k=>walkTree(k,fn,expand,true,seen))}return}
-  n.children.forEach(k=>walkTree(k,fn,expand,inC,seen));
-}
-function flowCode(){
-  const ss=data.screens,cs=data.comps,all=$('#flowshared').checked;
-  const si=new Map(ss.map((s,i)=>[slug(s.label),i])),ci=new Map(cs.map((c,i)=>[slug(c.label),i]));
-  const E=new Map(),add=(a,b,l,dot)=>{if(a===b)return;const k=a+'>'+b+(dot?'.':'');if(!E.has(k))E.set(k,{a,b,dot,l:new Set()});E.get(k).l.add(l||'link')};
-  const usedBy=ss.map(()=>new Set());
-  ss.forEach((s,i)=>{
-    walkTree(s,n=>{if(n.type==='use'&&ci.has(slug(n.label)))usedBy[i].add(ci.get(slug(n.label)))},false,false,new Set());
-    walkTree(s,(n,inC)=>{if(n.to&&si.has(slug(n.to))&&(all||!inC))add('s'+i,'s'+si.get(slug(n.to)),n.label,inC)},all,false,new Set());
-  });
-  const cu=[...new Set(usedBy.flatMap(u=>[...u]))].sort((x,y)=>x-y);
-  if(!all)cu.forEach(j=>walkTree(cs[j],n=>{if(n.to&&si.has(slug(n.to)))add('c'+j,'s'+si.get(slug(n.to)),n.label,true)},true,false,new Set([cs[j]])));
-  const st=$('#flowstart').value,dep=$('#flowdepth').value==='all'?99:+$('#flowdepth').value,keep=new Set();
-  if(st&&si.has(slug(st))){
-    keep.add('s'+si.get(slug(st)));let fr=[...keep];
-    for(let d=0;d<dep&&fr.length;d++){const nx=[];E.forEach(e=>{if(e.a[0]==='s'&&fr.includes(e.a)&&!keep.has(e.b)){keep.add(e.b);nx.push(e.b)}});fr=nx}
-  }
-  const on=x=>!keep.size||keep.has(x);
-  const cshow=cu.filter(j=>ss.some((s,i)=>on('s'+i)&&usedBy[i].has(j)));
-  const L=['flowchart TB'];
-  if(!all&&cshow.length)L.push('  subgraph shared["Shared components"]',...cshow.map(j=>`    c${j}["${q(cs[j].label)}"]`),'  end');
-  ss.forEach((s,i)=>{if(!on('s'+i))return;const u=[...usedBy[i]].map(j=>cs[j].label);L.push(`  s${i}["${q(s.label)}${u.length&&!all?'<br/>uses: '+q(u.join(', ')):''}"]`)});
-  E.forEach(e=>{if((e.a[0]==='c'?cshow.includes(+e.a.slice(1)):on(e.a))&&on(e.b))L.push(`  ${e.a} ${e.dot?'-.->':'-->'}|"${q([...e.l].join(' / '))}"| ${e.b}`)});
-  L.push('  classDef shared fill:#e8eefc,stroke:#6b7fb3,stroke-dasharray:4 3,color:#1d2733');
-  if(!all&&cshow.length)L.push('  class '+cshow.map(j=>'c'+j).join(',')+' shared');
-  if(keep.size){L.push('  classDef start stroke:#1f5fbf,stroke-width:4px');L.push('  class s'+si.get(slug(st))+' start')}
-  return L.join('\n');
-}
-let fn=0;
-async function drawFlow(code,theme,plain){
-  mermaid.initialize({startOnLoad:false,theme,flowchart:{htmlLabels:!plain}});
-  return (await mermaid.render('wf'+(++fn),code)).svg;
-}
-async function showFlow(){
-  setOpts($('#flowstart'),'<option value="">All screens</option>'+data.screens.map(s=>`<option value="${esc(s.label)}">${esc(s.label)}</option>`).join(''));
-  $('#flowdepth').hidden=!$('#flowstart').value;
-  const code=flowCode(),box=$('#flow');
-  $('#flowsrc').textContent=code;
-  if(!data.screens.length){box.textContent='No screens yet.';return}
-  try{box.innerHTML=await drawFlow(code,matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral')}
-  catch(e){box.textContent='The flow map could not be drawn. The Mermaid source is below.'}
-}
-async function flowFile(){
-  let svg=await drawFlow(flowCode(),'neutral',true);
-  const vb=(svg.match(/viewBox="([^"]+)"/)||[])[1],[x,y,w,h]=(vb||'0 0 800 600').split(/[\s,]+/).map(Number);
-  svg=svg.replace(/<svg[^>]*>/,m=>m.replace(/\swidth="[^"]*"/,'').replace(/\sheight="[^"]*"/,'').replace(/\sstyle="[^"]*"/,'').replace('<svg',`<svg width="${Math.ceil(w)}" height="${Math.ceil(h)}"`)+`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#fff"/>`);
-  return{svg,w:Math.ceil(w),h:Math.ceil(h)};
-}
-function svgToPng(svg,w,h){
-  return new Promise((res,rej)=>{
-    const im=new Image();
-    im.onload=()=>{const c=document.createElement('canvas');c.width=w*2;c.height=h*2;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);c.toBlob(res,'image/png')};
-    im.onerror=rej;im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
-  });
-}
-async function flowOut(kind){
-  try{say('Making image\u2026');const f=await flowFile();await saveFile(pf(kind==='png'?'flow.png':'flow.svg'),kind==='png'?await svgToPng(f.svg,f.w,f.h):f.svg)}
-  catch(e){say('Could not make the image.')}
-}
-$('#flowshared').addEventListener('change',showFlow);
-['#flowstart','#flowdepth'].forEach(id=>$(id).addEventListener('change',showFlow));
-$('#fpng').onclick=()=>flowOut('png');
-$('#fsvg').onclick=()=>flowOut('svg');
 function specText(){return ta.value.trim()+'\n'}
-function htmlText(){
-  const ss=data.screens;
-  const body=ss.map((s,i)=>`<section class="screen" id="${slug(s.label)}"${i?' hidden':''}>\n${s.children.map(c=>R(c,false)).join('\n')}\n</section>`).join('\n');
-  const js=`const show=id=>{document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==id);scrollTo(0,0)};\ndocument.addEventListener('click',e=>{const t=e.target.closest('[data-to]');if(t){e.preventDefault();show(t.dataset.to)}const b=e.target.closest('.wtabs button');if(b)b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});`;
-  return `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>${esc(pn())}</title>\n<style>\nbody{margin:0;padding:16px}\n${WFCSS}\n</style>\n</head>\n<body class="wf">\n${body}\n<script>\n${js}\n<\/script>\n</body>\n</html>\n`;
+function htmlText(only,noBar){
+  const ss=only?data.screens.filter(s=>slug(s.label)===only):data.screens;
+  const body=ss.map((s,i)=>`<section class="screen" id="${slug(s.label)}"${i?' hidden':''}>\n${noBar?'':stbarHTML(s)}${secHTML(s)}\n${allModals(s).map(m=>modalBox(m,false,true)).join('\n')}\n</section>`).join('\n');
+  const js=`const show=id=>{document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==id);scrollTo(0,0)};\ndocument.addEventListener('click',e=>{const t=e.target.closest('[data-to]');if(t){e.preventDefault();show(t.dataset.to)}const b=e.target.closest('.wtabs button');if(b)b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});\nfunction setSt(sec,st){sec.querySelectorAll('[data-in],[data-out]').forEach(function(el){var i=el.dataset.in,o=el.dataset.out;el.hidden=!!((i&&i.split('|').indexOf(st)<0)||(o&&o.split('|').indexOf(st)>=0))});sec.querySelectorAll('.stbar button').forEach(function(b){b.classList.toggle('on',b.dataset.st===st)})}\ndocument.querySelectorAll('section').forEach(function(sec){var b=sec.querySelector('.stbar button');if(b)setSt(sec,b.dataset.st)});\ndocument.addEventListener('click',function(e){var o=e.target.closest('[data-opens]');if(o){var d=o.closest('section').querySelector('dialog[data-m="'+o.dataset.opens+'"]');if(d)d.showModal()}var c=e.target.closest('[data-closes]');if(c){var dd=c.closest('dialog');if(dd)dd.close()}if(e.target.tagName==='DIALOG')e.target.close();var sb=e.target.closest('.stbar button');var ss=e.target.closest('[data-state]');var cs=Array.prototype.slice.call(document.querySelectorAll('section')).filter(function(x){return !x.hidden})[0];if(cs&&sb)setSt(cs,sb.dataset.st);else if(cs&&ss)setSt(cs,ss.dataset.state)});`;
+  return `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>${esc(pn())}</title>\n<style>\nbody{margin:0}\n${respCSS()}\n</style>\n</head>\n<body class="wf">\n${body}\n<script>\n${js}\n<\/script>\n</body>\n</html>\n`;
 }
 const FWH={'React':'Vite + React + React Router; src/pages and src/components','Next.js':'App Router; app/<route>/page.tsx and a components/ folder','Vue':'Vite + Vue 3 + Vue Router; src/views and src/components','Nuxt':'Nuxt 3; pages/, components/ and layouts/','Angular':'standalone components + the Angular router; one component per screen','SvelteKit':'src/routes/<route>/+page.svelte and src/lib/components','Laravel':'Blade views in resources/views, Blade components in resources/views/components, routes in routes/web.php','Django':'templates/ with a base template and includes, urls.py and views.py','Ruby on Rails':'views with partials in app/views/shared, routes.rb, one controller action per screen'};
 const TG={
-  demo:{goal:'Build a clickable demo of this interface in plain HTML, CSS and JavaScript only (no build step, no libraries). Fill it with realistic dummy content, and use stock photos matched to each image element’s label so the wireframe comes to life.',
+  demo:{goal:'Build a clickable demo of this interface in plain HTML, CSS and JavaScript only (no build step, no libraries). Fill it with realistic dummy content, and use stock photos matched to each image element\u2019s label so the wireframe comes to life.',
     files:['index.html (the first screen) and one HTML file per other screen','css/styles.css (design tokens, layout, components)','js/components.js (shared components, rendered from one definition)','js/app.js (interactions only)'],
     extra:['Use royalty-free stock photo URLs matched to each image label, with descriptive alt text and a neutral fallback if an image fails to load.','Forms validate in the browser only and show a plausible success state instead of posting anywhere.','It must work by simply opening index.html.']},
   starter:{goal:'Create an empty but well-structured starter for a production build in plain HTML, CSS and JavaScript. Do not invent content: use clear placeholders and TODO comments.',
@@ -494,18 +430,26 @@ const TG={
     extra:['No dummy copy and no stock images: use labelled placeholders (an image becomes a sized, labelled box).']},
   php:{goal:'Create the skeleton of a PHP 8 + MySQL project for this interface, ready for a developer to extend.',
     files:['One PHP page per screen','includes/ with a PHP partial for each shared component, plus header.php and footer.php','config.php (outside the web root if possible) and db.php (a PDO connection)','schema.sql with tables inferred from the data hints below','assets/css and assets/js'],
-    extra:['Use PDO prepared statements, escape all output and add CSRF tokens to forms. If there is a login screen, add a simple session-based login stub.','Keep logic out of templates and leave clear TODOs where real logic belongs.']}
+    extra:['Use PDO prepared statements, escape all output and add CSRF tokens to forms. If there is a login screen, add a simple session-based login stub.','Keep logic out of templates and leave clear TODOs where real logic belongs.']},
+  existing:{goal:'Apply this design to the code I already have. Change or add only what is needed for the screens in scope to match the design, following my existing structure and conventions (framework, templating, naming, CSS approach, routing).',
+    files:['Only the files that need to change or be created, each shown in full or as a clear diff','Reuse my existing components, partials and styles where an equivalent exists; add new ones only where nothing fits','A short list of anything I must do by hand (new routes, dependencies, migrations)'],
+    extra:['If I have not pasted my code yet, ask me for it before writing anything.','Do not rewrite or restyle unrelated parts of my code.']}
 };
 function aiText(){
-  const ss=data.screens,cs=data.comps,tg=$('#aitarget').value,fw=$('#aifw').value,fl=flat();
+  const ss=data.screens,tg=$('#aitarget').value,fw=$('#aifw').value;
+  const curS=tg==='existing'&&$('#aiscope').value==='cur'?ss.find(s=>slug(s.label)===cur):null;
   const top=k=>{while(k.parent)k=k.parent;return k};
-  const tn=k=>{k=top(k);return k.type==='component'?'shared component “'+k.label+'”':k.label};
+  const tn=k=>{k=top(k);return k.type==='component'?'shared component \u201c'+k.label+'\u201d':k.label};
+  const sc=new Set();
+  if(curS){const add=n=>all(n).filter(k=>k.type==='use').map(k=>COMPS[slug(k.label)]).filter(Boolean).forEach(c=>{if(!sc.has(c)){sc.add(c);add(c)}});add(curS)}
+  const cs=curS?data.comps.filter(c=>sc.has(c)):data.comps;
+  const fl=flat().filter(k=>!curS||top(k)===curS||sc.has(top(k)));
   const used=new Set(fl.map(k=>k.type)),ext=tg==='php'?'.php':'.html';
-  const file=(s,i)=>tg==='fw'?(i?'/'+slug(s.label):'/'):(i?slug(s.label):'index')+ext;
-  const T=tg==='fw'?{goal:`Create a ${fw} project for this interface, ready for a developer to extend.`,files:['Project structure following this convention: '+FWH[fw],'One route or page per screen','One reusable component per shared component, and for any repeated pattern','Plain CSS or CSS modules; no UI library unless I ask for one','Navigation through the framework’s router'],extra:['Write idiomatic '+fw+' code, using types where the framework normally does.']}:TG[tg];
-  const nav=ss.map((s,i)=>{const t=edges().filter(e=>e.from===i).map(e=>`${ss[e.to].label} (“${e.label||'link'}”)`);return `- ${s.label} → ${file(s,i)}: ${t.length?'links to '+t.join(', '):'no outgoing links'}`}).join('\n');
+  const file=(s,i)=>tg==='existing'?'':tg==='fw'?(i?'/'+slug(s.label):'/'):(i?slug(s.label):'index')+ext;
+  const T=tg==='fw'?{goal:`Create a ${fw} project for this interface, ready for a developer to extend.`,files:['Project structure following this convention: '+FWH[fw],'One route or page per screen','One reusable component per shared component, and for any repeated pattern','Plain CSS or CSS modules; no UI library unless I ask for one','Navigation through the framework\u2019s router'],extra:['Write idiomatic '+fw+' code, using types where the framework normally does.']}:TG[tg];
+  const nav=ss.map((s,i)=>({s,i})).filter(x=>!curS||x.s===curS).map(({s,i})=>{const t=edges().filter(e=>e.from===i).map(e=>`${ss[e.to].label} (\u201c${e.label||'link'}\u201d)`),f=file(s,i);return `- ${s.label}${f?' \u2192 '+f:''}: ${t.length?'links to '+t.join(', '):'no outgoing links'}`}).join('\n');
   const shared=cs.length?cs.map(c=>{const u=[...new Set(fl.filter(k=>k.type==='use'&&slug(k.label)===slug(c.label)).map(tn))];return `- [ ] ${c.label}: define once, reuse on ${u.length?u.join(', '):'(not used yet)'}`}).join('\n'):'- None defined';
-  const shHow={demo:'Define each in js/components.js and render it into a placeholder element, so there is one source of truth.',starter:'Put each in partials/ and load it with js/include.js, so there is one source of truth.',php:'Put each in includes/ as a PHP partial and require it wherever it is used.',fw:'Make each a reusable component in the framework’s shared components folder and import it wherever it is used.'}[tg];
+  const shHow={demo:'Define each in js/components.js and render it into a placeholder element, so there is one source of truth.',starter:'Put each in partials/ and load it with js/include.js, so there is one source of truth.',php:'Put each in includes/ as a PHP partial and require it wherever it is used.',fw:'Make each a reusable component in the framework\u2019s shared components folder and import it wherever it is used.',existing:'Reuse an existing shared header, navigation or footer component in my code if one exists; otherwise create it where my project keeps shared components.'}[tg];
   const notes=fl.filter(k=>k.type==='note').map(k=>`- [ ] ${tn(k)}: ${k.label}`);
   const generic=['- [ ] Every link and button in the navigation list works','- [ ] No horizontal page scrolling at 360 px wide','- [ ] Every form control has a visible, associated label','- [ ] Keyboard and screen-reader friendly (landmarks, focus states, alt text)','- [ ] Shared components exist once and are reused, not copied'];
   const resp=['Responsive and mobile first: check 360, 768 and 1280 px wide.',
@@ -514,22 +458,28 @@ function aiText(){
     used.has('inline')&&'inline: a wrapping flex row; make buttons full width on narrow screens.',
     used.has('card')&&'card: a bordered, padded box.',
     used.has('nav')&&'nav: a <nav> landmark that collapses to a menu button below 768 px.',
+    used.has('links')&&'links: placeholder links (Link 1, Link 2, \u2026): keep them as placeholders or ask me for the real destinations.',
     used.has('table')&&'table: a real <table> inside a wrapper with overflow-x: auto.',
     used.has('tabs')&&'tabs: an accessible tab list (role=tablist) with one panel per tab.',
-    used.has('modal')&&'modal: a <dialog> hidden by default; state your assumption about what opens it.',
+    used.has('modal')&&'modal: a <dialog> hidden by default, opened by the control marked opens and closed by a control marked closes, Esc or the backdrop.',
     used.has('image')&&'image: responsive (max-width: 100%, fixed aspect ratio) with alt text taken from its label.',
     'Use rem units, relative spacing and CSS variables for colours and spacing.'].filter(Boolean);
   const fields=fl.filter(k=>/^(input|select|checkbox)$/.test(k.type)).map(k=>`- ${tn(k)}: ${k.label} (${k.type==='input'?(k.attrs.type||'text'):k.type}${k.attrs.options?': '+k.attrs.options.split('|').join(', '):''})`);
-  const tabs=fl.filter(k=>k.type==='table').map(k=>`- ${tn(k)}: table “${k.label||'untitled'}” with columns ${(k.attrs.cols||'').split('|').join(', ')}`);
+  const tabs=fl.filter(k=>k.type==='table').map(k=>`- ${tn(k)}: table \u201c${k.label||'untitled'}\u201d with columns ${(k.attrs.cols||'').split('|').join(', ')}`);
   const urls=$('#airefs').value.split(/[\s,]+/).filter(u=>/^https?:\/\//i.test(u));
   const refs=`## Reference URLs\n${urls.length?urls.map(u=>'- '+u).join('\n')+'\nVisit these (if you can browse) and base the visual design on them: typography, colour, spacing and tone. Do not copy their content.':'Add one or more URLs here, one per line, for sites whose look and feel the design should follow (leave blank if none):\n- https://\n- https://'}\nIf you cannot open the URLs, ask me for screenshots or a description instead.\n\n`;
   const hints=(tg==='php'||tg==='fw')?`\n## Data hints (infer ${tg==='php'?'MySQL tables':'models and forms'} from these)\n${[...fields,...tabs].join('\n')||'- None'}\n`:'';
-  return `# ${pn()}: build brief (made with UXSpace)
+  const L=ta.value.split('\n'),blk=n=>L.slice(n.line-1,maxLine(n)).join('\n');
+  const spec=curS?[...cs.map(blk),blk(curS)].join('\n\n')+'\n':specText();
+  const others=curS?ss.filter(s=>s!==curS).map(s=>s.label):[];
+  const scope=tg==='existing'?`## Scope\n${curS?`Only the screen \u201c${curS.label}\u201d and the shared components it uses are in scope.${others.length?` Other screens (${others.join(', ')}) are out of scope: link to them using my existing routes and do not change them.`:''}`:'Every screen in the spec is in scope.'}\n\n`:'';
+  const mine=tg==='existing'?'## My existing code\nPaste the files that matter here (templates, styles, scripts, routes), or tell me which paths to look at, and say which stack and conventions I use.\n\n(paste code here)\n\n':'';
+  return `# ${pn()}: build brief (made with WireframeSpace)
 
 ## Goal
 ${T.goal}
 
-## Files to produce
+${scope}## Files to produce
 ${T.files.map(x=>'- '+x).join('\n')}
 
 ## Rules
@@ -542,13 +492,13 @@ ${nav}
 ${shared}
 ${cs.length?'\n'+shHow+'\n':''}
 ## Requirements checklist
-${[...notes,...generic].join('\n')}
+${[...notes,...modalReq(fl),...stateReq(ss,curS),...generic].join('\n')}
 ${hints}
 ## Design spec (indentation = nesting; -> "Screen" = navigation)
 ${F}text
-${specText()}${F}
-${$('#airef').checked?`\n## Reference wireframe (generated HTML, for visual intent only)\n${F}html\n${htmlText()}${F}\n`:''}
-${refs}## Before you start
+${spec}${F}
+${$('#airef').checked?`\n## Reference wireframe (generated HTML, for visual intent only)\n${F}html\n${htmlText(curS?slug(curS.label):undefined,true)}${F}\n`:''}
+${mine}${refs}## Before you start
 Ask me about anything ambiguous, list your assumptions at the top of your reply, then produce every file in full. Finish with a short checklist showing which requirements you met.
 `;
 }
@@ -631,14 +581,14 @@ function hilite(){$$('#stage [data-l]').forEach(x=>x.classList.toggle('sel',x.da
 function fillForm(){
   setOpts($('#fs'),tops().map(s=>`<option value="${s.line}">${esc(nm(s))}</option>`).join('')+'<option value="ns">+ Add new screen…</option><option value="nc">+ Add new shared component…</option>');
   $('#newrow').hidden=!/^n[sc]$/.test($('#fs').value);
-  setOpts($('#fto'),'<option value="">(none)</option>'+data.screens.map(s=>`<option>${esc(s.label)}</option>`).join(''));
+  {const cc=curC();setOpts($('#fto'),actOpts(cc[0],!!cc[1]&&inModal(cc[1])))}
   syncLabel();
   $('#fns').placeholder=$('#fs').value==='nc'?'New shared component name':'New screen name';
   const s=curC()[0];
   setOpts($('#fc'),'<option value="root">Screen</option>'+(s?containers(s).map(c=>`<option value="${c.line}">${'– '.repeat(c.depth-1)}${esc(lab(c))}</option>`).join(''):''));
 }
 function fillMore(){
-  const cc=curC(),c=cc[1];if(c)CTX={s:cc[0],c};
+  const cc=curC(),c=cc[1];if(c)CTX={s:cc[0],c};setOpts($('#fto'),actOpts(cc[0],!!c&&inModal(c)));
   setOpts($('#fp'),'<option value="end">At end</option>'+(c?c.children.map(k=>`<option value="${k.line}">Before ${esc(lab(k))}</option>`).join(''):''));
   setOpts($('#fm'),'<option value="">Select an element…</option>'+flat().map(k=>`<option value="${k.line}">${'– '.repeat(k.depth)}${esc(nl(k))}</option>`).join(''));
   fillTargets();
@@ -692,12 +642,13 @@ const EXT={
   select:{l:'Options',k:['options'],c:1,o:T3(['Option 1|Option 2|Option 3','Yes|No','Low|Medium|High','Planning|In progress|Done','All|Active|Archived'],'options')},
   table:{l:'Columns',k:['cols','rows'],c:1,o:['Name|Role|Status','Task|Owner|Due','Item|Quantity|Price','Name|Email|Date'].map(x=>[x.replace(/\|/g,' | '),{cols:x,rows:'3'}])},
   tabs:{l:'Tabs',k:['items'],c:1,o:T3(['Overview|Details|Settings','Home|Profile|Settings','Tab 1|Tab 2|Tab 3','All|Active|Archived'],'items')},
+  links:{l:'Number',k:['count'],o:[['3 links',{count:'3'}],['2 links',{count:'2'}],['4 links',{count:'4'}],['5 links',{count:'5'}]]},
   columns:{l:'Layout',k:['layout'],o:L8.map(([a,b])=>[a,{layout:b}])}
 };
 const optsOf=e=>e.o.map((o,i)=>`<option value="${i}">${esc(o[0])}</option>`).join('')+(e.c?'<option value="c">Custom\u2026</option>':'');
 function syncExtra(){
   const t=$('#ft').value,e=EXT[t],f=$('#fly'),x=$('#fx');
-  $('#fxl').parentNode.hidden=!e;
+  $('#fxl').parentNode.hidden=!e||/^n[sc]$/.test($('#fs').value);
   if(!e)return;
   $('#fxl').textContent=e.l;
   if(f.dataset.t!==t){f.innerHTML=optsOf(e);f.value='0';f.dataset.t=t}
@@ -717,7 +668,7 @@ function fillVx(n){
   x.value=f.value==='c'?cur:'';x.hidden=f.value!=='c';
 }
 function applyAttrs(n,t){
-  const e=EXT[t],b={...n.attrs};
+  const e=EXT[t],b={...n.attrs};stApply(n,b);if(t==='button'||t==='link')delete b.state;
   if(!e)return attrStr(b);
   e.k.forEach(k=>delete b[k]);
   const v=$('#vly').value;
@@ -727,19 +678,155 @@ function applyAttrs(n,t){
 $('#vly').addEventListener('change',()=>{$('#vx').hidden=$('#vly').value!=='c'});
 const UNDO=[],REDO=[];
 $('#stage').addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)(g.dataset.go==='tut'?$('#tutload'):$('#sample')).click()});
-$('#psave').onclick=()=>saveFile(slug(pn())+'-project.json',new Blob([JSON.stringify({app:'UXSpace',version:1,name:$('#pname').value.trim(),spec:ta.value},null,2)],{type:'application/json'}));
+$('#psave').onclick=()=>saveFile(slug(pn())+'.wfspace.txt',new Blob(['# WireframeSpace project: '+pn()+'\n'+ta.value.replace(/\s+$/,'')+'\n'],{type:'text/plain'}));
 $('#pload').onclick=()=>$('#pfile').click();
 $('#pfile').onchange=()=>{
   const f=$('#pfile').files[0];if(!f)return;
   const r=new FileReader();
   r.onload=()=>{
     let t=String(r.result),nm='';
-    try{const j=JSON.parse(t);if(j&&typeof j.spec==='string'){t=j.spec;nm=j.name||''}}catch(e){}
+    const m=t.match(/^#\s*WireframeSpace project:\s*(.*)\r?\n/);if(m){nm=m[1]==='Untitled project'?'':m[1];t=t.slice(m[0].length)}
     TUT=null;$('#pname').value=nm;$('#pname').dispatchEvent(new Event('input'));
     setText(t);say('Loaded '+f.name);
   };
   r.readAsText(f);$('#pfile').value='';
 };
+const REF=new Set(['card','columns','column','nav','form','inline','tabs']);
+const RN='Reference name only (not shown): helps you find it later';
+const PH={heading:'Text shown as the heading',text:'Text shown on the page',paragraph:'Paragraph text (leave empty for Lorem ipsum)',button:'Text shown on the button',link:'Text shown for the link',input:'Label shown above the field',select:'Label shown above the dropdown',checkbox:'Text shown next to the box',image:'Caption shown in the image box',table:'Table title shown above it (optional)',note:'A note for the developer or AI (not part of the page)',section:'Section title: shown on the page and helps you find it',modal:'Dialog title: shown on the page',card:RN,columns:RN,column:RN,nav:RN,form:RN,inline:RN,tabs:'Reference name only (tab names are set in Tabs)',links:'Not needed',divider:'Not needed'};
+function syncNew(){
+  const nw=/^n[sc]$/.test($('#fs').value);
+  ['#fc','#ft','#fl','#fto','#fp'].forEach(q=>$(q).parentNode.hidden=nw);
+  $('#fadd').parentNode.hidden=nw;
+  if(nw)$('#fxl').parentNode.hidden=true;
+}
+function respCSS(){
+  return WFCSS.split('\n').filter(l=>!/:not\(\.wide\)/.test(l)).join('\n')+`
+.wf .screen{max-width:1100px;border:0;border-radius:0;padding:24px 16px}
+.wf [hidden]{display:none!important}
+.wf .stbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;padding:6px 16px;background:#fff8d6;border-bottom:1px solid #d9c36a;color:#4d3d00}
+.wf .stbar button{font:inherit;font-size:13px;padding:2px 10px;border:1px solid #b8a04a;border-radius:999px;background:#fff;cursor:pointer}
+.wf .stbar button.on{background:#4d3d00;color:#fff}
+.wf dialog.mdl{border:0;padding:0;background:transparent;width:min(520px,92vw)}
+.wf dialog.mdl::backdrop{background:rgba(0,0,0,.45)}
+@media (max-width:768px){
+  .wf .columns{grid-template-columns:1fr!important}
+  .wf .inline,.wf .nav{flex-direction:column;align-items:stretch}
+  .wf .st{flex-basis:auto}
+  .wf table{display:block;overflow-x:auto}
+}`;
+}
+const topOf=k=>{while(k.parent)k=k.parent;return k};
+const inModal=n=>{for(let k=n;k;k=k.parent)if(k.type==='modal')return true;return false};
+const av=v=>/\s/.test(v)?`"${v}"`:v;
+const act=v=>!v?'':v.slice(0,2)==='s:'?` -> "${v.slice(2)}"`:v.slice(0,2)==='m:'?` opens "${v.slice(2)}"`:v==='close'?' closes':v.slice(0,3)==='st:'?' state='+av(v.slice(3)):'';
+const stAttr=()=>{const v=$('#strow').hidden?'':$('#fst').value;return v?' '+(v[0]==='i'?'show-in=':'hide-in=')+av(v.slice(v.indexOf(':')+1)):''};
+const vis=n=>{const i=n.attrs['show-in'],o=n.attrs['hide-in'];return !((i&&!i.split('|').includes(CURST))||(o&&o.split('|').includes(CURST)))};
+function stateList(s){
+  const dec=s.attrs.states?s.attrs.states.split('|').map(x=>x.trim()).filter(Boolean):[],men=new Set();
+  all(s).forEach(k=>['show-in','hide-in'].forEach(a=>k.attrs[a]&&k.attrs[a].split('|').forEach(x=>men.add(x.trim()))));
+  const l=dec.length?[...dec]:(men.size?['Default']:[]);
+  men.forEach(x=>{if(x&&!l.includes(x))l.push(x)});
+  return l;
+}
+function stateOf(s){const l=stateList(s);if(!l.length)return null;const c=STATE[slug(s.label)];return l.includes(c)?c:l[0]}
+const allModals=s=>all(s).filter(k=>k.type==='modal');
+function openersOf(s,m){
+  const used=[s];(function f(n){all(n).filter(k=>k.type==='use').forEach(k=>{const c=COMPS[slug(k.label)];if(c&&!used.includes(c)){used.push(c);f(c)}})})(s);
+  const o=used.flatMap(t=>all(t)).filter(k=>k.opens&&slug(k.opens)===slug(m.label));
+  return o.length?o.map(k=>`${k.type} \u201c${esc(k.label)}\u201d`).join(', '):'nothing yet (add a button or link that opens it)';
+}
+function pageHTML(s,nt){SKIPM=true;try{return s.children.map(c=>R(c,nt)).join('')}finally{SKIPM=false}}
+function secHTML(s){EXP=true;SKIPM=true;try{return s.children.map(c=>R(c,false)).join('\n')}finally{EXP=false;SKIPM=false}}
+function modalBox(n,notes,dlg){
+  const t=esc(n.label||'Modal'),inner=`<div class="modal" role="dialog" aria-label="${t}"><div class="st">${t}</div>${n.children.map(c=>R(c,notes)).join('')}</div>`;
+  return dlg?`<dialog class="mdl" data-m="${esc(slug(n.label))}">${inner}</dialog>`:inner;
+}
+function stbarHTML(s){
+  const l=stateList(s);
+  return l.length?`<div class="stbar" role="group" aria-label="Screen state (for reviewers: remove in production)"><span>State:</span>${l.map((x,i)=>`<button type="button" data-st="${esc(x)}"${i?'':' class="on"'}>${esc(x)}</button>`).join('')}</div>\n`:'';
+}
+function drawStates(s){
+  const l=stateList(s),cs=stateOf(s);
+  $('#stbar').innerHTML='<span class="stl">State:</span>'+(l.length?l.map(x=>`<button class="chip" data-st="${esc(x)}" aria-pressed="${x===cs}">${esc(x)}</button>`).join(''):'<span class="stl">none yet</span>')+'<input id="newst" type="text" placeholder="New state name" aria-label="New state name"><button class="act" id="addst">Add state</button>';
+}
+function setStates(s,arr){
+  const L=ta.value.split('\n'),v=arr.join('|');
+  L[s.line-1]=L[s.line-1].replace(/\sstates=("[^"]*"|\S+)/,'')+' states='+av(v);
+  setText(L.join('\n'));
+}
+$('#stbar').addEventListener('click',e=>{
+  const b=e.target.closest('[data-st]');
+  if(b){STATE[slug(cur)]=b.dataset.st;showPrev();return}
+  if(e.target.id==='addst'){
+    const nm=$('#newst').value.trim().replace(/[|"]/g,''),s=data.screens.find(x=>slug(x.label)===cur);if(!nm||!s)return;
+    const l=stateList(s);if(l.includes(nm))return;
+    STATE[slug(cur)]=nm;setStates(s,l.length?[...l,nm]:['Default',nm]);
+  }
+});
+function stOpts(s){
+  const l=s?stateList(s):[];
+  return l.length?'<option value="">All states</option>'+l.map(x=>`<option value="in:${esc(x)}">Only in: ${esc(x)}</option>`).join('')+l.map(x=>`<option value="out:${esc(x)}">Hidden in: ${esc(x)}</option>`).join(''):'';
+}
+function fillStates(){const s=curC()[0],o=stOpts(s&&s.type==='screen'?s:null);setOpts($('#fst'),o);$('#strow').hidden=!o||/^n[sc]$/.test($('#fs').value)}
+$('#fs').addEventListener('change',fillStates);
+function stCur(n){
+  const i=n.attrs['show-in'],o=n.attrs['hide-in'];
+  if(i&&!o&&i.split('|').length===1)return 'in:'+i;
+  if(o&&!i&&o.split('|').length===1)return 'out:'+o;
+  return (i||o)?'?':'';
+}
+function stApply(n,b){
+  if($('#vstrow').hidden)return;
+  const v=$('#vst').value;if(v===stCur(n)||v==='?')return;
+  delete b['show-in'];delete b['hide-in'];
+  if(v)b[v[0]==='i'?'show-in':'hide-in']=v.slice(v.indexOf(':')+1);
+}
+function actOpts(t,inM){
+  const scr=t&&t.type==='screen'?t:null,ms=t?all(t).filter(k=>k.type==='modal'):[],sl=scr?stateList(scr):[];
+  return '<option value="">(nothing)</option><optgroup label="Go to screen">'+data.screens.map(x=>`<option value="s:${esc(x.label)}">${esc(x.label)}</option>`).join('')+'</optgroup>'
+    +(ms.length?'<optgroup label="Open modal">'+ms.map(m=>`<option value="m:${esc(m.label)}">${esc(m.label)}</option>`).join('')+'</optgroup>':'')
+    +(inM?'<optgroup label="Close"><option value="close">Close this modal</option></optgroup>':'')
+    +(sl.length?'<optgroup label="Switch this screen to state">'+sl.map(x=>`<option value="st:${esc(x)}">${esc(x)}</option>`).join('')+'</optgroup>':'');
+}
+function actVal(n){
+  if(n.opens)return 'm:'+n.opens;
+  if(n.closes)return 'close';
+  if(n.to){const m=data.screens.find(x=>slug(x.label)===slug(n.to));return m?'s:'+m.label:''}
+  return n.attrs.state?'st:'+n.attrs.state:'';
+}
+function modalReq(fl){
+  const out=[];
+  fl.filter(k=>k.type==='modal').forEach(m=>{
+    const t=topOf(m),nm=t.type==='component'?'shared component \u201c'+t.label+'\u201d':t.label;
+    const ops=fl.filter(k=>k.opens&&slug(k.opens)===slug(m.label)).map(k=>'\u201c'+k.label+'\u201d'),cl=all(m).filter(k=>k.closes).map(k=>'\u201c'+k.label+'\u201d');
+    out.push(`- [ ] ${nm}: modal \u201c${m.label}\u201d is a <dialog>, hidden by default and shown over a dimmed backdrop; opened by ${ops.length?ops.join(', '):'(nothing yet: ask me)'}; closed by ${cl.length?cl.join(', ')+', ':''}Esc and a click on the backdrop`);
+  });
+  return out;
+}
+function stateReq(ss,curS){
+  const out=[];
+  (curS?[curS]:ss).forEach(s=>{
+    const l=stateList(s);if(!l.length)return;
+    out.push(`- [ ] ${s.label}: has states ${l.join(', ')} (the first is the default). A state shows or hides elements on the same screen; it is not a separate page`);
+    all(s).forEach(k=>{
+      const nm=k.type+(k.label?' \u201c'+k.label+'\u201d':'');
+      if(k.attrs['show-in'])out.push(`  - ${nm} appears only in: ${k.attrs['show-in'].split('|').join(', ')}`);
+      if(k.attrs['hide-in'])out.push(`  - ${nm} is hidden in: ${k.attrs['hide-in'].split('|').join(', ')}`);
+    });
+  });
+  return out;
+}
+$('#stage').addEventListener('click',e=>{
+  if(M!=='play')return;
+  const o=e.target.closest('[data-opens]');
+  if(o){OPEN=o.dataset.opens;showPrev();return}
+  if(e.target.classList.contains('mover')||e.target.closest('[data-closes]')){OPEN=null;showPrev();return}
+  const st=e.target.closest('[data-state]');
+  if(st){STATE[slug(cur)]=st.dataset.state;showPrev()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&OPEN){OPEN=null;showPrev()}});
+$$('[data-m]').forEach(b=>b.addEventListener('click',()=>{OPEN=null;showPrev()}));
 var CTX=null;
 let TUT=null;
 const pn=()=>$('#pname').value.trim()||'Untitled project';
@@ -747,7 +834,7 @@ const pf=n=>slug(pn())+'-'+n;
 try{$('#pname').value=localStorage.getItem('wfw-name')||''}catch(e){}
 $('#pname').addEventListener('input',()=>{
   try{localStorage.setItem('wfw-name',$('#pname').value)}catch(e){}
-  document.title=$('#pname').value.trim()?$('#pname').value.trim()+' \u00b7 UXSpace':'UXSpace';
+  document.title=$('#pname').value.trim()?$('#pname').value.trim()+' \u00b7 WireframeSpace':'WireframeSpace';
   if(T==='exp')showExp();
 });
 $('#airefs').addEventListener('input',showExp);
@@ -785,12 +872,12 @@ const BASIC=[
  S('Create the Home screen',['#fs','#fns','#fnew'],OL('In the <b>Add</b> box, open <b>Within screen</b> and choose <b>+ Add new screen\u2026</b>.','Type <b>Home</b> in the box that appears.','Press <b>Create</b>.')+'<p>Tip: give <b>every</b> element a label. Labels are how you find elements later in the Inside, Position, Edit and Move into lists. Your earlier text stays available through <b>Undo</b>.</p>',()=>!!homeN(),()=>mkScreen('Home')),
  S('Add a header section',['#ft','#fl','#fadd'],OL('Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Header</b>.','Press <b>Add element</b>.'),()=>!!fnd(hn(),'section',/^header$/i),()=>addIn(homeN(),'section "Header"')),
  S('Put a heading in the header',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Header section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Heading</b>.','In <b>Label</b> type <b>My site</b>, then press <b>Add element</b>.'),()=>{const h=fnd(hn(),'section',/^header$/i);return !!h&&h.children.some(c=>c.type==='heading')},()=>addIn(fnd(hn(),'section',/^header$/i),'heading "My site"')),
- S('Add a navigation bar',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Label</b> type <b>Main navigation</b>, then press <b>Add element</b>.'),()=>!!fnd(hn(),'nav',/./),()=>addIn(homeN(),'nav "Main navigation"')),
- S('Add three links to the navigation',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> now shows the navigation. Leave it.','Open <b>Element</b> and choose <b>Actions \u2192 Link</b>.','In <b>Label</b> type <b>Home</b>, set <b>Goes to</b> to <b>Home</b>, then press <b>Add element</b>.','Repeat for <b>About</b> and <b>Contact</b>, leaving Goes to on (none).'),()=>{const n=fnd(hn(),'nav',/./);return !!n&&n.children.filter(c=>c.type==='link').length>=3},()=>{const n=fnd(hn(),'nav',/./);if(!n)return;const c=n.children.filter(k=>k.type==='link').length;addIn(n,['link "Home" -> "Home"','link "About"','link "Contact"'].slice(c).join('\n'))}),
+ S('Add a navigation bar',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Reference name</b> type <b>Main navigation</b>, then press <b>Add element</b>.'),()=>!!fnd(hn(),'nav',/./),()=>addIn(homeN(),'nav "Main navigation"')),
+ S('Add three links to the navigation',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> now shows the navigation. Leave it.','Open <b>Element</b> and choose <b>Actions \u2192 Link</b>.','In <b>Label</b> type <b>Home</b>, set <b>On click</b> to <b>Go to screen \u2192 Home</b>, then press <b>Add element</b>.','Repeat for <b>About</b> and <b>Contact</b>, leaving On click on (nothing).'),()=>{const n=fnd(hn(),'nav',/./);return !!n&&n.children.filter(c=>c.type==='link').length>=3},()=>{const n=fnd(hn(),'nav',/./);if(!n)return;const c=n.children.filter(k=>k.type==='link').length;addIn(n,['link "Home" -> "Home"','link "About"','link "Contact"'].slice(c).join('\n'))}),
  S('Add a search box to the navigation',['#ft','#fl','#fly','#fadd'],OL('Open <b>Element</b> and choose <b>Form controls \u2192 Input</b>.','In <b>Label</b> type <b>Search</b>.','Set <b>Type</b> to <b>Search</b>, then press <b>Add element</b>.'),()=>{const n=fnd(hn(),'nav',/./);return !!n&&n.children.some(c=>c.type==='input')},()=>addIn(fnd(hn(),'nav',/./),'input "Search" type=search')),
- S('Add the main content area',['#fc','#ft','#fl','#fly','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Columns</b>.','In <b>Label</b> type <b>Page content</b>.','Set <b>Layout</b> to <b>Main + sidebar (2:1)</b>, then press <b>Add element</b>.')+'<p>Two columns are created for you, already labelled Main and Sidebar.</p>',()=>hn().some(k=>k.type==='columns'&&k.attrs.layout==='2:1'),()=>addIn(homeN(),'columns "Page content" layout=2:1\n  column "Main"\n  column "Sidebar"')),
+ S('Add the main content area',['#fc','#ft','#fl','#fly','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Columns</b>.','In <b>Reference name</b> type <b>Page content</b>.','Set <b>Layout</b> to <b>Main + sidebar (2:1)</b>, then press <b>Add element</b>.')+'<p>Two columns are created for you, already labelled Main and Sidebar.</p>',()=>hn().some(k=>k.type==='columns'&&k.attrs.layout==='2:1'),()=>addIn(homeN(),'columns "Page content" layout=2:1\n  column "Main"\n  column "Sidebar"')),
  S('Fill the main column',['#fc','#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Main column. Leave it.','Add a <b>Content \u2192 Heading</b> with the label <b>Main content</b>.','Then add a <b>Content \u2192 Paragraph (Lorem ipsum)</b>. Its label can stay empty.'),()=>{const m=fnd(hn(),'column',/^main$/i);return !!m&&m.children.some(c=>c.type==='heading')&&m.children.some(c=>c.type==='paragraph')},()=>addIn(fnd(hn(),'column',/^main$/i),'heading "Main content"\nparagraph')),
- S('Add a card to the sidebar',['#fc','#ft','#fl','#fadd'],OL('Open <b>Inside</b> and choose the <b>Sidebar</b> column.','Open <b>Element</b> and choose <b>Layout \u2192 Card (bordered box)</b>.','In <b>Label</b> type <b>Related links</b>, then press <b>Add element</b>.'),()=>{const c=fnd(hn(),'column',/^sidebar$/i);return !!c&&c.children.some(k=>k.type==='card')},()=>addIn(fnd(hn(),'column',/^sidebar$/i),'card "Related links"')),
+ S('Add a card to the sidebar',['#fc','#ft','#fl','#fadd'],OL('Open <b>Inside</b> and choose the <b>Sidebar</b> column.','Open <b>Element</b> and choose <b>Layout \u2192 Card (bordered box)</b>.','In <b>Reference name</b> type <b>Related links</b>, then press <b>Add element</b>.'),()=>{const c=fnd(hn(),'column',/^sidebar$/i);return !!c&&c.children.some(k=>k.type==='card')},()=>addIn(fnd(hn(),'column',/^sidebar$/i),'card "Related links"')),
  S('Put text in the card',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the card. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>Related links go here.</b>, then press <b>Add element</b>.'),()=>{const c=fnd(hn(),'column',/^sidebar$/i),d=c&&c.children.find(k=>k.type==='card');return !!d&&d.children.some(k=>k.type==='text')},()=>{const c=fnd(hn(),'column',/^sidebar$/i);addIn(c&&c.children.find(k=>k.type==='card'),'text "Related links go here."')}),
  S('Add a footer section',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Footer</b>, then press <b>Add element</b>.'),()=>!!fnd(hn(),'section',/^footer$/i),()=>addIn(homeN(),'section "Footer"')),
  S('Put text in the footer',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Footer section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>\u00a9 2026 My site</b>, then press <b>Add element</b>.'),()=>{const f=fnd(hn(),'section',/^footer$/i);return !!f&&f.children.some(k=>k.type==='text')},()=>addIn(fnd(hn(),'section',/^footer$/i),'text "\u00a9 2026 My site"')),
@@ -800,15 +887,17 @@ const ADV=[
  S('Create the About screen',['#fs','#fns','#fnew'],OL('Open <b>Within screen</b> and choose <b>+ Add new screen\u2026</b>.','Type <b>About</b>, then press <b>Create</b>.'),()=>!!aboutN(),()=>mkScreen('About')),
  S('Add a heading to About',['#ft','#fl','#fadd'],OL('Check that <b>Within screen</b> shows <b>About</b> and <b>Inside</b> shows <b>Screen</b>.','Open <b>Element</b> and choose <b>Content \u2192 Heading</b>.','In <b>Label</b> type <b>About us</b>, then press <b>Add element</b>.'),()=>an().some(k=>k.type==='heading'),()=>addIn(aboutN(),'heading "About us"')),
  S('Create a shared component',['#fs','#fns','#fnew'],OL('Keep <b>Within screen</b> on <b>About</b> and <b>Inside</b> on <b>Screen</b>.','Open <b>Within screen</b> and choose <b>+ Add new shared component\u2026</b>.','Type <b>Site nav</b>, then press <b>Create</b>.')+'<p>A <b>use</b> of it is added to About for you.</p>',()=>!!compN(),()=>{if(!aboutN())return;addIn(aboutN(),'use "Site nav"');setText(ta.value.replace(/\s+$/,'')+'\n\ncomponent "Site nav"\n')}),
- S('Add a navigation to the shared component',['#ft','#fl','#fadd'],OL('<b>Within screen</b> now shows <b>Shared component: Site nav</b>. Leave it.','Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Label</b> type <b>Site navigation</b>, then press <b>Add element</b>.'),()=>!!fnd(cn(),'nav',/./),()=>addIn(compN(),'nav "Site navigation"')),
- S('Add two links to it',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> shows the navigation. Leave it.','Add a <b>Actions \u2192 Link</b> with the label <b>Home</b> and <b>Goes to</b> set to <b>Home</b>.','Add another labelled <b>About</b> with <b>Goes to</b> set to <b>About</b>.'),()=>{const n=fnd(cn(),'nav',/./);return !!n&&n.children.filter(c=>c.type==='link'&&c.to).length>=2},()=>{const n=fnd(cn(),'nav',/./);if(!n)return;const c=n.children.filter(k=>k.type==='link').length;addIn(n,['link "Home" -> "Home"','link "About" -> "About"'].slice(c).join('\n'))}),
+ S('Add a navigation to the shared component',['#ft','#fl','#fadd'],OL('<b>Within screen</b> now shows <b>Shared component: Site nav</b>. Leave it.','Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Reference name</b> type <b>Site navigation</b>, then press <b>Add element</b>.'),()=>!!fnd(cn(),'nav',/./),()=>addIn(compN(),'nav "Site navigation"')),
+ S('Add two links to it',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> shows the navigation. Leave it.','Add a <b>Actions \u2192 Link</b> with the label <b>Home</b> and <b>On click</b> set to <b>Go to screen \u2192 Home</b>.','Add another labelled <b>About</b> with <b>On click</b> set to <b>Go to screen \u2192 About</b>.'),()=>{const n=fnd(cn(),'nav',/./);return !!n&&n.children.filter(c=>c.type==='link'&&c.to).length>=2},()=>{const n=fnd(cn(),'nav',/./);if(!n)return;const c=n.children.filter(k=>k.type==='link').length;addIn(n,['link "Home" -> "Home"','link "About" -> "About"'].slice(c).join('\n'))}),
  S('Use it on Home as well',['#fs','#fc','#ft','#fls','#fadd'],OL('Open <b>Within screen</b> and choose <b>Home</b>. Set <b>Inside</b> to <b>Screen</b>.','Open <b>Element</b> and choose <b>Reuse and notes \u2192 Use shared component</b>.','Check <b>Shared component</b> says <b>Site nav</b>, then press <b>Add element</b>.'),()=>hn().some(k=>k.type==='use'&&slug(k.label)==='site-nav'),()=>addIn(homeN(),'use "Site nav"')),
  S('Remove the old navigation from Home',['#fm','#fdel'],OL('In the <b>Edit</b> box, open the first dropdown and choose <b>nav \u201cMain navigation\u201d</b>.','Press <b>Delete</b>.'),()=>!!homeN()&&!hn().some(k=>k.type==='nav'),()=>{const n=fnd(hn(),'nav',/./);if(!n)return;const L=ta.value.split('\n');L.splice(n.line-1,maxLine(n)-n.line+1);setText(L.join('\n'))}),
  S('Add tabs and a table to About',['#fs','#ft','#fly','#fadd'],OL('Set <b>Within screen</b> to <b>About</b> and <b>Inside</b> to <b>Screen</b>.','Choose <b>Actions \u2192 Tabs</b>, pick a <b>Tabs</b> preset and press <b>Add element</b>.','Choose <b>Content \u2192 Table</b>, give it a label such as <b>Team</b>, pick a <b>Columns</b> preset and press <b>Add element</b>.'),()=>an().some(k=>k.type==='tabs')&&an().some(k=>k.type==='table'),()=>addIn(aboutN(),'tabs items=Team|History|Contact\ntable "Team" cols=Name|Role rows=3')),
- S('Add a modal',['#fc','#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Modal</b>, label it <b>Thanks for signing up</b> and press <b>Add element</b>.','Then add a <b>Content \u2192 Text</b> inside it with the label <b>We will be in touch.</b>'),()=>{const m=fnd(an(),'modal',/./);return !!m&&m.children.some(k=>k.type==='text')},()=>addIn(aboutN(),'modal "Thanks for signing up"\n  text "We will be in touch."')),
+ S('Add a screen state',['#stbar','#ft','#fl','#fst','#fadd'],OL('In the <b>State</b> row above the preview, type <b>Empty</b> and press <b>Add state</b>.','Choose <b>Content \u2192 Text</b>, type the label <b>No team members yet.</b>, set <b>Shown in</b> to <b>Only in: Empty</b> and press <b>Add element</b>.','Click <b>Default</b> and <b>Empty</b> in the State row to compare them.'),()=>an().some(k=>k.attrs['show-in']),()=>{const s=aboutN();if(!s)return;setStates(s,['Default','Empty']);addIn(aboutN(),'text "No team members yet." show-in=Empty')}),
+ S('Add a modal',['#fc','#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Modal</b>, label it <b>Thanks for signing up</b> and press <b>Add element</b>. Modals always go at the bottom of the screen.','<b>Inside</b> now shows the modal. Add a <b>Content \u2192 Text</b> labelled <b>We will be in touch.</b>, then a <b>Special \u2192 Button</b> labelled <b>Close</b> with <b>On click</b> set to <b>Close this modal</b>.')+'<p>In Edit mode the modal appears below the page, separate from it.</p>',()=>{const m=fnd(an(),'modal',/./);return !!m&&m.children.some(k=>k.type==='text')&&m.children.some(k=>k.closes)},()=>addIn(aboutN(),'modal "Thanks for signing up"\n  text "We will be in touch."\n  button "Close" closes')),
+ S('Open the modal from a button',['#fc','#ft','#fl','#fto','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Button</b> and label it <b>Sign up</b>.','Set <b>On click</b> to <b>Open modal \u2192 Thanks for signing up</b>, then press <b>Add element</b>.','Press <b>Run</b> above the preview and click the button.'),()=>an().some(k=>k.opens),()=>addIn(aboutN(),'button "Sign up" opens "Thanks for signing up"')),
  S('Add a note',['#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Reuse and notes \u2192 Note</b>, type <b>Search filters the team table</b> as the label and press <b>Add element</b>.')+'<p>Notes become requirements in the AI handoff.</p>',()=>an().some(k=>k.type==='note'),()=>addIn(aboutN(),'note "Search filters the team table"')),
  S('Try Run mode',['[data-m=play]'],OL('Above the preview, press <b>Run</b>.','Click a link or button to move between screens.'),()=>M==='play'),
- S('Export',['[data-t=exp]'],OL('Open the <b>Flow</b> tab to see how the screens connect.','Open the <b>Export</b> tab, choose a <b>Build target</b> and press <b>Copy</b> or <b>Download</b>.')+'<p>Use <b>Save project</b> at the top to keep your work.</p>',()=>T==='exp')
+ S('Export',['[data-t=exp]'],OL('Open the <b>Export</b> tab, choose a <b>Build target</b> and press <b>Copy</b> or <b>Download</b>.')+'<p>Use <b>Save project</b> at the top to keep your work.</p>',()=>T==='exp')
 ];
 function renderTut(auto){
   const el=$('#tut');
@@ -833,14 +922,14 @@ $('#tut').addEventListener('click',e=>{
 });
 $('#tutload').onclick=()=>{TUT={name:'Tutorial',steps:BASIC,i:0,msg:''};setText('')};
 $('#imgscope').addEventListener('change',()=>{$('#imgdir').hidden=$('#imgscope').value!=='all'});
-['#aitarget','#aifw','#airef'].forEach(q=>$(q).addEventListener('change',()=>{$('#fwrow').hidden=$('#aitarget').value!=='fw';showExp()}));
+['#aitarget','#aifw','#airef','#aiscope'].forEach(q=>$(q).addEventListener('change',()=>{$('#fwrow').hidden=$('#aitarget').value!=='fw';$('#scoperow').hidden=$('#aitarget').value!=='existing';showExp()}));
 $('#fadd').onclick=()=>{
-  const[s,c]=curC();if(!s)return;
-  const t=$('#ft').value,pv=$('#fp').value,col=t==='columns';
+  const[s,c0]=curC();if(!s)return;
+  const t=$('#ft').value,col=t==='columns',c=t==='modal'?s:c0,pv=t==='modal'?'end':$('#fp').value;
   const label=(t==='use'?$('#fls').value:$('#fl').value).replace(/"/g,"'").trim();
   const to=$('#fto').disabled?'':$('#fto').value,x=extraStr(t);
   const ind=' '.repeat((c.depth+1)*2);
-  const txt=[ind+t+(label?` "${label}"`:'')+(to?` -> "${to}"`:'')+(x?' '+x:'')];
+  const txt=[ind+t+(label?` "${label}"`:'')+act(to)+(x?' '+x:'')+stAttr()];
   if(col){const ly=extraObj(t).layout;ly.split(':').forEach((_,i)=>txt.push(ind+'  column "'+((CN[ly]||[])[i]||'Column '+(i+1))+'"'))}
   const at=pv==='end'?maxLine(c):+pv-1,L=ta.value.split('\n');
   L.splice(at,0,...txt);setText(L.join('\n'));
@@ -851,8 +940,8 @@ $('#fadd').onclick=()=>{
 const LOREM='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 function syncLabel(){
   const u=$('#ft').value==='use',l=$('#fl');
-  l.hidden=u;$('#fls').hidden=!u;$('#fll').textContent=u?'Shared component':'Label';
-  syncExtra();
+  l.hidden=u;$('#fls').hidden=!u;$('#fll').textContent=u?'Shared component':(REF.has($('#ft').value)?'Reference name':'Label');l.placeholder=PH[$('#ft').value]||'Label';
+  syncExtra();syncNew();
   setOpts($('#fls'),data.comps.length?data.comps.map(c=>`<option>${esc(c.label)}</option>`).join(''):'<option value="">(none defined yet)</option>');
   if(u){l.value=$('#fls').value;l.dataset.u='1'}else if(l.dataset.u){l.value='';l.dataset.u=''}
 }
@@ -872,17 +961,19 @@ const qt=v=>`"${v}"`;
 const attrStr=a=>Object.entries(a).map(([k,v])=>k+'='+(/\s/.test(v)?`"${v}"`:v)).join(' ');
 function fillVals(){
   const n=pick(),on=!!n,lk=on&&(n.type==='button'||n.type==='link');
-  setOpts($('#vto'),'<option value="">(none)</option>'+data.screens.map(s=>`<option>${esc(s.label)}</option>`).join(''));
+  setOpts($('#vto'),actOpts(on?topOf(n):null,on&&inModal(n)));
   $('#vl').value=on?n.label:'';fillVx(n);
-  const m=lk&&data.screens.find(s=>slug(s.label)===slug(n.to));
-  $('#vto').value=m?m.label:'';
+  $('#vto').value=on&&lk?actVal(n):'';
+  const ts=on?topOf(n):null,so=ts&&ts.type==='screen'?stOpts(ts):'';
+  setOpts($('#vst'),so?so+'<option value="?">Several (edit in the text)</option>':'');$('#vstrow').hidden=!so;
+  if(so)$('#vst').value=stCur(n);
   ['#vl','#vx','#vly','#vapply'].forEach(s=>$(s).disabled=!on);$('#vto').disabled=!lk;
 }
 $('#vapply').onclick=()=>{
   const n=pick();if(!n)return;
   const L=ta.value.split('\n'),ind=L[n.line-1].match(/^ */)[0],ln=n.line;
   const label=$('#vl').value.replace(/"/g,"'").trim(),to=$('#vto').disabled?'':$('#vto').value,x=applyAttrs(n,n.type);
-  L[ln-1]=ind+n.type+(label?` "${label}"`:'')+(to?` -> ${qt(to)}`:'')+(x?' '+x:'');
+  L[ln-1]=ind+n.type+(label?` "${label}"`:'')+act(to)+(x?' '+x:'');
   if(label&&label!==n.label){
     if(n.type==='screen')L.forEach((l,i)=>{if(i!==ln-1)L[i]=l.replace(/->\s*(?:"([^"]*)"|(\S+))/g,(m,a,b)=>slug(a??b)===slug(n.label)?'-> '+qt(label):m)});
     if(n.type==='component')L.forEach((l,i)=>{if(i!==ln-1)L[i]=l.replace(/^(\s*use\s+)(?:"([^"]*)"|(\S+))/,(m,p,a,b)=>slug(a??b)===slug(n.label)?p+qt(label):m)});
@@ -894,7 +985,13 @@ function sheet(all){
   const ss=all?data.screens:data.screens.filter(s=>slug(s.label)===cur),w=D==='wide'?960:420;
   const b=document.createElement('div');b.className='wf';b.setAttribute('data-cap','1');
   b.style.cssText=LIGHT+';position:fixed;left:-99999px;top:0;display:flex;flex-direction:'+(all&&$('#imgdir').value==='h'?'row':'column')+';gap:24px;align-items:flex-start;padding:24px;background:#fff;color:#1d2733';
-  b.innerHTML=ss.map(s=>`<div style="width:${w}px"><div style="text-align:center;color:#5d6b7a;font-size:13px;margin-bottom:6px">${esc(s.label)}</div><div class="screen${D==='wide'?' wide':''}" style="max-width:none">${s.children.map(c=>R(c,$('#shownotes').checked)).join('')}</div></div>`).join('');
+  const nt=$('#shownotes').checked,cap=t=>`<div style="text-align:center;color:#5d6b7a;font-size:13px;margin-bottom:6px">${esc(t)}</div>`,frames=[];
+  ss.forEach(s=>{
+    const sl=stateList(s),sts=all?(sl.length?sl:[null]):[stateOf(s)];
+    sts.forEach(st=>{CURST=st;const pg=pageHTML(s,nt);CURST=null;frames.push([s.label+(st?' \u00b7 '+st:''),pg,''])});
+    allModals(s).forEach(m=>{CURST=sts[0];const pg=pageHTML(s,nt),mb=R(m,nt);CURST=null;frames.push([s.label+' \u00b7 modal open: '+m.label,pg,`<div class="mover">${mb}</div>`])});
+  });
+  b.innerHTML=frames.map(([c,pg,ov])=>`<div style="width:${w}px">${cap(c)}<div class="screen${D==='wide'?' wide':''}" style="max-width:none">${pg}${ov}</div></div>`).join('');
   document.body.appendChild(b);return b;
 }
 async function png(b){
