@@ -244,7 +244,7 @@ Please keep the project a single dependency-light file where practical, and keep
 
 ## Licence
 
-Add the licence of your choice here (a `LICENSE` file in the repository root is recommended).
+MIT.
 
 ## Credits
 
