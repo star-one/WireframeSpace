@@ -77,7 +77,7 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 .wf h3{margin:0;font-size:18px}
 .wf p{margin:0;color:var(--mut,#5d6b7a)}
 .wf .f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mut,#5d6b7a)}
-.wf input[type=text],.wf input[type=email],.wf input[type=password],.wf input[type=number],.wf input[type=search],.wf input[type=tel],.wf select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--bd,#c5cdd6);border-radius:6px;background:transparent;color:inherit;width:100%}
+.wf input[type=date],.wf input[type=datetime-local],.wf input[type=month],.wf input[type=text],.wf input[type=email],.wf input[type=password],.wf input[type=number],.wf input[type=search],.wf input[type=tel],.wf select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--bd,#c5cdd6);border-radius:6px;background:transparent;color:inherit;width:100%}
 .wf .c{display:flex;gap:8px;align-items:center}
 .wf .b{font:inherit;font-weight:600;padding:10px 14px;border:1px solid var(--fg,#1d2733);background:var(--fg,#1d2733);color:var(--card,#fff);border-radius:6px;cursor:pointer}
 .wf .b.s{background:transparent;color:var(--fg,#1d2733)}
@@ -114,6 +114,7 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 .wf .mover{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;justify-content:center;align-items:flex-start;padding:60px 16px 16px;border-radius:inherit}
 .wf .mover .modal,.wf .mback .modal{width:min(420px,100%)}
 .stl{font-size:14px;color:var(--mut)}
+#fm,#fmt{flex:1 1 140px;min-width:0;max-width:100%;text-overflow:ellipsis}
 .sticky .bar input[type=text]{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);min-width:0;width:150px}
 </style>
 </head>
@@ -135,7 +136,7 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 <div class="fgrid">
 <label>Within screen<select id="fs"></select></label>
 <label>Inside<select id="fc"></select></label>
-<label>Element<select id="ft"><optgroup label="Layout"><option value="section">Section (full-width band)</option><option value="columns">Columns (side by side, stack on mobile)</option><option value="column">Column (one column inside Columns)</option><option value="card">Card (bordered box)</option><option value="inline">Inline group (side by side, no box)</option></optgroup><optgroup label="Content"><option value="heading">Heading</option><option value="text">Text</option><option value="paragraph">Paragraph (Lorem ipsum)</option><option value="image">Image</option><option value="divider">Divider</option><option value="table">Table</option></optgroup><optgroup label="Forms"><option value="form">Form</option><option value="input">Input</option><option value="select">Select</option><option value="checkbox">Checkbox</option></optgroup><optgroup label="Special"><option value="nav">Nav</option><option value="link">Link</option><option value="links">Example links (Link 1, Link 2, Link 3)</option><option value="button">Button</option><option value="modal">Modal</option><option value="tabs">Tabs</option></optgroup><optgroup label="Utility"><option value="use">Use shared component</option><option value="note">Note</option></optgroup></select></label>
+<label>Element<select id="ft"><optgroup label="Layout"><option value="section">Section (full-width band)</option><option value="columns">Columns (side by side, stack on mobile)</option><option value="column">Column (one column inside Columns)</option><option value="card">Card (bordered box)</option><option value="inline">Inline group (side by side, no box)</option></optgroup><optgroup label="Content"><option value="heading">Heading</option><option value="text">Text</option><option value="paragraph">Paragraph (Lorem ipsum)</option><option value="image">Image</option><option value="divider">Divider</option><option value="table">Table</option></optgroup><optgroup label="Forms"><option value="form">Form</option><option value="input">Input</option><option value="select">Select</option><option value="checkbox">Checkbox</option><option value="date">Date picker</option></optgroup><optgroup label="Special"><option value="nav">Nav</option><option value="link">Link</option><option value="links">Example links (Link 1, Link 2, Link 3)</option><option value="button">Button</option><option value="modal">Modal</option><option value="tabs">Tabs</option></optgroup><optgroup label="Utility"><option value="use">Use shared component</option><option value="note">Note</option></optgroup></select></label>
 <label><span id="fll">Label</span><input id="fl" type="text" placeholder="Name it, to find it later"><select id="fls" hidden></select></label>
 <label>On click<select id="fto" disabled></select></label>
 <label><span id="fxl">Extra</span><input id="fx" type="text" placeholder="(optional)"><select id="fly" hidden><option value="1:1">2 equal columns</option><option value="1:1:1">3 equal columns</option><option value="1:1:1:1">4 equal columns</option><option value="2:1">Main + sidebar (2:1)</option><option value="3:1">Main + narrow sidebar (3:1)</option><option value="1:2">Sidebar + main (1:2)</option><option value="1:3">Narrow sidebar + main (1:3)</option><option value="1:2:1">Sidebar + main + sidebar (1:2:1)</option></select></label>
@@ -146,7 +147,8 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 </fieldset>
 <fieldset><legend>Edit</legend>
 <div class="bar"><select id="fm" aria-label="Element to move or delete"></select><button class="act" id="fup">Up</button><button class="act" id="fdn">Down</button><button class="act" id="fdel">Delete</button><button class="act" id="fundo">Undo</button><button class="act" id="fredo">Redo</button></div>
-<div class="fgrid"><label>Label<input id="vl" type="text"></label><label>On click<select id="vto"></select></label><label id="vstrow" hidden>Shown in<select id="vst"></select></label><label><span id="vxl">Extra</span><select id="vly" hidden></select><input id="vx" type="text" hidden></label><div class="bar" style="align-items:end"><button class="act" id="vapply">Apply values</button></div></div>
+<div class="bar"><button class="act" id="fcopy">Copy</button><button class="act" id="fcut">Cut</button><button class="act" id="fpaste">Paste</button><span id="pastehint" class="stl"></span></div>
+<div class="fgrid"><label>Label<input id="vl" type="text"></label><label id="vtyrow" hidden>Change to<select id="vty"></select></label><label>On click<select id="vto"></select></label><label id="vstrow" hidden>Shown in<select id="vst"></select></label><label><span id="vxl">Extra</span><select id="vly" hidden></select><input id="vx" type="text" hidden></label><div class="bar" style="align-items:end"><button class="act" id="vapply">Apply values</button></div></div>
 <div class="bar"><select id="fmt" aria-label="Move into"></select><button class="act" id="fmv">Move into</button></div>
 </fieldset></div>
 <div class="ed"><div id="hl" aria-hidden="true"></div><textarea id="src" spellcheck="false" aria-label="Wireframe spec"></textarea></div>
@@ -199,7 +201,7 @@ Notes become requirements in the AI handoff.</pre></details>
 
 <button class="act" id="dl" style="margin-left:auto">Download</button><button class="act" id="copy">Copy</button><span class="imgmsg"></span>
 </div>
-<div class="fgrid" id="aiopts" style="margin:0 0 12px"><label>Build target<select id="aitarget"><option value="demo">Demo: HTML/CSS/JS with sample content and stock images</option><option value="starter">Starter: empty HTML/CSS/JS files</option><option value="php">PHP + MySQL project files</option><option value="fw">Framework project files</option><option value="existing">Apply to existing code</option></select></label><label id="scoperow" hidden>Apply to<select id="aiscope"><option value="all">All screens</option><option value="cur">Current screen only (the one shown in the preview)</option></select></label><label id="fwrow" hidden>Framework<select id="aifw"><option>React</option><option>Next.js</option><option>Vue</option><option>Nuxt</option><option>Angular</option><option>SvelteKit</option><option>Laravel</option><option>Django</option><option>Ruby on Rails</option></select></label><label style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="airef" style="width:auto"> Include reference wireframe HTML</label><label style="grid-column:1/-1">Reference URLs for the design (optional, one per line)<textarea id="airefs" rows="2" placeholder="https://example.com" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);width:100%;min-width:0;padding:7px 8px"></textarea></label></div>
+<div class="fgrid" id="aiopts" style="margin:0 0 12px"><label>Build target<select id="aitarget"><option value="demo">Demo: HTML/CSS/JS with sample content and stock images</option><option value="starter">Starter: empty HTML/CSS/JS files</option><option value="php">PHP + MySQL project files</option><option value="fw">Framework project files</option><option value="cms">Web Content Management System module, plugin or theme</option><option value="existing">Apply to existing code</option></select></label><label id="cmsrow" hidden>CMS option<select id="aicms"><option>Drupal theme</option><option>Drupal module</option><option>WordPress theme (classic)</option><option>WordPress block theme (site editor)</option><option>WordPress plugin</option><option>WordPress block (Gutenberg)</option><option>Joomla template</option><option>Joomla module</option><option>Craft CMS templates</option><option>Shopify theme</option><option>Ghost theme</option><option>Another CMS (name it in the special instructions)</option></select></label><label id="scoperow" hidden>Apply to<select id="aiscope"><option value="all">All screens</option><option value="cur">Current screen only (the one shown in the preview)</option></select></label><label id="fwrow" hidden>Framework<select id="aifw"><option>React</option><option>Next.js</option><option>Vue</option><option>Nuxt</option><option>Angular</option><option>SvelteKit</option><option>Laravel</option><option>Django</option><option>Ruby on Rails</option></select></label><label style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="airef" style="width:auto"> Include reference wireframe HTML</label><label style="grid-column:1/-1">Special instructions for the AI (optional)<textarea id="aispec" rows="3" placeholder="e.g. Use British English, aim for WCAG 2.2 AA, follow our existing brand colours…" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);width:100%;min-width:0;padding:7px 8px"></textarea></label><label style="grid-column:1/-1">Reference URLs for the design (optional, one per line)<textarea id="airefs" rows="2" placeholder="https://example.com" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);width:100%;min-width:0;padding:7px 8px"></textarea></label></div>
 <textarea id="out" readonly spellcheck="false" aria-label="Export"></textarea>
 </section>
 </main>
@@ -208,8 +210,26 @@ Notes become requirements in the AI handoff.</pre></details>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-const SAMPLE=`# Lines starting with # are comments.
-# A shared component is defined once, then reused with "use".
+const SAMPLE=`component "Header"
+  heading "EventSpace"
+  nav "Main nav"
+    link "Home" -> "Home"
+    link "Events" -> "Events list"
+    link "Submit event" -> "Submit event"
+    link "My Events" -> "My events"
+
+component "Footer"
+  columns layout=1:1:1
+    column "Credits"
+      heading "Credits"
+      links count=3
+    column "Social links"
+      heading "Social"
+      links count=3
+    column "Utility links"
+      heading "About"
+      links count=3
+
 screen "Home"
   use "Header"
   section "Intro"
@@ -238,38 +258,142 @@ screen "Home"
           text "Blah 4"
   use "Footer"
 
-component "Footer"
-  columns layout=1:1:1
-    column "Credits"
-      heading "Credits"
-      links count=3
-    column "Social links"
-      heading "Social"
-      links count=3
-    column "Utility links"
-      heading "About"
-      links count=3
-
-component "Header"
-  heading "EventSpace"
-  nav "Main nav"
-    link "Home"
-    link "Events"
-    link "Submit event"
-    link "My Events"
-    input "Search" type=search
-
-screen "Events list"
+screen "Events list" states="Default|No results|Booked"
   use "Header"
   image "Hero image"
+  columns "Events list and search" layout=3:1
+    column "Main"
+      section "No results" show-in="No results"
+        heading "No events found"
+        text "Try different dates or locations."
+        button "Clear filters" state=Default
+      columns "Event 1" layout=1:3 hide-in="No results"
+        column "Sidebar"
+          image "Event 1 thumbnail"
+        column "Main"
+          heading "Event 1"
+          paragraph
+          button "Book" opens "Book event"
+      columns "Event 2" layout=1:3 hide-in="No results"
+        column "Sidebar"
+          image "Event 2 thumbnail"
+        column "Main"
+          heading "Event 2"
+          paragraph
+          button "Book" opens "Book event"
+      columns "Event 3" layout=1:3 hide-in="No results"
+        column "Sidebar"
+          image "Event 3 thumbnail"
+        column "Main"
+          heading "Event 3"
+          paragraph
+          button "Book" opens "Book event"
+    column "Sidebar"
+      heading "Find events"
+      form "Search"
+        checkbox "Filter"
+        checkbox "Filter"
+        checkbox "Filter"
+        select "Locations" options="Option 1|Option 2|Option 3"
+        date "Date from"
+        date "Date to"
+      input "Search" type=search
+      button "Find events" state="No results"
+  use "Footer"
+  modal "Book event"
+    heading "Event name"
+    text "Event location, date, and time"
+    form "Your details" hide-in=Booked
+      input "Your name"
+      input "Your email address" type=email
+      button "Book" state=Booked
+    heading "You're booked" show-in=Booked
+    text "A confirmation has been sent to your email address." show-in=Booked
+    button "Close" closes state=Default
 
+screen "Submit event" states="Default|Form completed"
+  use "Header"
+  image "Hero image"
+  text "We'd love to hear about your event and put it on the site"
+  form "Event details" hide-in="Form completed"
+    input "Detail"
+    input "Detail"
+    date "Event date"
+    select "Detail" options="Option 1|Option 2|Option 3"
+    select "Detail" options="Option 1|Option 2|Option 3"
+    checkbox "Detail"
+    checkbox "Detail"
+    button "Submit your event" state="Form completed"
+    text "Please note submitted events are subject to approval before publishing"
+  section "Completion message" show-in="Form completed"
+    heading "Thank you"
+    text "Your event has been submitted. It will be published once it has been approved."
+    button "Submit another event" state=Default
+  use "Footer"
+
+screen "My events" states=Default|Empty
+  use "Header"
+  image "Hero image"
+  section "No events" show-in=Empty
+    heading "You have no events yet"
+    text "Events you submit will appear here."
+    button "Submit an event" -> "Submit event"
+  section "Upcoming events" hide-in=Empty
+    heading "Upcoming events"
+    column "Main"
+      columns "Event 1" layout=1:3
+        column "Sidebar"
+          image "Event 1 thumbnail"
+        column "Main"
+          heading "Event 1"
+          paragraph
+          button "Manage"
+      columns "Event 2" layout=1:3
+        column "Sidebar"
+          image "Event 2 thumbnail"
+        column "Main"
+          heading "Event 2"
+          paragraph
+          button "Manage"
+      columns "Event 3" layout=1:3
+        column "Sidebar"
+          image "Event 3 thumbnail"
+        column "Main"
+          heading "Event 3"
+          paragraph
+          button "Manage"
+  section "Past events" hide-in=Empty
+    heading "Past events"
+    column "Main"
+      columns "Event 1" layout=1:3
+        column "Sidebar"
+          image "Event 1 thumbnail"
+        column "Main"
+          heading "Event 4"
+          paragraph
+          button "Print souvenir ticket"
+      columns "Event 2" layout=1:3
+        column "Sidebar"
+          image "Event 2 thumbnail"
+        column "Main"
+          heading "Event 5"
+          paragraph
+          button "Print souvenir ticket"
+      columns "Event 3" layout=1:3
+        column "Sidebar"
+          image "Event 3 thumbnail"
+        column "Main"
+          heading "Event 6"
+          paragraph
+          button "Print souvenir ticket"
+  use "Footer"
 `;
 const WFCSS=[...document.styleSheets[0].cssRules].map(r=>r.cssText).filter(t=>t.startsWith('.wf')).join('\n');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const F=String.fromCharCode(96).repeat(3);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const slug=s=>String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const TYPES=new Set(['screen','card','section','column','form','nav','columns','inline','modal','table','tabs','links','component','use','paragraph','heading','text','input','select','checkbox','image','divider','button','link','note']);
+const TYPES=new Set(['screen','card','section','column','form','nav','columns','inline','modal','table','tabs','links','component','use','paragraph','date','heading','text','input','select','checkbox','image','divider','button','link','note']);
 const ta=$('#src');
 try{ta.value=localStorage.getItem('wfw-spec')||''}catch(e){ta.value=''}
 
@@ -330,6 +454,7 @@ function R0(n,notes){
   switch(n.type){
     case 'heading':return `<h3>${esc(n.label)}</h3>`;
     case 'links':return `<div class="inline">${Array.from({length:Math.min(+a.count||3,8)},(_,i)=>`<a class="l" href="#">Link ${i+1}</a>`).join('')}</div>`;
+    case 'date':return `<label class="f"><span>${esc(n.label)}</span><input type="${a.kind==='datetime'?'datetime-local':a.kind==='month'?'month':'date'}"></label>`;
     case 'paragraph':return `<p>${esc(n.label||LOREM)}</p>`;
     case 'text':return `<p>${esc(n.label)}</p>`;
     case 'input':return `<label class="f"><span>${esc(n.label)}</span><input type="${esc(a.type||'text')}" placeholder="${esc(a.placeholder||'')}"${a.id?` id="${esc(a.id)}"`:''}></label>`;
@@ -435,6 +560,63 @@ const TG={
     files:['Only the files that need to change or be created, each shown in full or as a clear diff','Reuse my existing components, partials and styles where an equivalent exists; add new ones only where nothing fits','A short list of anything I must do by hand (new routes, dependencies, migrations)'],
     extra:['If I have not pasted my code yet, ask me for it before writing anything.','Do not rewrite or restyle unrelated parts of my code.']}
 };
+const CMS={
+'Drupal theme':{g:'Create a Drupal 10/11 theme for this interface, ready to install and extend.',
+ f:['THEMENAME.info.yml (name, type: theme, base theme, regions, libraries) and THEMENAME.libraries.yml','THEMENAME.theme with preprocess functions only where Twig cannot do the job','templates/ with Twig overrides for the screens (page, node, region and block templates)','css/ and js/ registered as libraries and attached with attach_library, never linked by hand','THEMENAME.breakpoints.yml for the responsive breakpoints'],
+ x:['Follow the Drupal coding standards and keep JavaScript inside Drupal.behaviors.','Map screens to page, content type or Layout Builder templates, and navigation to the menu system rather than hard-coded links.','Use Twig autoescape and the |t filter for translatable text. Do not rebuild forms: theme the Form API output.'],
+ s:'Fill shared header and footer regions with blocks, and make other shared components Twig partials included with {% include %}.'},
+'Drupal module':{g:'Create a Drupal 10/11 module for this interface, ready to install and extend.',
+ f:['MODULENAME.info.yml, MODULENAME.module and MODULENAME.routing.yml','src/Controller/ for pages, src/Form/ for forms (Form API) and src/Plugin/Block/ for shared components','templates/ with Twig templates, and MODULENAME.libraries.yml for assets','MODULENAME.permissions.yml and config schema where settings or content types are needed','css/ and js/ attached through libraries'],
+ x:['Use Drupal APIs (routing, Form API, Entity API, render arrays), dependency injection and no raw SQL.','Add cache metadata and permission checks to every route.','Open modals with the Drupal dialog API (use-ajax with data-dialog-type="modal") instead of custom scripts.'],
+ s:'Make each shared component a block plugin, or a Twig template provided by the module.'},
+'WordPress theme (classic)':{g:'Create a classic (PHP template) WordPress theme for this interface, ready to activate and extend.',
+ f:['style.css (theme header comment) and functions.php (enqueue assets, theme supports, menus)','header.php, footer.php, index.php, front-page.php and a template for each screen (page-*.php or custom page templates)','template-parts/ for shared and repeated components, loaded with get_template_part()','assets/css and assets/js, enqueued with wp_enqueue_style and wp_enqueue_script','A screenshot.png placeholder and a README'],
+ x:['Follow the WordPress Coding Standards and the template hierarchy, and call wp_head(), wp_footer() and wp_body_open().','Escape late (esc_html, esc_attr, esc_url, wp_kses_post), use nonces on forms and make strings translatable with a text domain.','Use wp_nav_menu() for navigation and register menus and widget areas for shared regions.'],
+ s:'Make each shared component a template part in template-parts/, or a registered widget area for header and footer regions.'},
+'WordPress block theme (site editor)':{g:'Create a WordPress block theme (full site editing) for this interface, ready to activate and extend.',
+ f:['style.css and theme.json (colours, typography, spacing, content and wide widths)','templates/ (index, front-page, page, single, 404) as block markup in HTML files','parts/header.html and parts/footer.html for the shared components','patterns/ with PHP block patterns for repeated layouts','functions.php only for what theme.json cannot do'],
+ x:['Use core blocks (Group, Columns, Cover, Navigation, Query Loop) and theme.json design tokens instead of custom CSS wherever possible.','Express column ratios with the Columns block widths and let them stack on mobile.','Provide modals and tabs with a small accessible script or the Interactivity API.'],
+ s:'Make shared components template parts (header, footer) or synced block patterns.'},
+'WordPress plugin':{g:'Create a WordPress plugin for this interface, ready to activate and extend.',
+ f:['The main plugin file with the plugin header comment, plus an includes/ folder of classes','admin/ with a settings page built on the Settings API, if the design needs settings','public/ for shortcodes or blocks that output the screens, with assets enqueued properly','uninstall.php, languages/ and a readme.txt','Custom post types, taxonomies and tables only where the data hints call for them'],
+ x:['Prefix every function, class, option and hook, and avoid globals.','Check capabilities and nonces, sanitise input, validate it and escape output.','Use WordPress APIs and $wpdb->prepare(); never build SQL from user input.'],
+ s:'Make each shared component a PHP template file or class method used by every shortcode or block that needs it.'},
+'WordPress block (Gutenberg)':{g:'Create a custom Gutenberg block plugin for this interface, ready to activate and extend.',
+ f:['A plugin file that registers the block with register_block_type()','block.json (name, attributes, supports, editorScript, style)','src/ with edit.js and save.js (or render.php for a dynamic block), plus style.scss and editor.scss','package.json using @wordpress/scripts, with the output in build/','A readme.txt'],
+ x:['Use InnerBlocks for containers and attributes for labels and options.','Use block supports (spacing, colour, typography) instead of custom controls where possible.','Render on the server with render.php when the content must stay up to date.'],
+ s:'Make each shared component its own block or a reusable block pattern.'},
+'Joomla template':{g:'Create a Joomla 4/5 template for this interface, ready to install and extend.',
+ f:['templateDetails.xml and joomla.asset.json (registered assets)','index.php, component.php and error.php','html/ with layout overrides for the screens','css/ and js/ loaded through the WebAssetManager','language/ files and template_preview.png'],
+ x:['Use jdoc:include for modules, component output and messages.','Define module positions for shared regions such as header, menu, sidebar and footer.','Escape output with $this->escape() and use Joomla layouts and Bootstrap 5 classes where they fit.'],
+ s:'Make shared components module positions filled with modules, or layout files in html/layouts.'},
+'Joomla module':{g:'Create a Joomla 4/5 module for this interface, ready to install and extend.',
+ f:['mod_NAME.xml (manifest and parameters) and the mod_NAME.php entry point','src/Dispatcher/ and src/Helper/ classes (namespaced)','tmpl/default.php (the output)','language/en-GB/ files','media/ with CSS and JS registered through the WebAssetManager'],
+ x:['Use the Joomla 4/5 namespaced dispatcher pattern.','Expose labels, links and options as module parameters so the content stays editable.','Escape every output and use the WebAssetManager for assets.'],
+ s:'Keep shared markup in tmpl/ sub-templates or layouts that the module reuses.'},
+'Craft CMS templates':{g:'Create the Twig templates for a Craft CMS site for this interface.',
+ f:['templates/_layouts/base.twig as the main layout','templates/_partials/ for shared components, included with {% include %}','templates/index.twig and an entry template for each screen','A short list of the sections and fields to create in the control panel','assets/ for CSS and JS (or a Vite setup if I ask for it)'],
+ x:['Use craft.entries queries and field handles; do not hard-code content that belongs in entries.','Add csrfInput() to every form.','Keep logic in Twig minimal and name templates after the sections they serve.'],
+ s:'Make each shared component a partial in _partials/, or a global set for editable shared content.'},
+'Shopify theme':{g:'Create a Shopify Online Store 2.0 theme for this interface, ready to upload and extend.',
+ f:['layout/theme.liquid, templates/*.json and sections/*.liquid with {% schema %} blocks','snippets/ for small shared pieces','assets/ for CSS and JS, and config/settings_schema.json','locales/ for translatable text'],
+ x:['Compose JSON templates from sections, with settings in each schema so merchants can edit the content.','Use {% form %} tags for forms, and Shopify objects (product, collection, cart) where a screen is about shop data.','Keep it responsive with plain CSS and no jQuery, and follow Shopify accessibility guidance.'],
+ s:'Make shared components sections (header, footer) in section groups, or snippets for small pieces.'},
+'Ghost theme':{g:'Create a Ghost theme for this interface, ready to upload and extend.',
+ f:['package.json (theme config and custom settings), default.hbs, index.hbs, post.hbs and page.hbs','partials/ for shared components, included with {{> name}}','assets/ for CSS and JS','routes.yaml for custom routes if the screens need them'],
+ x:['Use Handlebars helpers such as {{#foreach}}, {{img_url}} and {{navigation}}, and include {{ghost_head}} and {{ghost_foot}}.','Validate the theme with gscan.','Use responsive images and keep the CSS free of external dependencies.'],
+ s:'Make each shared component a partial in partials/.'},
+'Another CMS (name it in the special instructions)':{g:'Build this interface as a module, plugin or theme for the CMS I name in the special instructions.',
+ f:['The conventional file and folder structure for that CMS, listed first','Templates or components for each screen, and shared files for shared components','Assets registered the way that CMS expects'],
+ x:['If I have not named the CMS and its version, ask me before writing anything.','Follow that CMS\u2019s coding standards and security practices (escaping, input validation, permissions).','Use the CMS\u2019s own APIs for menus, forms, content and assets instead of custom code.'],
+ s:'Use that CMS\u2019s mechanism for shared regions or components: one definition, used everywhere.'}
+};
+const cmsT=()=>{const o=CMS[$('#aicms').value]||CMS['WordPress theme (classic)'];return{goal:o.g,files:o.f,extra:o.x}};
+function resetExport(){
+  $('#aitarget').value='demo';$('#aifw').selectedIndex=0;$('#aicms').selectedIndex=0;$('#aiscope').value='all';
+  $('#aispec').value='';$('#airefs').value='';$('#airef').checked=false;
+  $('#fwrow').hidden=true;$('#cmsrow').hidden=true;$('#scoperow').hidden=true;
+  if(T==='exp')showExp();
+}
 function aiText(){
   const ss=data.screens,tg=$('#aitarget').value,fw=$('#aifw').value;
   const curS=tg==='existing'&&$('#aiscope').value==='cur'?ss.find(s=>slug(s.label)===cur):null;
@@ -445,11 +627,11 @@ function aiText(){
   const cs=curS?data.comps.filter(c=>sc.has(c)):data.comps;
   const fl=flat().filter(k=>!curS||top(k)===curS||sc.has(top(k)));
   const used=new Set(fl.map(k=>k.type)),ext=tg==='php'?'.php':'.html';
-  const file=(s,i)=>tg==='existing'?'':tg==='fw'?(i?'/'+slug(s.label):'/'):(i?slug(s.label):'index')+ext;
-  const T=tg==='fw'?{goal:`Create a ${fw} project for this interface, ready for a developer to extend.`,files:['Project structure following this convention: '+FWH[fw],'One route or page per screen','One reusable component per shared component, and for any repeated pattern','Plain CSS or CSS modules; no UI library unless I ask for one','Navigation through the framework\u2019s router'],extra:['Write idiomatic '+fw+' code, using types where the framework normally does.']}:TG[tg];
+  const file=(s,i)=>(tg==='existing'||tg==='cms')?'':tg==='fw'?(i?'/'+slug(s.label):'/'):(i?slug(s.label):'index')+ext;
+  const T=tg==='fw'?{goal:`Create a ${fw} project for this interface, ready for a developer to extend.`,files:['Project structure following this convention: '+FWH[fw],'One route or page per screen','One reusable component per shared component, and for any repeated pattern','Plain CSS or CSS modules; no UI library unless I ask for one','Navigation through the framework\u2019s router'],extra:['Write idiomatic '+fw+' code, using types where the framework normally does.']}:tg==='cms'?cmsT():TG[tg];
   const nav=ss.map((s,i)=>({s,i})).filter(x=>!curS||x.s===curS).map(({s,i})=>{const t=edges().filter(e=>e.from===i).map(e=>`${ss[e.to].label} (\u201c${e.label||'link'}\u201d)`),f=file(s,i);return `- ${s.label}${f?' \u2192 '+f:''}: ${t.length?'links to '+t.join(', '):'no outgoing links'}`}).join('\n');
   const shared=cs.length?cs.map(c=>{const u=[...new Set(fl.filter(k=>k.type==='use'&&slug(k.label)===slug(c.label)).map(tn))];return `- [ ] ${c.label}: define once, reuse on ${u.length?u.join(', '):'(not used yet)'}`}).join('\n'):'- None defined';
-  const shHow={demo:'Define each in js/components.js and render it into a placeholder element, so there is one source of truth.',starter:'Put each in partials/ and load it with js/include.js, so there is one source of truth.',php:'Put each in includes/ as a PHP partial and require it wherever it is used.',fw:'Make each a reusable component in the framework\u2019s shared components folder and import it wherever it is used.',existing:'Reuse an existing shared header, navigation or footer component in my code if one exists; otherwise create it where my project keeps shared components.'}[tg];
+  const shHow={demo:'Define each in js/components.js and render it into a placeholder element, so there is one source of truth.',starter:'Put each in partials/ and load it with js/include.js, so there is one source of truth.',php:'Put each in includes/ as a PHP partial and require it wherever it is used.',fw:'Make each a reusable component in the framework\u2019s shared components folder and import it wherever it is used.',existing:'Reuse an existing shared header, navigation or footer component in my code if one exists; otherwise create it where my project keeps shared components.'}[tg]||(tg==='cms'?CMS[$('#aicms').value].s:'');
   const notes=fl.filter(k=>k.type==='note').map(k=>`- [ ] ${tn(k)}: ${k.label}`);
   const generic=['- [ ] Every link and button in the navigation list works','- [ ] No horizontal page scrolling at 360 px wide','- [ ] Every form control has a visible, associated label','- [ ] Keyboard and screen-reader friendly (landmarks, focus states, alt text)','- [ ] Shared components exist once and are reused, not copied'];
   const resp=['Responsive and mobile first: check 360, 768 and 1280 px wide.',
@@ -464,11 +646,12 @@ function aiText(){
     used.has('modal')&&'modal: a <dialog> hidden by default, opened by the control marked opens and closed by a control marked closes, Esc or the backdrop.',
     used.has('image')&&'image: responsive (max-width: 100%, fixed aspect ratio) with alt text taken from its label.',
     'Use rem units, relative spacing and CSS variables for colours and spacing.'].filter(Boolean);
-  const fields=fl.filter(k=>/^(input|select|checkbox)$/.test(k.type)).map(k=>`- ${tn(k)}: ${k.label} (${k.type==='input'?(k.attrs.type||'text'):k.type}${k.attrs.options?': '+k.attrs.options.split('|').join(', '):''})`);
+  const fields=fl.filter(k=>/^(input|select|checkbox|date)$/.test(k.type)).map(k=>`- ${tn(k)}: ${k.label} (${k.type==='input'?(k.attrs.type||'text'):k.type}${k.attrs.options?': '+k.attrs.options.split('|').join(', '):''})`);
   const tabs=fl.filter(k=>k.type==='table').map(k=>`- ${tn(k)}: table \u201c${k.label||'untitled'}\u201d with columns ${(k.attrs.cols||'').split('|').join(', ')}`);
+  const ins=$('#aispec').value.trim(),instr=ins?`## Special instructions\n${ins}\n\n`:'';
   const urls=$('#airefs').value.split(/[\s,]+/).filter(u=>/^https?:\/\//i.test(u));
   const refs=`## Reference URLs\n${urls.length?urls.map(u=>'- '+u).join('\n')+'\nVisit these (if you can browse) and base the visual design on them: typography, colour, spacing and tone. Do not copy their content.':'Add one or more URLs here, one per line, for sites whose look and feel the design should follow (leave blank if none):\n- https://\n- https://'}\nIf you cannot open the URLs, ask me for screenshots or a description instead.\n\n`;
-  const hints=(tg==='php'||tg==='fw')?`\n## Data hints (infer ${tg==='php'?'MySQL tables':'models and forms'} from these)\n${[...fields,...tabs].join('\n')||'- None'}\n`:'';
+  const hints=(tg==='php'||tg==='fw'||tg==='cms')?`\n## Data hints (infer ${tg==='php'?'MySQL tables':tg==='cms'?'content types, fields and forms':'models and forms'} from these)\n${[...fields,...tabs].join('\n')||'- None'}\n`:'';
   const L=ta.value.split('\n'),blk=n=>L.slice(n.line-1,maxLine(n)).join('\n');
   const spec=curS?[...cs.map(blk),blk(curS)].join('\n\n')+'\n':specText();
   const others=curS?ss.filter(s=>s!==curS).map(s=>s.label):[];
@@ -479,7 +662,7 @@ function aiText(){
 ## Goal
 ${T.goal}
 
-${scope}## Files to produce
+${instr}${scope}## Files to produce
 ${T.files.map(x=>'- '+x).join('\n')}
 
 ## Rules
@@ -534,7 +717,7 @@ $('#fadd').onclick=()=>{
   const t=$('#ft').value,cv=$('#fc').value,c=cv==='root'?s:containers(s).find(c=>String(c.line)===cv)||s;
   const label=$('#fl').value.replace(/"/g,"'").trim(),to=$('#fto').disabled?'':$('#fto').value,x=$('#fx').value.trim();
   const txt=' '.repeat((c.depth+1)*2)+t+(label?` "${label}"`:'')+(to?` -> ${/\s/.test(to)?`"${to}"`:to}`:'')+(x?' '+x:'');
-  const L=ta.value.split('\n');const pv=$('#fp').value;L.splice(pv==='end'?maxLine(c):+pv-1,0,txt);setText(L.join('\n'));if(pv!=='end')$('#fp').value=String(+pv+1);
+  const L=ta.value.split('\n');const pv=$('#fp').value;L.splice(pv==='end'?endAt(c,t==='modal'):+pv-1,0,txt);setText(L.join('\n'));if(pv!=='end')$('#fp').value=String(+pv+1);
   $('#fl').value='';$('#fx').value='';$('#fl').focus();
 };
 $('#fnew').onclick=()=>{
@@ -588,14 +771,14 @@ function fillForm(){
   setOpts($('#fc'),'<option value="root">Screen</option>'+(s?containers(s).map(c=>`<option value="${c.line}">${'– '.repeat(c.depth-1)}${esc(lab(c))}</option>`).join(''):''));
 }
 function fillMore(){
-  const cc=curC(),c=cc[1];if(c)CTX={s:cc[0],c};setOpts($('#fto'),actOpts(cc[0],!!c&&inModal(c)));
+  const cc=curC(),c=cc[1];if(c)CTX={s:cc[0],c};setOpts($('#fto'),actOpts(cc[0],!!c&&inModal(c)));updatePaste();
   setOpts($('#fp'),'<option value="end">At end</option>'+(c?c.children.map(k=>`<option value="${k.line}">Before ${esc(lab(k))}</option>`).join(''):''));
-  setOpts($('#fm'),'<option value="">Select an element…</option>'+flat().map(k=>`<option value="${k.line}">${'– '.repeat(k.depth)}${esc(nl(k))}</option>`).join(''));
+  setOpts($('#fm'),'<option value="">Select an element…</option>'+scopeTops().map(t=>`<optgroup label="${esc(t.type==='screen'?'Screen: '+t.label:nm(t))}">`+[t,...all(t)].map(k=>`<option value="${k.line}">${'– '.repeat(k.depth)}${esc(nl(k))}</option>`).join('')+'</optgroup>').join(''));
   fillTargets();
 }
 function fillTargets(){
   const n=pick(),ok=n&&n.type!=='screen'&&n.type!=='component';
-  setOpts($('#fmt'),ok?flat().filter(k=>(k.type==='screen'||k.type==='component'||CONT.has(k.type))&&(k.line<n.line||k.line>maxLine(n))).map(k=>`<option value="${k.line}">${'– '.repeat(k.depth)}${esc(nl(k))}</option>`).join(''):'');
+  setOpts($('#fmt'),ok?scopeTops().flatMap(t=>[t,...all(t)]).filter(k=>(k.type==='screen'||k.type==='component'||CONT.has(k.type))&&(k.line<n.line||k.line>maxLine(n))).map(k=>`<option value="${k.line}">${'– '.repeat(k.depth)}${esc(nl(k))}</option>`).join(''):'');
   hilite();
 }
 function mv(dir){
@@ -609,7 +792,7 @@ $('#fadd').onclick=()=>{
   const[s,c]=curC();if(!s)return;
   const t=$('#ft').value,label=$('#fl').value.replace(/"/g,"'").trim(),to=$('#fto').disabled?'':$('#fto').value,x=$('#fx').value.trim(),pv=$('#fp').value;
   const txt=' '.repeat((c.depth+1)*2)+t+(label?` "${label}"`:'')+(to?` -> ${/\s/.test(to)?`"${to}"`:to}`:'')+(x?' '+x:'');
-  const L=ta.value.split('\n');L.splice(pv==='end'?maxLine(c):+pv-1,0,txt);setText(L.join('\n'));
+  const L=ta.value.split('\n');L.splice(pv==='end'?endAt(c,t==='modal'):+pv-1,0,txt);setText(L.join('\n'));
   if(CONT.has(t)){$('#fc').value=String(pv==='end'?maxLine(c)+1:+pv);fillMore()}else if(pv!=='end')$('#fp').value=String(+pv+1);
   $('#fl').value='';$('#fx').value='';$('#fl').focus();
 };
@@ -633,7 +816,7 @@ $('#stage').addEventListener('click',e=>{
   const el=e.target.closest('[data-l]');if(!el)return;
   $('#fm').value=el.dataset.l;fillTargets();const pn=pick();if(pn)ta.scrollTop=Math.max(0,(pn.line-3)*24);if(pn)syncToNode(pn);
 });
-$('#sample').onclick=()=>setText(SAMPLE);
+$('#sample').onclick=()=>{resetExport();setText(SAMPLE)};
 const L8=[['2 equal columns','1:1'],['3 equal columns','1:1:1'],['4 equal columns','1:1:1:1'],['Main + sidebar (2:1)','2:1'],['Main + narrow sidebar (3:1)','3:1'],['Sidebar + main (1:2)','1:2'],['Narrow sidebar + main (1:3)','1:3'],['Sidebar + main + sidebar (1:2:1)','1:2:1']];
 const T3=(l,k)=>l.map(x=>[x.replace(/\|/g,' | '),{[k]:x}]);
 const EXT={
@@ -643,6 +826,7 @@ const EXT={
   table:{l:'Columns',k:['cols','rows'],c:1,o:['Name|Role|Status','Task|Owner|Due','Item|Quantity|Price','Name|Email|Date'].map(x=>[x.replace(/\|/g,' | '),{cols:x,rows:'3'}])},
   tabs:{l:'Tabs',k:['items'],c:1,o:T3(['Overview|Details|Settings','Home|Profile|Settings','Tab 1|Tab 2|Tab 3','All|Active|Archived'],'items')},
   links:{l:'Number',k:['count'],o:[['3 links',{count:'3'}],['2 links',{count:'2'}],['4 links',{count:'4'}],['5 links',{count:'5'}]]},
+  date:{l:'Kind',k:['kind'],o:[['Date',{}],['Date and time',{kind:'datetime'}],['Month',{kind:'month'}]]},
   columns:{l:'Layout',k:['layout'],o:L8.map(([a,b])=>[a,{layout:b}])}
 };
 const optsOf=e=>e.o.map((o,i)=>`<option value="${i}">${esc(o[0])}</option>`).join('')+(e.c?'<option value="c">Custom\u2026</option>':'');
@@ -687,16 +871,16 @@ $('#pfile').onchange=()=>{
     let t=String(r.result),nm='';
     const m=t.match(/^#\s*WireframeSpace project:\s*(.*)\r?\n/);if(m){nm=m[1]==='Untitled project'?'':m[1];t=t.slice(m[0].length)}
     TUT=null;$('#pname').value=nm;$('#pname').dispatchEvent(new Event('input'));
-    setText(t);say('Loaded '+f.name);
+    resetExport();setText(t);say('Loaded '+f.name);
   };
   r.readAsText(f);$('#pfile').value='';
 };
 const REF=new Set(['card','columns','column','nav','form','inline','tabs']);
 const RN='Reference name only (not shown): helps you find it later';
-const PH={heading:'Text shown as the heading',text:'Text shown on the page',paragraph:'Paragraph text (leave empty for Lorem ipsum)',button:'Text shown on the button',link:'Text shown for the link',input:'Label shown above the field',select:'Label shown above the dropdown',checkbox:'Text shown next to the box',image:'Caption shown in the image box',table:'Table title shown above it (optional)',note:'A note for the developer or AI (not part of the page)',section:'Section title: shown on the page and helps you find it',modal:'Dialog title: shown on the page',card:RN,columns:RN,column:RN,nav:RN,form:RN,inline:RN,tabs:'Reference name only (tab names are set in Tabs)',links:'Not needed',divider:'Not needed'};
+const PH={heading:'Text shown as the heading',text:'Text shown on the page',paragraph:'Paragraph text (leave empty for Lorem ipsum)',button:'Text shown on the button',link:'Text shown for the link',input:'Label shown above the field',select:'Label shown above the dropdown',checkbox:'Text shown next to the box',image:'Caption shown in the image box',table:'Table title shown above it (optional)',note:'A note for the developer or AI (not part of the page)',section:'Section title: shown on the page and helps you find it',modal:'Dialog title: shown on the page',card:RN,columns:RN,column:RN,nav:RN,form:RN,inline:RN,tabs:'Reference name only (tab names are set in Tabs)',links:'Not needed',divider:'Not needed',date:'Label shown above the date field'};
 function syncNew(){
   const nw=/^n[sc]$/.test($('#fs').value);
-  ['#fc','#ft','#fl','#fto','#fp'].forEach(q=>$(q).parentNode.hidden=nw);
+  ['#fc','#ft','#fl','#fp'].forEach(q=>$(q).parentNode.hidden=nw);const tt=$('#ft').value;$('#fto').parentNode.hidden=nw||!(tt==='button'||tt==='link');
   $('#fadd').parentNode.hidden=nw;
   if(nw)$('#fxl').parentNode.hidden=true;
 }
@@ -748,7 +932,7 @@ function stbarHTML(s){
 }
 function drawStates(s){
   const l=stateList(s),cs=stateOf(s);
-  $('#stbar').innerHTML='<span class="stl">State:</span>'+(l.length?l.map(x=>`<button class="chip" data-st="${esc(x)}" aria-pressed="${x===cs}">${esc(x)}</button>`).join(''):'<span class="stl">none yet</span>')+'<input id="newst" type="text" placeholder="New state name" aria-label="New state name"><button class="act" id="addst">Add state</button>';
+  $('#stbar').innerHTML='<span class="stl">State:</span>'+(l.length?l.map(x=>`<button class="chip" data-st="${esc(x)}" aria-pressed="${x===cs}">${esc(x)}</button>`).join(''):'<span class="stl">none yet</span>')+'<input id="newst" type="text" list="stpresets" placeholder="New state (or pick one)" aria-label="New state name"><datalist id="stpresets"><option value="Empty"><option value="Loading"><option value="Error"><option value="No results"><option value="Form completed"><option value="Logged out"></datalist><button class="act" id="addst">Add state</button>';
 }
 function setStates(s,arr){
   const L=ta.value.split('\n'),v=arr.join('|');
@@ -759,11 +943,32 @@ $('#stbar').addEventListener('click',e=>{
   const b=e.target.closest('[data-st]');
   if(b){STATE[slug(cur)]=b.dataset.st;showPrev();return}
   if(e.target.id==='addst'){
-    const nm=$('#newst').value.trim().replace(/[|"]/g,''),s=data.screens.find(x=>slug(x.label)===cur);if(!nm||!s)return;
-    const l=stateList(s);if(l.includes(nm))return;
-    STATE[slug(cur)]=nm;setStates(s,l.length?[...l,nm]:['Default',nm]);
+    const n0=$('#newst').value.trim().replace(/[|"]/g,''),sc=data.screens.find(x=>slug(x.label)===cur);if(!n0||!sc)return;
+    addState(sc,/^form completed$/i.test(n0)?'Form completed':n0);
   }
 });
+function setAttrLine(L,n,key,val){L[n.line-1]=L[n.line-1].replace(new RegExp('\\s'+key+'=("[^"]*"|\\S+)'),'')+' '+key+'='+av(val)}
+function addState(sc,nm){
+  const l=stateList(sc);if(l.includes(nm))return;
+  STATE[slug(sc.label)]=nm;
+  const L=ta.value.split('\n');
+  setAttrLine(L,sc,'states',(l.length?[...l,nm]:['Default',nm]).join('|'));
+  if(nm==='Form completed'){
+    const boxes=new Set(),ins=[];
+    all(sc).filter(k=>k.type==='form').forEach(f=>{
+      const h=f.attrs['hide-in'];setAttrLine(L,f,'hide-in',(h?h.split('|').concat(nm):[nm]).join('|'));
+      all(f).filter(b=>b.type==='button'&&!b.to&&!b.opens&&!b.closes&&!b.attrs.state).forEach(b=>setAttrLine(L,b,'state',nm));
+      let c=f.parent;while(c&&c.type!=='modal'&&c!==sc)c=c.parent;boxes.add(c||sc);
+    });
+    if(!boxes.size)boxes.add(sc);
+    boxes.forEach(c=>{
+      const ind=' '.repeat((c.depth+1)*2);
+      ins.push([endAt(c,false),c.type==='modal'?[ind+'heading "Thank you" show-in='+av(nm),ind+'text "Your details have been sent." show-in='+av(nm)]:[ind+'section "Completion message" show-in='+av(nm),ind+'  heading "Thank you"',ind+'  text "Your details have been sent."']]);
+    });
+    ins.sort((a,b)=>b[0]-a[0]).forEach(([at,m])=>L.splice(at,0,...m));
+  }
+  setText(L.join('\n'));
+}
 function stOpts(s){
   const l=s?stateList(s):[];
   return l.length?'<option value="">All states</option>'+l.map(x=>`<option value="in:${esc(x)}">Only in: ${esc(x)}</option>`).join('')+l.map(x=>`<option value="out:${esc(x)}">Hidden in: ${esc(x)}</option>`).join(''):'';
@@ -809,6 +1014,7 @@ function stateReq(ss,curS){
   (curS?[curS]:ss).forEach(s=>{
     const l=stateList(s);if(!l.length)return;
     out.push(`- [ ] ${s.label}: has states ${l.join(', ')} (the first is the default). A state shows or hides elements on the same screen; it is not a separate page`);
+    if(l.some(x=>/form completed/i.test(x)))out.push('  - when the form is submitted successfully, show the completion message and hide the form');
     all(s).forEach(k=>{
       const nm=k.type+(k.label?' \u201c'+k.label+'\u201d':'');
       if(k.attrs['show-in'])out.push(`  - ${nm} appears only in: ${k.attrs['show-in'].split('|').join(', ')}`);
@@ -819,14 +1025,89 @@ function stateReq(ss,curS){
 }
 $('#stage').addEventListener('click',e=>{
   if(M!=='play')return;
-  const o=e.target.closest('[data-opens]');
-  if(o){OPEN=o.dataset.opens;showPrev();return}
-  if(e.target.classList.contains('mover')||e.target.closest('[data-closes]')){OPEN=null;showPrev();return}
-  const st=e.target.closest('[data-state]');
-  if(st){STATE[slug(cur)]=st.dataset.state;showPrev()}
+  const st=e.target.closest('[data-state]'),o=e.target.closest('[data-opens]'),cl=e.target.classList.contains('mover')||e.target.closest('[data-closes]');
+  if(!st&&!o&&!cl)return;
+  if(st)STATE[slug(cur)]=st.dataset.state;
+  if(o)OPEN=o.dataset.opens;else if(cl)OPEN=null;
+  showPrev();
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&OPEN){OPEN=null;showPrev()}});
-$$('[data-m]').forEach(b=>b.addEventListener('click',()=>{OPEN=null;showPrev()}));
+$$('[data-m]').forEach(b=>b.addEventListener('click',()=>{OPEN=null;showPrev();renderTut(true)}));
+let CLIP=null;
+function copyNode(n){
+  const L=ta.value.split('\n'),a=n.line-1,base=L[a].match(/^ */)[0].length;
+  return{type:n.type,label:n.label,lines:L.slice(a,maxLine(n)).map(l=>l.slice(Math.min(base,l.match(/^ */)[0].length)))};
+}
+function updatePaste(){
+  const h=$('#pastehint');if(!h)return;
+  if(!CLIP){h.textContent='Nothing copied yet.';return}
+  const[sc,c0]=curC();if(!sc){h.textContent='Choose a screen in the Add box to paste into.';return}
+  const mod=CLIP.type==='modal',c=mod?sc:c0,pv=mod?'end':$('#fp').value,parts=[];
+  for(let k=c;k&&k!==sc;k=k.parent)parts.unshift(k.label||k.type);
+  parts.unshift(sc.label);
+  const before=pv==='end'?null:$('#fp').selectedOptions[0].textContent;
+  h.textContent='Will paste '+CLIP.type+(CLIP.label?' \u201c'+CLIP.label+'\u201d':'')+' into '+parts.join(' \u203a ')+(before?' ('+before.toLowerCase()+')':' (at the end)');
+}
+function doCopy(cut){
+  const n=pick();
+  if(!n||n.type==='screen'||n.type==='component'){say('Select an element or container in the preview first (screens cannot be copied).');return}
+  CLIP=copyNode(n);
+  if(cut){const L=ta.value.split('\n');L.splice(n.line-1,maxLine(n)-n.line+1);setText(L.join('\n'));$('#fm').value='';fillTargets()}
+  say((cut?'Cut ':'Copied ')+n.type+(n.label?' \u201c'+n.label+'\u201d':'')+'. Choose where it goes in the Add box, then press Paste.');
+  updatePaste();
+}
+function doPaste(){
+  if(!CLIP){say('Nothing copied yet.');return}
+  const[sc,c0]=curC();if(!sc){say('Choose a screen in the Add box first.');return}
+  const mod=CLIP.type==='modal',c=mod?sc:c0,pv=mod?'end':$('#fp').value;
+  const ind=' '.repeat((c.depth+1)*2),at=pv==='end'?endAt(c,mod):+pv-1,L=ta.value.split('\n');
+  L.splice(at,0,...CLIP.lines.map(l=>ind+l));setText(L.join('\n'));
+  $('#fm').value=String(at+1);fillTargets();say('Pasted.');
+}
+$('#fcopy').onclick=()=>doCopy(false);
+$('#fcut').onclick=()=>doCopy(true);
+$('#fpaste').onclick=doPaste;
+document.addEventListener('keydown',e=>{
+  if(!(e.ctrlKey||e.metaKey)||e.altKey||T!=='build'||M!=='select')return;
+  const tg=e.target&&e.target.tagName;if(tg==='INPUT'||tg==='TEXTAREA'||tg==='SELECT')return;
+  if(String(w_sel()).length)return;
+  const k=e.key.toLowerCase();
+  if((k==='c'||k==='x')&&pick()){e.preventDefault();doCopy(k==='x')}
+  else if(k==='v'&&CLIP){e.preventDefault();doPaste()}
+});
+const w_sel=()=>window.getSelection?window.getSelection().toString():'';
+function endAt(c,mod){
+  if(mod||c.type!=='screen')return maxLine(c);
+  let k=c.children.length;while(k>0&&c.children[k-1].type==='modal')k--;
+  return k<c.children.length?c.children[k].line-1:maxLine(c);
+}
+function scopeTops(){
+  const sc=data.screens.find(s=>slug(s.label)===cur)||data.screens[0],out=[];
+  if(sc){
+    out.push(sc);const seen=new Set();
+    const add=n=>all(n).filter(k=>k.type==='use').forEach(k=>{const c=COMPS[slug(k.label)];if(c&&!seen.has(c)){seen.add(c);out.push(c);add(c)}});
+    add(sc);
+  }
+  const f=tops().find(t=>String(t.line)===$('#fs').value);
+  if(f&&f.type==='component'&&!out.includes(f))out.push(f);
+  return out;
+}
+const CONVG=[['heading','text','paragraph'],['button','link'],['input','select','checkbox','date'],['section','card','column','inline','form','nav']];
+const ALW={input:['type'],select:['options'],date:['kind'],button:['style']};
+const tyName=t=>{const o=$('#ft option[value="'+t+'"]');return o?o.textContent.replace(/ \(.*\)$/,''):t};
+function fillVty(n){
+  const g=n&&CONVG.find(x=>x.includes(n.type)),sel=$('#vty');
+  $('#vtyrow').hidden=!g;
+  if(!g){sel.innerHTML='';return}
+  sel.innerHTML='<option value="">'+esc(tyName(n.type))+' (current)</option>'+g.filter(t=>t!==n.type).map(t=>`<option value="${t}">${esc(tyName(t))}</option>`).join('');
+}
+function convAttrs(n,nt){
+  const b={};
+  [...(ALW[nt]||[]),'show-in','hide-in'].forEach(k=>{if(n.attrs[k]!==undefined)b[k]=n.attrs[k]});
+  if(nt==='select'&&!b.options)b.options='Option 1|Option 2|Option 3';
+  stApply(n,b);
+  return attrStr(b);
+}
 var CTX=null;
 let TUT=null;
 const pn=()=>$('#pname').value.trim()||'Untitled project';
@@ -838,12 +1119,14 @@ $('#pname').addEventListener('input',()=>{
   if(T==='exp')showExp();
 });
 $('#airefs').addEventListener('input',showExp);
-$('#clear').onclick=()=>{TUT=null;setText('')};
+$('#aispec').addEventListener('input',showExp);
+$('#clear').onclick=()=>{TUT=null;resetExport();setText('');$('#pname').value='';$('#pname').dispatchEvent(new Event('input'))};
 $('#fnew').onclick=()=>{
   const n=$('#fns').value.trim().replace(/"/g,"'"),isC=$('#fs').value==='nc';if(!n)return;
   const L=ta.value.replace(/\s+$/,'').split('\n');
   if(isC&&CTX)L.splice(maxLine(CTX.c),0,' '.repeat((CTX.c.depth+1)*2)+'use "'+n+'"');
   const v=L.join('\n');
+  if(!isC){cur=slug(n);OPEN=null}
   setText(v+(v?'\n\n':'')+(isC?'component':'screen')+' "'+n+'"\n');
   $('#fns').value='';
   $('#fs').value=String(tops().reduce((a,b)=>b.line>a.line?b:a).line);fillForm();fillMore();
@@ -852,52 +1135,69 @@ $('#dl').onclick=()=>{
   const m={ai:['handoff.md','text/markdown'],html:['wireframe.html','text/html'],spec:['spec.txt','text/plain']}[X];
   saveFile(pf(m[0]),new Blob([$('#out').value],{type:m[1]+';charset=utf-8'}));
 };
-const homeN=()=>data.screens.find(s=>slug(s.label)==='home'),aboutN=()=>data.screens.find(s=>slug(s.label)==='about'),compN=()=>data.comps.find(c=>slug(c.label)==='site-nav');
+const homeN=()=>data.screens[0],aboutN=()=>data.screens.find(s=>slug(s.label)==='about')||(data.screens.length>1?data.screens[1]:undefined),compN=()=>data.comps.find(c=>slug(c.label)==='site-nav')||data.comps[data.comps.length-1];
 const hn=()=>homeN()?all(homeN()):[],an=()=>aboutN()?all(aboutN()):[],cn=()=>compN()?all(compN()):[];
 const fnd=(a,t,re)=>a.find(k=>k.type===t&&re.test(k.label||''));
 const CN={'2:1':['Main','Sidebar'],'3:1':['Main','Sidebar'],'1:2':['Sidebar','Main'],'1:3':['Sidebar','Main'],'1:2:1':['Left sidebar','Main','Right sidebar']};
 function addIn(n,txt){
   if(!n)return;
   const L=ta.value.replace(/\s+$/,'').split('\n'),ind=' '.repeat((n.depth+1)*2);
-  L.splice(maxLine(n),0,...txt.split('\n').map(l=>ind+l));setText(L.join('\n')+'\n');
+  L.splice(endAt(n,/^modal /.test(txt)),0,...txt.split('\n').map(l=>ind+l));setText(L.join('\n')+'\n');
 }
 function mkScreen(label){
   if(tops().some(s=>slug(s.label)===slug(label)))return;
-  const v=ta.value.replace(/\s+$/,'');setText((v?v+'\n\n':'')+'screen "'+label+'"\n');
+  const v=ta.value.replace(/\s+$/,'');cur=slug(label);setText((v?v+'\n\n':'')+'screen "'+label+'"\n');
 }
+/* finders and "make sure it exists" helpers: every Do it for me action builds what it needs */
+const eScr=()=>{if(!homeN())mkScreen('Home');return homeN()};
+const hdr=()=>fnd(hn(),'section',/head/i),nv=()=>fnd(hn(),'nav',/./),cols=()=>hn().find(k=>k.type==='columns'&&k.children.length>=2),ftr=()=>fnd(hn(),'section',/foot/i);
+const mainC=()=>{const c=cols();return c&&(fnd(c.children,'column',/main/i)||c.children[0])},sideC=()=>{const c=cols();return c&&(fnd(c.children,'column',/side/i)||c.children[c.children.length-1])};
+const cardIn=c=>c&&c.children.find(k=>k.type==='card');
+const eHdr=()=>{if(!hdr())addIn(eScr(),'section "Header"');return hdr()};
+const eNv=()=>{if(!nv())addIn(eScr(),'nav "Main navigation"');return nv()};
+const eCols=()=>{if(!cols())addIn(eScr(),'columns "Page content" layout=2:1\n  column "Main"\n  column "Sidebar"');return cols()};
+const eFtr=()=>{if(!ftr())addIn(eScr(),'section "Footer"');return ftr()};
+const eAbout=()=>{if(!aboutN())mkScreen('About');return aboutN()};
+const eComp=()=>{if(!compN()){const a=eAbout();addIn(a,'use "Site nav"');setText(ta.value.replace(/\s+$/,'')+'\n\ncomponent "Site nav"\n')}return compN()};
+const eCnav=()=>{const c=eComp();if(!fnd(all(c),'nav',/./))addIn(c,'nav "Site navigation"');return fnd(cn(),'nav',/./)};
+const frm=()=>fnd(an(),'form',/./),eFrm=()=>{if(!frm())addIn(eAbout(),'form "Contact us"\n  input "Your name"\n  date "Preferred date"\n  button "Send"');return frm()};
+const mdl=()=>fnd(an(),'modal',/./),eMdl=()=>{if(!mdl())addIn(eAbout(),'modal "Thanks for signing up"\n  text "We will be in touch."\n  button "Close" closes');return mdl()};
 const OL=(...x)=>'<ol>'+x.map(i=>'<li>'+i+'</li>').join('')+'</ol>';
-const S=(t,ui,d,ok,act)=>({t,ui,d,ok,act});
+const S=(t,ui,d,ok,act,need)=>({t,ui,d,ok,act,need});
 const IN='Open <b>Inside</b> and choose <b>Screen</b>.';
 const BASIC=[
- S('Create the Home screen',['#fs','#fns','#fnew'],OL('In the <b>Add</b> box, open <b>Within screen</b> and choose <b>+ Add new screen\u2026</b>.','Type <b>Home</b> in the box that appears.','Press <b>Create</b>.')+'<p>Tip: give <b>every</b> element a label. Labels are how you find elements later in the Inside, Position, Edit and Move into lists. Your earlier text stays available through <b>Undo</b>.</p>',()=>!!homeN(),()=>mkScreen('Home')),
- S('Add a header section',['#ft','#fl','#fadd'],OL('Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Header</b>.','Press <b>Add element</b>.'),()=>!!fnd(hn(),'section',/^header$/i),()=>addIn(homeN(),'section "Header"')),
- S('Put a heading in the header',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Header section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Heading</b>.','In <b>Label</b> type <b>My site</b>, then press <b>Add element</b>.'),()=>{const h=fnd(hn(),'section',/^header$/i);return !!h&&h.children.some(c=>c.type==='heading')},()=>addIn(fnd(hn(),'section',/^header$/i),'heading "My site"')),
- S('Add a navigation bar',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Reference name</b> type <b>Main navigation</b>, then press <b>Add element</b>.'),()=>!!fnd(hn(),'nav',/./),()=>addIn(homeN(),'nav "Main navigation"')),
- S('Add three links to the navigation',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> now shows the navigation. Leave it.','Open <b>Element</b> and choose <b>Actions \u2192 Link</b>.','In <b>Label</b> type <b>Home</b>, set <b>On click</b> to <b>Go to screen \u2192 Home</b>, then press <b>Add element</b>.','Repeat for <b>About</b> and <b>Contact</b>, leaving On click on (nothing).'),()=>{const n=fnd(hn(),'nav',/./);return !!n&&n.children.filter(c=>c.type==='link').length>=3},()=>{const n=fnd(hn(),'nav',/./);if(!n)return;const c=n.children.filter(k=>k.type==='link').length;addIn(n,['link "Home" -> "Home"','link "About"','link "Contact"'].slice(c).join('\n'))}),
- S('Add a search box to the navigation',['#ft','#fl','#fly','#fadd'],OL('Open <b>Element</b> and choose <b>Form controls \u2192 Input</b>.','In <b>Label</b> type <b>Search</b>.','Set <b>Type</b> to <b>Search</b>, then press <b>Add element</b>.'),()=>{const n=fnd(hn(),'nav',/./);return !!n&&n.children.some(c=>c.type==='input')},()=>addIn(fnd(hn(),'nav',/./),'input "Search" type=search')),
- S('Add the main content area',['#fc','#ft','#fl','#fly','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Columns</b>.','In <b>Reference name</b> type <b>Page content</b>.','Set <b>Layout</b> to <b>Main + sidebar (2:1)</b>, then press <b>Add element</b>.')+'<p>Two columns are created for you, already labelled Main and Sidebar.</p>',()=>hn().some(k=>k.type==='columns'&&k.attrs.layout==='2:1'),()=>addIn(homeN(),'columns "Page content" layout=2:1\n  column "Main"\n  column "Sidebar"')),
- S('Fill the main column',['#fc','#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Main column. Leave it.','Add a <b>Content \u2192 Heading</b> with the label <b>Main content</b>.','Then add a <b>Content \u2192 Paragraph (Lorem ipsum)</b>. Its label can stay empty.'),()=>{const m=fnd(hn(),'column',/^main$/i);return !!m&&m.children.some(c=>c.type==='heading')&&m.children.some(c=>c.type==='paragraph')},()=>addIn(fnd(hn(),'column',/^main$/i),'heading "Main content"\nparagraph')),
- S('Add a card to the sidebar',['#fc','#ft','#fl','#fadd'],OL('Open <b>Inside</b> and choose the <b>Sidebar</b> column.','Open <b>Element</b> and choose <b>Layout \u2192 Card (bordered box)</b>.','In <b>Reference name</b> type <b>Related links</b>, then press <b>Add element</b>.'),()=>{const c=fnd(hn(),'column',/^sidebar$/i);return !!c&&c.children.some(k=>k.type==='card')},()=>addIn(fnd(hn(),'column',/^sidebar$/i),'card "Related links"')),
- S('Put text in the card',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the card. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>Related links go here.</b>, then press <b>Add element</b>.'),()=>{const c=fnd(hn(),'column',/^sidebar$/i),d=c&&c.children.find(k=>k.type==='card');return !!d&&d.children.some(k=>k.type==='text')},()=>{const c=fnd(hn(),'column',/^sidebar$/i);addIn(c&&c.children.find(k=>k.type==='card'),'text "Related links go here."')}),
- S('Add a footer section',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Footer</b>, then press <b>Add element</b>.'),()=>!!fnd(hn(),'section',/^footer$/i),()=>addIn(homeN(),'section "Footer"')),
- S('Put text in the footer',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Footer section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>\u00a9 2026 My site</b>, then press <b>Add element</b>.'),()=>{const f=fnd(hn(),'section',/^footer$/i);return !!f&&f.children.some(k=>k.type==='text')},()=>addIn(fnd(hn(),'section',/^footer$/i),'text "\u00a9 2026 My site"')),
- S('Check it on mobile',['[data-d=mobile]','[data-m=select]'],OL('Above the preview, press <b>Mobile</b>, then <b>Widescreen</b>, and watch the columns stack.','Make sure <b>Edit</b> is selected, click any element in the preview, then change its values in the <b>Edit</b> box and press <b>Apply values</b>.')+'<p>You have built a basic page.</p>')
+ S('Create the Home screen',['#fs','#fns','#fnew'],OL('In the <b>Add</b> box, open <b>Within screen</b> and choose <b>+ Add new screen\u2026</b>.','Type <b>Home</b> in the box that appears.','Press <b>Create</b>.')+'<p>Tip: give <b>every</b> element a label. Labels are how you find elements later in the Inside, Position, Edit and Move into lists. Your earlier text stays available through <b>Undo</b>.</p>',()=>!!homeN(),()=>eScr(),'a screen'),
+ S('Add a header section',['#ft','#fl','#fadd'],OL('Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Header</b>.','Press <b>Add element</b>.'),()=>!!hdr(),()=>eHdr(),'a Section whose label contains \u201cHeader\u201d, directly on the screen'),
+ S('Put a heading in the header',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Header section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Heading</b>.','In <b>Label</b> type <b>My site</b>, then press <b>Add element</b>.'),()=>{const h=hdr();return !!h&&h.children.some(c=>c.type==='heading')},()=>{eHdr();if(!hdr().children.some(c=>c.type==='heading'))addIn(hdr(),'heading "My site"')},'a Heading inside the Header section'),
+ S('Add a navigation bar',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Reference name</b> type <b>Main navigation</b>, then press <b>Add element</b>.'),()=>!!nv(),()=>eNv(),'a Nav on the screen'),
+ S('Add three links to the navigation',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> now shows the navigation. Leave it.','Open <b>Element</b> and choose <b>Special \u2192 Link</b>.','In <b>Label</b> type <b>Home</b>, set <b>On click</b> to <b>Go to screen \u2192 Home</b>, then press <b>Add element</b>.','Repeat for <b>About</b> and <b>Contact</b>, leaving On click on (nothing).'),()=>{const n=nv();return !!n&&n.children.filter(c=>c.type==='link').length>=3},()=>{eNv();const c=nv().children.filter(k=>k.type==='link').length;if(c<3)addIn(nv(),['link "Home" -> "Home"','link "About"','link "Contact"'].slice(c).join('\n'))},'three Links inside the Nav'),
+ S('Add a search box to the navigation',['#ft','#fl','#fly','#fadd'],OL('Open <b>Element</b> and choose <b>Forms \u2192 Input</b>.','In <b>Label</b> type <b>Search</b>.','Set <b>Type</b> to <b>Search</b>, then press <b>Add element</b>.'),()=>{const n=nv();return !!n&&n.children.some(c=>c.type==='input')},()=>{eNv();if(!nv().children.some(c=>c.type==='input'))addIn(nv(),'input "Search" type=search')},'an Input inside the Nav'),
+ S('Add the main content area',['#fc','#ft','#fl','#fly','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Columns</b>.','In <b>Reference name</b> type <b>Page content</b>.','Set <b>Layout</b> to <b>Main + sidebar (2:1)</b>, then press <b>Add element</b>.')+'<p>Two columns are created for you, already labelled Main and Sidebar.</p>',()=>!!cols(),()=>eCols(),'a Columns element with at least two columns'),
+ S('Fill the main column',['#fc','#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Main column. Leave it.','Add a <b>Content \u2192 Heading</b> with the label <b>Main content</b>.','Then add a <b>Content \u2192 Paragraph (Lorem ipsum)</b>. Its label can stay empty.'),()=>{const m=mainC();return !!m&&m.children.some(c=>c.type==='heading')&&m.children.some(c=>c.type==='paragraph')},()=>{eCols();const need=[];if(!mainC().children.some(c=>c.type==='heading'))need.push('heading "Main content"');if(!mainC().children.some(c=>c.type==='paragraph'))need.push('paragraph');if(need.length)addIn(mainC(),need.join('\n'))},'a Heading and a Paragraph in the first column'),
+ S('Add a card to the sidebar',['#fc','#ft','#fl','#fadd'],OL('Open <b>Inside</b> and choose the <b>Sidebar</b> column.','Open <b>Element</b> and choose <b>Layout \u2192 Card (bordered box)</b>.','In <b>Reference name</b> type <b>Related links</b>, then press <b>Add element</b>.'),()=>!!cardIn(sideC()),()=>{eCols();if(!cardIn(sideC()))addIn(sideC(),'card "Related links"')},'a Card in the last column'),
+ S('Put text in the card',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the card. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>Related links go here.</b>, then press <b>Add element</b>.'),()=>{const c=cardIn(sideC());return !!c&&c.children.some(k=>k.type==='text')},()=>{eCols();if(!cardIn(sideC()))addIn(sideC(),'card "Related links"');if(!cardIn(sideC()).children.some(k=>k.type==='text'))addIn(cardIn(sideC()),'text "Related links go here."')},'a Text inside that Card'),
+ S('Add a footer section',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Footer</b>, then press <b>Add element</b>.'),()=>!!ftr(),()=>eFtr(),'a Section whose label contains \u201cFooter\u201d, directly on the screen'),
+ S('Put text in the footer',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Footer section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>\u00a9 2026 My site</b>, then press <b>Add element</b>.'),()=>{const f=ftr();return !!f&&f.children.some(k=>k.type==='text')},()=>{eFtr();if(!ftr().children.some(k=>k.type==='text'))addIn(ftr(),'text "\u00a9 2026 My site"')},'a Text inside the Footer section'),
+ S('Check it on mobile',['[data-d=mobile]','[data-m=select]'],OL('Above the preview, press <b>Mobile</b>, then <b>Widescreen</b>, and watch the columns stack.','Make sure <b>Edit</b> is selected, click any element in the preview, then change its values in the <b>Edit</b> box and press <b>Apply values</b>.')+'<p>You have built a basic page.</p>',undefined,()=>$('[data-d=mobile]').click())
 ];
 const ADV=[
- S('Create the About screen',['#fs','#fns','#fnew'],OL('Open <b>Within screen</b> and choose <b>+ Add new screen\u2026</b>.','Type <b>About</b>, then press <b>Create</b>.'),()=>!!aboutN(),()=>mkScreen('About')),
- S('Add a heading to About',['#ft','#fl','#fadd'],OL('Check that <b>Within screen</b> shows <b>About</b> and <b>Inside</b> shows <b>Screen</b>.','Open <b>Element</b> and choose <b>Content \u2192 Heading</b>.','In <b>Label</b> type <b>About us</b>, then press <b>Add element</b>.'),()=>an().some(k=>k.type==='heading'),()=>addIn(aboutN(),'heading "About us"')),
- S('Create a shared component',['#fs','#fns','#fnew'],OL('Keep <b>Within screen</b> on <b>About</b> and <b>Inside</b> on <b>Screen</b>.','Open <b>Within screen</b> and choose <b>+ Add new shared component\u2026</b>.','Type <b>Site nav</b>, then press <b>Create</b>.')+'<p>A <b>use</b> of it is added to About for you.</p>',()=>!!compN(),()=>{if(!aboutN())return;addIn(aboutN(),'use "Site nav"');setText(ta.value.replace(/\s+$/,'')+'\n\ncomponent "Site nav"\n')}),
- S('Add a navigation to the shared component',['#ft','#fl','#fadd'],OL('<b>Within screen</b> now shows <b>Shared component: Site nav</b>. Leave it.','Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Reference name</b> type <b>Site navigation</b>, then press <b>Add element</b>.'),()=>!!fnd(cn(),'nav',/./),()=>addIn(compN(),'nav "Site navigation"')),
- S('Add two links to it',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> shows the navigation. Leave it.','Add a <b>Actions \u2192 Link</b> with the label <b>Home</b> and <b>On click</b> set to <b>Go to screen \u2192 Home</b>.','Add another labelled <b>About</b> with <b>On click</b> set to <b>Go to screen \u2192 About</b>.'),()=>{const n=fnd(cn(),'nav',/./);return !!n&&n.children.filter(c=>c.type==='link'&&c.to).length>=2},()=>{const n=fnd(cn(),'nav',/./);if(!n)return;const c=n.children.filter(k=>k.type==='link').length;addIn(n,['link "Home" -> "Home"','link "About" -> "About"'].slice(c).join('\n'))}),
- S('Use it on Home as well',['#fs','#fc','#ft','#fls','#fadd'],OL('Open <b>Within screen</b> and choose <b>Home</b>. Set <b>Inside</b> to <b>Screen</b>.','Open <b>Element</b> and choose <b>Reuse and notes \u2192 Use shared component</b>.','Check <b>Shared component</b> says <b>Site nav</b>, then press <b>Add element</b>.'),()=>hn().some(k=>k.type==='use'&&slug(k.label)==='site-nav'),()=>addIn(homeN(),'use "Site nav"')),
- S('Remove the old navigation from Home',['#fm','#fdel'],OL('In the <b>Edit</b> box, open the first dropdown and choose <b>nav \u201cMain navigation\u201d</b>.','Press <b>Delete</b>.'),()=>!!homeN()&&!hn().some(k=>k.type==='nav'),()=>{const n=fnd(hn(),'nav',/./);if(!n)return;const L=ta.value.split('\n');L.splice(n.line-1,maxLine(n)-n.line+1);setText(L.join('\n'))}),
- S('Add tabs and a table to About',['#fs','#ft','#fly','#fadd'],OL('Set <b>Within screen</b> to <b>About</b> and <b>Inside</b> to <b>Screen</b>.','Choose <b>Actions \u2192 Tabs</b>, pick a <b>Tabs</b> preset and press <b>Add element</b>.','Choose <b>Content \u2192 Table</b>, give it a label such as <b>Team</b>, pick a <b>Columns</b> preset and press <b>Add element</b>.'),()=>an().some(k=>k.type==='tabs')&&an().some(k=>k.type==='table'),()=>addIn(aboutN(),'tabs items=Team|History|Contact\ntable "Team" cols=Name|Role rows=3')),
- S('Add a screen state',['#stbar','#ft','#fl','#fst','#fadd'],OL('In the <b>State</b> row above the preview, type <b>Empty</b> and press <b>Add state</b>.','Choose <b>Content \u2192 Text</b>, type the label <b>No team members yet.</b>, set <b>Shown in</b> to <b>Only in: Empty</b> and press <b>Add element</b>.','Click <b>Default</b> and <b>Empty</b> in the State row to compare them.'),()=>an().some(k=>k.attrs['show-in']),()=>{const s=aboutN();if(!s)return;setStates(s,['Default','Empty']);addIn(aboutN(),'text "No team members yet." show-in=Empty')}),
- S('Add a modal',['#fc','#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Modal</b>, label it <b>Thanks for signing up</b> and press <b>Add element</b>. Modals always go at the bottom of the screen.','<b>Inside</b> now shows the modal. Add a <b>Content \u2192 Text</b> labelled <b>We will be in touch.</b>, then a <b>Special \u2192 Button</b> labelled <b>Close</b> with <b>On click</b> set to <b>Close this modal</b>.')+'<p>In Edit mode the modal appears below the page, separate from it.</p>',()=>{const m=fnd(an(),'modal',/./);return !!m&&m.children.some(k=>k.type==='text')&&m.children.some(k=>k.closes)},()=>addIn(aboutN(),'modal "Thanks for signing up"\n  text "We will be in touch."\n  button "Close" closes')),
- S('Open the modal from a button',['#fc','#ft','#fl','#fto','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Button</b> and label it <b>Sign up</b>.','Set <b>On click</b> to <b>Open modal \u2192 Thanks for signing up</b>, then press <b>Add element</b>.','Press <b>Run</b> above the preview and click the button.'),()=>an().some(k=>k.opens),()=>addIn(aboutN(),'button "Sign up" opens "Thanks for signing up"')),
- S('Add a note',['#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Reuse and notes \u2192 Note</b>, type <b>Search filters the team table</b> as the label and press <b>Add element</b>.')+'<p>Notes become requirements in the AI handoff.</p>',()=>an().some(k=>k.type==='note'),()=>addIn(aboutN(),'note "Search filters the team table"')),
- S('Try Run mode',['[data-m=play]'],OL('Above the preview, press <b>Run</b>.','Click a link or button to move between screens.'),()=>M==='play'),
- S('Export',['[data-t=exp]'],OL('Open the <b>Export</b> tab, choose a <b>Build target</b> and press <b>Copy</b> or <b>Download</b>.')+'<p>Use <b>Save project</b> at the top to keep your work.</p>',()=>T==='exp')
+ S('Create the About screen',['#fs','#fns','#fnew'],OL('Open <b>Within screen</b> and choose <b>+ Add new screen\u2026</b>.','Type <b>About</b>, then press <b>Create</b>.'),()=>data.screens.length>=2,()=>eAbout(),'a second screen'),
+ S('Add a heading to About',['#ft','#fl','#fadd'],OL('Check that <b>Within screen</b> shows <b>About</b> and <b>Inside</b> shows <b>Screen</b>.','Open <b>Element</b> and choose <b>Content \u2192 Heading</b>.','In <b>Label</b> type <b>About us</b>, then press <b>Add element</b>.'),()=>an().some(k=>k.type==='heading'),()=>{eAbout();if(!an().some(k=>k.type==='heading'))addIn(aboutN(),'heading "About us"')},'a Heading on the second screen'),
+ S('Create a shared component',['#fs','#fns','#fnew'],OL('Keep <b>Within screen</b> on <b>About</b> and <b>Inside</b> on <b>Screen</b>.','Open <b>Within screen</b> and choose <b>+ Add new shared component\u2026</b>.','Type <b>Site nav</b>, then press <b>Create</b>.')+'<p>A <b>use</b> of it is added to About for you.</p>',()=>data.comps.length>0,()=>eComp(),'a shared component'),
+ S('Add a navigation to the shared component',['#ft','#fl','#fadd'],OL('<b>Within screen</b> now shows <b>Shared component: Site nav</b>. Leave it.','Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Reference name</b> type <b>Site navigation</b>, then press <b>Add element</b>.'),()=>!!fnd(cn(),'nav',/./),()=>eCnav(),'a Nav inside the shared component'),
+ S('Add two links to it',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> shows the navigation. Leave it.','Add a <b>Special \u2192 Link</b> with the label <b>Home</b> and <b>On click</b> set to <b>Go to screen \u2192 Home</b>.','Add another labelled <b>About</b> with <b>On click</b> set to <b>Go to screen \u2192 About</b>.'),()=>{const n=fnd(cn(),'nav',/./);return !!n&&n.children.filter(c=>c.type==='link'&&c.to).length>=2},()=>{const n=eCnav();const c=n.children.filter(k=>k.type==='link'&&k.to).length;if(c<2)addIn(fnd(cn(),'nav',/./),['link "Home" -> "'+homeN().label+'"','link "About" -> "'+(aboutN()?aboutN().label:'About')+'"'].slice(c).join('\n'))},'two Links with an On click screen inside that Nav'),
+ S('Use it on Home as well',['#fs','#fc','#ft','#fls','#fadd'],OL('Open <b>Within screen</b> and choose <b>Home</b>. Set <b>Inside</b> to <b>Screen</b>.','Open <b>Element</b> and choose <b>Utility \u2192 Use shared component</b>.','Check <b>Shared component</b> says <b>Site nav</b>, then press <b>Add element</b>.'),()=>!!compN()&&hn().some(k=>k.type==='use'&&slug(k.label)===slug(compN().label)),()=>{const c=eComp();if(!hn().some(k=>k.type==='use'&&slug(k.label)===slug(c.label)))addIn(homeN(),'use "'+c.label+'"')},'a \u201cuse\u201d of the shared component on the first screen'),
+ S('Remove the old navigation from Home',['#fm','#fdel'],OL('In the <b>Edit</b> box, open the first dropdown and choose <b>nav \u201cMain navigation\u201d</b>.','Press <b>Delete</b>.'),()=>!!homeN()&&!hn().some(k=>k.type==='nav'),()=>{const n=fnd(hn(),'nav',/./);if(!n)return;const L=ta.value.split('\n');L.splice(n.line-1,maxLine(n)-n.line+1);setText(L.join('\n'))},'no Nav of its own on the first screen'),
+ S('Add tabs and a table to About',['#fs','#ft','#fly','#fadd'],OL('Set <b>Within screen</b> to <b>About</b> and <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Tabs</b>, pick a <b>Tabs</b> preset and press <b>Add element</b>.','Choose <b>Content \u2192 Table</b>, give it a label such as <b>Team</b>, pick a <b>Columns</b> preset and press <b>Add element</b>.'),()=>an().some(k=>k.type==='tabs')&&an().some(k=>k.type==='table'),()=>{eAbout();const add=[];if(!an().some(k=>k.type==='tabs'))add.push('tabs items=Team|History|Contact');if(!an().some(k=>k.type==='table'))add.push('table "Team" cols=Name|Role rows=3');if(add.length)addIn(aboutN(),add.join('\n'))},'Tabs and a Table on the second screen'),
+ S('Add a screen state',['#stbar','#ft','#fl','#fst','#fadd'],OL('In the <b>State</b> row above the preview, type <b>Empty</b> and press <b>Add state</b>.','Choose <b>Content \u2192 Text</b>, type the label <b>No team members yet.</b>, set <b>Shown in</b> to <b>Only in: Empty</b> and press <b>Add element</b>.','Click <b>Default</b> and <b>Empty</b> in the State row to compare them.'),()=>an().some(k=>k.attrs['show-in']),()=>{eAbout();if(!stateList(aboutN()).includes('Empty'))addState(aboutN(),'Empty');if(!an().some(k=>k.attrs['show-in']))addIn(aboutN(),'text "No team members yet." show-in=Empty')},'an element on the second screen with a \u201cshow-in\u201d state'),
+ S('Add a modal',['#fc','#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Modal</b>, label it <b>Thanks for signing up</b> and press <b>Add element</b>. Modals always go at the bottom of the screen.','<b>Inside</b> now shows the modal. Add a <b>Content \u2192 Text</b> labelled <b>We will be in touch.</b>, then a <b>Special \u2192 Button</b> labelled <b>Close</b> with <b>On click</b> set to <b>Close this modal</b>.')+'<p>In Edit mode the modal appears below the page, separate from it.</p>',()=>{const m=mdl();return !!m&&m.children.some(k=>k.type==='text')&&m.children.some(k=>k.closes)},()=>{eMdl();if(!mdl().children.some(k=>k.type==='text'))addIn(mdl(),'text "We will be in touch."');if(!mdl().children.some(k=>k.closes))addIn(mdl(),'button "Close" closes')},'a Modal with some Text and a button that closes it'),
+ S('Open the modal from a button',['#fc','#ft','#fl','#fto','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Button</b> and label it <b>Sign up</b>.','Set <b>On click</b> to <b>Open modal \u2192 Thanks for signing up</b>, then press <b>Add element</b>.','Press <b>Run</b> above the preview and click the button.'),()=>an().some(k=>k.opens),()=>{const m=eMdl();if(!an().some(k=>k.opens))addIn(aboutN(),'button "Sign up" opens "'+m.label+'"')},'a Button or Link that opens the modal'),
+ S('Add a form with a date picker',['#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Forms \u2192 Form</b>, label it <b>Contact us</b> and press <b>Add element</b>.','<b>Inside</b> now shows the form. Add a <b>Forms \u2192 Input</b> labelled <b>Your name</b>, a <b>Forms \u2192 Date picker</b> labelled <b>Preferred date</b>, and a <b>Special \u2192 Button</b> labelled <b>Send</b>.'),()=>{const f=frm();return !!f&&f.children.some(k=>k.type==='date')&&f.children.some(k=>k.type==='button')},()=>{eFrm();const add=[];if(!frm().children.some(k=>k.type==='date'))add.push('date "Preferred date"');if(!frm().children.some(k=>k.type==='button'))add.push('button "Send"');if(add.length)addIn(frm(),add.join('\n'))},'a Form with a Date picker and a Button'),
+ S('Add a form completion message',['#newst','#addst'],OL('In the <b>State</b> row above the preview, type <b>Form completed</b> (or pick it from the list) and press <b>Add state</b>.','A thank-you message is added for you, the form is hidden in that state, and the Send button switches to it.','Press <b>Run</b>, then click <b>Send</b> to see the message.'),()=>!!aboutN()&&stateList(aboutN()).includes('Form completed')&&an().some(k=>k.attrs['show-in']==='Form completed'),()=>{eFrm();if(!stateList(aboutN()).includes('Form completed'))addState(aboutN(),'Form completed')},'a \u201cForm completed\u201d state with its message'),
+ S('Copy and paste an element',['#fcopy','#fc','#fpaste'],OL('Make sure <b>Edit</b> is on, then click the heading on <b>About</b> in the preview.','Press <b>Copy</b> in the Edit box.','Open <b>Within screen</b>, choose <b>Home</b>, and set <b>Inside</b> to <b>Screen</b>. The line beside <b>Paste</b> shows exactly where it will go.','Press <b>Paste</b>.'),()=>!!CLIP&&flat().filter(k=>k.type===CLIP.type&&k.label===CLIP.label).length>=2,()=>{eAbout();if(!fnd(an(),'heading',/./))addIn(aboutN(),'heading "About us"');CLIP=copyNode(fnd(an(),'heading',/./));addIn(homeN(),CLIP.lines.join('\n'))},'the copied element pasted a second time'),
+ S('Add a note',['#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Utility \u2192 Note</b>, type <b>Search filters the team table</b> as the label and press <b>Add element</b>.')+'<p>Notes become requirements in the AI handoff.</p>',()=>an().some(k=>k.type==='note'),()=>{eAbout();if(!an().some(k=>k.type==='note'))addIn(aboutN(),'note "Search filters the team table"')},'a Note on the second screen'),
+ S('Try Run mode',['[data-m=play]'],OL('Above the preview, press <b>Run</b>.','Click a link or button to move between screens.'),()=>M==='play',()=>$('[data-m=play]').click(),'Run mode switched on'),
+ S('Export',['[data-t=exp]'],OL('Open the <b>Export</b> tab, choose a <b>Build target</b>, add any special instructions and reference URLs, then press <b>Copy</b> or <b>Download</b>.')+'<p>Use <b>Save project</b> at the top to keep your work.</p>',()=>T==='exp',()=>tab('exp'),'the Export tab open')
 ];
 function renderTut(auto){
   const el=$('#tut');
@@ -908,21 +1208,21 @@ function renderTut(auto){
   const st=TUT.steps[TUT.i],isLast=TUT.i===last,done=st.ok?st.ok():null;
   (st.ui||[]).forEach(q=>{const e=$(q);if(e)(e.closest('label')||e).classList.add('glow')});
   el.hidden=false;
-  el.innerHTML=`<h3>${TUT.name}: step ${TUT.i+1} of ${TUT.steps.length} \u00b7 ${st.t}</h3>${TUT.msg?`<p class="ok">${TUT.msg}</p>`:''}<div class="td">${st.d}</div>${done===null?'':`<p class="ok">${done?'\u2713 Done':'Waiting for you to finish this step\u2026 it moves on by itself.'}</p>`}<div class="bar" style="margin:0"><button class="act" id="tprev"${TUT.i?'':' disabled'}>\u2190 Back</button>${st.act?'<button class="act" id="tdo">Do it for me</button>':''}<button class="act" id="tnext">${isLast?'Finish':'Skip step \u2192'}</button>${isLast&&!TUT.adv?'<button class="act" id="tadv">Start advanced tutorial</button>':''}<button class="act" id="tclose">Close</button></div>`;
+  el.innerHTML=`<h3>${TUT.name}: step ${TUT.i+1} of ${TUT.steps.length} \u00b7 ${st.t}</h3>${TUT.msg?`<p class="ok">${TUT.msg}</p>`:''}<div class="td">${st.d}</div>${done===null?'':`<p class="ok">${done?'\u2713 Done':'Waiting for you to finish this step\u2026 it moves on by itself.'+(st.need?' It is looking for: '+st.need+'.':'')}</p>`}<div class="bar" style="margin:0"><button class="act" id="tprev"${TUT.i?'':' disabled'}>\u2190 Back</button>${st.act?'<button class="act" id="tdo">Do it for me</button>':''}<button class="act" id="tnext">${isLast?'Finish':'Skip step \u2192'}</button>${isLast&&!TUT.adv?'<button class="act" id="tadv">Start advanced tutorial</button>':''}<button class="act" id="tclose">Close</button></div>`;
 }
 $('#tut').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b||!TUT)return;
   if(b.id!=='tdo')TUT.msg='';
   if(b.id==='tprev')TUT.i--;
   else if(b.id==='tnext'){if(TUT.i===TUT.steps.length-1)TUT=null;else TUT.i++}
-  else if(b.id==='tdo'){for(let j=0;j<=TUT.i;j++){const x=TUT.steps[j];if(x.act&&!(x.ok&&x.ok()))x.act()}}
+  else if(b.id==='tdo'){const x=TUT.steps[TUT.i];if(x.act&&!(x.ok&&x.ok()))x.act()}
   else if(b.id==='tadv')TUT={name:'Advanced tutorial',steps:ADV,i:0,adv:true,msg:''};
   else if(b.id==='tclose')TUT=null;
   renderTut();
 });
-$('#tutload').onclick=()=>{TUT={name:'Tutorial',steps:BASIC,i:0,msg:''};setText('')};
+$('#tutload').onclick=()=>{resetExport();TUT={name:'Tutorial',steps:BASIC,i:0,msg:''};setText('')};
 $('#imgscope').addEventListener('change',()=>{$('#imgdir').hidden=$('#imgscope').value!=='all'});
-['#aitarget','#aifw','#airef','#aiscope'].forEach(q=>$(q).addEventListener('change',()=>{$('#fwrow').hidden=$('#aitarget').value!=='fw';$('#scoperow').hidden=$('#aitarget').value!=='existing';showExp()}));
+['#aitarget','#aifw','#aicms','#airef','#aiscope'].forEach(q=>$(q).addEventListener('change',()=>{$('#fwrow').hidden=$('#aitarget').value!=='fw';$('#cmsrow').hidden=$('#aitarget').value!=='cms';$('#scoperow').hidden=$('#aitarget').value!=='existing';showExp()}));
 $('#fadd').onclick=()=>{
   const[s,c0]=curC();if(!s)return;
   const t=$('#ft').value,col=t==='columns',c=t==='modal'?s:c0,pv=t==='modal'?'end':$('#fp').value;
@@ -931,7 +1231,7 @@ $('#fadd').onclick=()=>{
   const ind=' '.repeat((c.depth+1)*2);
   const txt=[ind+t+(label?` "${label}"`:'')+act(to)+(x?' '+x:'')+stAttr()];
   if(col){const ly=extraObj(t).layout;ly.split(':').forEach((_,i)=>txt.push(ind+'  column "'+((CN[ly]||[])[i]||'Column '+(i+1))+'"'))}
-  const at=pv==='end'?maxLine(c):+pv-1,L=ta.value.split('\n');
+  const at=pv==='end'?endAt(c,t==='modal'):+pv-1,L=ta.value.split('\n');
   L.splice(at,0,...txt);setText(L.join('\n'));
   if(col||CONT.has(t)){$('#fc').value=String(at+1+(col?1:0));fillMore()}
   else if(pv!=='end')$('#fp').value=String(+pv+txt.length);
@@ -967,13 +1267,14 @@ function fillVals(){
   const ts=on?topOf(n):null,so=ts&&ts.type==='screen'?stOpts(ts):'';
   setOpts($('#vst'),so?so+'<option value="?">Several (edit in the text)</option>':'');$('#vstrow').hidden=!so;
   if(so)$('#vst').value=stCur(n);
-  ['#vl','#vx','#vly','#vapply'].forEach(s=>$(s).disabled=!on);$('#vto').disabled=!lk;
+  fillVty(n);
+  ['#vl','#vx','#vly','#vapply'].forEach(s=>$(s).disabled=!on);$('#vto').disabled=!lk;$('#vto').parentNode.hidden=!lk;
 }
 $('#vapply').onclick=()=>{
   const n=pick();if(!n)return;
   const L=ta.value.split('\n'),ind=L[n.line-1].match(/^ */)[0],ln=n.line;
-  const label=$('#vl').value.replace(/"/g,"'").trim(),to=$('#vto').disabled?'':$('#vto').value,x=applyAttrs(n,n.type);
-  L[ln-1]=ind+n.type+(label?` "${label}"`:'')+act(to)+(x?' '+x:'');
+  const nt=$('#vty').value||n.type,sw=nt!==n.type,label=$('#vl').value.replace(/"/g,"'").trim(),to=($('#vto').disabled||!(nt==='button'||nt==='link'))?'':$('#vto').value,x=sw?convAttrs(n,nt):applyAttrs(n,n.type);
+  L[ln-1]=ind+nt+(label?` "${label}"`:'')+act(to)+(x?' '+x:'');
   if(label&&label!==n.label){
     if(n.type==='screen')L.forEach((l,i)=>{if(i!==ln-1)L[i]=l.replace(/->\s*(?:"([^"]*)"|(\S+))/g,(m,a,b)=>slug(a??b)===slug(n.label)?'-> '+qt(label):m)});
     if(n.type==='component')L.forEach((l,i)=>{if(i!==ln-1)L[i]=l.replace(/^(\s*use\s+)(?:"([^"]*)"|(\S+))/,(m,p,a,b)=>slug(a??b)===slug(n.label)?p+qt(label):m)});

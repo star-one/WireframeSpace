@@ -6,7 +6,7 @@ WireframeSpace is a single-file, browser-based tool for sketching the structure 
 
 There is no drag and drop on purpose: text and forms scale better, diff well in version control, and are easy for both people and AI tools to read and write.
 
-> Repository: <https://github.com/star-one/WireframeSpace>
+> Repository: <https://github.com/star-one/UXSpace>
 
 ## Contents
 
@@ -181,6 +181,7 @@ The Export tab builds a prompt you can paste into an AI tool. Choose a build tar
 | Starter | Empty, well-structured HTML, CSS and JavaScript files with placeholders. |
 | PHP + MySQL | A PHP page per screen, shared partials, a PDO connection and a schema inferred from your forms and tables. |
 | Framework | A project in React, Next.js, Vue, Nuxt, Angular, SvelteKit, Laravel, Django or Ruby on Rails. |
+| Web CMS module, plugin or theme | A Drupal theme or module, a WordPress theme (classic or block), plugin or Gutenberg block, a Joomla template or module, Craft CMS templates, a Shopify theme, a Ghost theme, or another CMS you name in the special instructions. |
 | Apply to existing code | Instructions to change only what is needed in code you paste, for all screens or just the current one. |
 
 Every prompt includes:
@@ -206,7 +207,7 @@ Save PNG or SVG for the current screen or all screens. Every state and every ope
 
 - Your work is autosaved in the browser's local storage.
 - **Save project** writes a plain text file (`.wfspace.txt`) whose first line is `# WireframeSpace project: Your name`, followed by your text. **Load project** reads it back, so project files are easy to read, diff and keep in Git.
-- **Clear** empties the text and the project name; **Undo** brings the text back.
+- **Clear**, **Load sample**, **Load tutorial** and **Load project** also reset the Export tab (build target, special instructions, reference URLs). **Clear** empties the text and the project name; **Undo** brings the text back.
 
 ## Browser support and limits
 
@@ -244,7 +245,7 @@ Please keep the project a single dependency-light file where practical, and keep
 
 ## Licence
 
-MIT.
+Add the licence of your choice here (a `LICENSE` file in the repository root is recommended).
 
 ## Credits
 
