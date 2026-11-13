@@ -6,7 +6,7 @@ WireframeSpace is a single-file, browser-based tool for sketching the structure 
 
 There is no drag and drop on purpose: text and forms scale better, diff well in version control, and are easy for both people and AI tools to read and write.
 
-> Repository: <https://github.com/star-one/WireframeSpace>
+> Repository: <https://github.com/star-one/UXSpace>
 
 ## Contents
 
@@ -259,6 +259,8 @@ The **Form code** tab turns one form into code a developer can drop into a proje
 | Drupal Webform | `webform-elements.yml` to paste into a webform's Source tab (each page becomes a wizard step) and an importable `webform.webform.*.yml`. |
 | MySQL table only | `schema.sql`. |
 | JSON definition | The form as pages and fields, for other tools or your own code. |
+
+For multi-page forms, a **Saving answers** setting chooses between saving each page as it is completed (the default) and saving once on the last page. Saving each page makes the table allow NULL in the answer columns and adds `ws_status` (draft or complete), `ws_page` (the page to resume at), `ws_token` and `completed_at`; people get a resume link, `form.php?resume=TOKEN` in PHP or `/form-name/resume/TOKEN` in Drupal, that returns them to the page they reached. In Drupal Webform it turns on draft auto-save. Drafts are not deleted automatically, so schedule a clean-up.
 
 Sample fields are left out. The table name for the database formats can be changed. The assumed structure is one table with a column per question, plus an id and timestamps; names come from the question labels (or a `name=` attribute).
 
