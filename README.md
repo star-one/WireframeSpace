@@ -6,7 +6,7 @@ WireframeSpace is a single-file, browser-based tool for sketching the structure 
 
 There is no drag and drop on purpose: text and forms scale better, diff well in version control, and are easy for both people and AI tools to read and write.
 
-> Repository: <https://github.com/star-one/UXSpace>
+> Repository: <https://github.com/star-one/WireframeSpace>
 
 ## Contents
 
