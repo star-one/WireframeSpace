@@ -14,6 +14,7 @@ There is no drag and drop on purpose: text and forms scale better, diff well in 
 - [Quick start](#quick-start)
 - [How it works](#how-it-works)
 - [The text format](#the-text-format)
+- [Designing forms](#designing-forms)
 - [Exports](#exports)
 - [Projects and saving](#projects-and-saving)
 - [Browser support and limits](#browser-support-and-limits)
@@ -32,9 +33,12 @@ There is no drag and drop on purpose: text and forms scale better, diff well in 
 - **Shared components.** Define a header or footer once and use it on every screen.
 - **Modals.** Shown separately from the page in Edit mode and in image exports, opened and closed by named actions in Run mode and in the exported page.
 - **Screen states.** Empty, Loading, Error, Form completed and any states you invent: show or hide elements per state and switch states with a click.
+- **Real form design.** Add a form and a Form designer panel appears: type each question, pick an answer type (short text, email, long text, radio buttons, checkboxes, dropdown, date, file upload, slider or an "other" type you name yourself), mark it required and add help text. Long forms can be split into pages, each with its own title, shown one at a time with Back and Next. Every page appears in image exports.
+- **Self-explaining Element list.** Each entry in the Element dropdown says what it is, and a short note beneath the dropdown explains when and why to use it.
 - **Copy, cut and paste** of selected elements and containers, plus undo and redo.
 - **Guided tutorials.** A basic tutorial builds a simple page step by step; an advanced tutorial covers shared components, tabs, tables, modals, states, forms and copy and paste. Each step highlights what to click and moves on automatically.
 - **Handoff and sharing.**
+  - **Form code** a developer can use without an AI: standalone HTML, PHP with MySQL, a Drupal module, Drupal Webform YAML, SQL or JSON, built from the form you designed.
   - A ready-made **AI prompt** for several build targets.
   - A **shareable, responsive HTML wireframe** in a single file, for testing with real people.
   - **PNG and SVG** images of screens, states and open modals.
@@ -136,7 +140,7 @@ The label on `card`, `columns`, `column`, `nav`, `form` and `inline` is a **refe
 
 ### Content and controls
 
-`heading`, `text`, `paragraph` (Lorem ipsum when empty), `image`, `table`, `divider`, `input`, `select`, `checkbox`, `date`, `button`, `link`, `links` (example links), `tabs` and `note`.
+`heading`, `text`, `paragraph` (Lorem ipsum when empty), `image`, `table`, `divider`, `button`, `link`, `links` (example links), `tabs` and `note`. Form controls are listed under [Designing forms](#designing-forms).
 
 Options are written as attributes:
 
@@ -149,6 +153,12 @@ Options are written as attributes:
 | `items=` | `tabs` | `items=Overview\|Details` |
 | `count=` | `links` | `count=4` |
 | `style=` | `button` | `style=secondary` |
+| `rows=` | `textarea` | `rows=6` |
+| `accept=` | `file` | `accept=image/*` |
+| `min=` and `max=` | `range` | `min=1 max=5` |
+| `as=` | `field` | `as="Signature pad"` |
+| `required` | any form field | `required` |
+| `hint=` | any form field | `hint="Shown under the field"` |
 
 ### Actions (Run mode and the exported page)
 
@@ -168,6 +178,48 @@ States are a way to show or hide elements on the same screen: an empty list, an 
 - Declare them with `states="Default|Empty|Error"`, or add them from the State row.
 - `show-in=Empty` shows an element only in that state; `hide-in=Error` hides it there. Combine states with `|` (`show-in="Empty|Error"`).
 - Typing **Form completed** in the State row adds a thank-you message, hides each form in that state and makes each form's plain buttons switch to it.
+
+## Designing forms
+
+WireframeSpace can be used for placeholder forms or for designing the real questions of a complete, multi-page form.
+
+When you add a **Form** it arrives with a sample mini-form (a text box, two radio buttons, a dropdown and a Submit button, with a dashed outline) so you can see how it will look. A **Form designer** panel then appears whenever the screen you are viewing contains a form. It lets you:
+
+- type a question and choose an answer type, then press **Add question**. Your first real question replaces the sample fields;
+- mark questions as required and add help text;
+- choose the form and the page the question goes into, and **Add page** to turn a one-page form into a multi-page one;
+- see tips for the form: sample fields left over, no submit button, empty or untitled pages, sample choices not yet replaced, and no "Form completed" state.
+
+| Element | Meaning |
+| --- | --- |
+| `form "Name"` | A form. The label is a reference name. |
+| `formpage "Page title"` | One step of a multi-page form (inside a `form`). The title is shown. |
+| `input "Question"` | Short text answer. `type=` text, email, tel, number, url, password or search. |
+| `textarea "Question"` | Long text answer. |
+| `radios "Question" options=A\|B` | Choose one. |
+| `checks "Question" options=A\|B` | Choose several. |
+| `select "Question" options=A\|B` | Dropdown. |
+| `checkbox "Label"` | A single tick box. |
+| `date "Question"` | Date picker (`kind=datetime`, `month` or `time`). |
+| `file "Question"` | File upload. |
+| `range "Question"` | Slider. |
+| `field "Question" as="Signature pad"` | Any other kind of control. Shown as a labelled dashed box and passed to the AI handoff as a custom field. |
+
+Add `required` and `hint="..."` to any field. A field marked `sample` is a placeholder to be replaced.
+
+```text
+screen "Submit event"
+  form "Event details"
+    formpage "About the event"
+      input "Event name" required hint="Keep it short and clear"
+      radios "Is it free to attend?" options="Free|Paid" required
+    formpage "Your details"
+      input "Your email address" type=email required
+      checkbox "I agree to the terms" required
+      button "Submit your event" state="Form completed"
+```
+
+In a multi-page form, the preview shows one page at a time with a step indicator and automatic Back and Next buttons. Put the questions inside the pages; anything placed after the last page (such as a submit button) appears on the last page. In **Save PNG** and **Save SVG** with all screens selected, every page of the form gets its own frame, in the same way as screen states. The AI handoff lists every question, page, choice, required flag and help text.
 
 ## Exports
 
@@ -194,6 +246,23 @@ Every prompt includes:
 - responsive rules based on the elements you used,
 - optional reference URLs for the look and feel,
 - an optional box for your own special instructions.
+
+### Form code
+
+The **Form code** tab turns one form into code a developer can drop into a project. Choose the form and a format. A format with several files downloads as one `.zip`; Copy copies the text shown.
+
+| Format | What you get |
+| --- | --- |
+| Standalone HTML | One file: an accessible `<form>` (labels, fieldsets, hints, required) with its own styles and a small script that validates, and moves between pages for a multi-page form. Set the `action` to where answers go. |
+| PHP + MySQL | `schema.sql`, `config.php` (PDO), `form.php` (create and edit with `?id=`), `thanks.php`, `list.php` and a README. Server-side validation page by page, CSRF token, prepared statements, safe file uploads and hashed passwords. Multi-page answers are kept in the session and saved once, on the last page. |
+| Drupal module | An `.info.yml`, a route, a `FormBase` class (one page built at a time, Back and Next, answers kept in form state) and an `.install` file that creates the table, with a submit handler that saves to it. |
+| Drupal Webform | `webform-elements.yml` to paste into a webform's Source tab (each page becomes a wizard step) and an importable `webform.webform.*.yml`. |
+| MySQL table only | `schema.sql`. |
+| JSON definition | The form as pages and fields, for other tools or your own code. |
+
+Sample fields are left out. The table name for the database formats can be changed. The assumed structure is one table with a column per question, plus an id and timestamps; names come from the question labels (or a `name=` attribute).
+
+The generated PHP and Drupal code has no access control on the edit form or the list: add your own before using it for real.
 
 ### Shareable HTML wireframe
 
@@ -236,7 +305,7 @@ There are no tests or build tools yet. When changing the parser or the form, a u
 
 Issues and pull requests are welcome. Good first areas:
 
-- more form-field types and options,
+- validation rules for form fields (patterns, minimum and maximum lengths),
 - a custom ratio picker for columns,
 - theming and brand styles for the exported wireframe,
 - automated tests for the parser and renderer.
@@ -245,7 +314,7 @@ Please keep the project a single dependency-light file where practical, and keep
 
 ## Licence
 
-Add the licence of your choice here (a `LICENSE` file in the repository root is recommended).
+WireframeSpace is released under the [MIT Licence](LICENSE). You are free to use, copy, modify, merge, publish, distribute, sublicense and sell copies of it, provided the copyright notice and licence text are included in all copies.
 
 ## Credits
 

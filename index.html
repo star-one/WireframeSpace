@@ -116,6 +116,29 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 .stl{font-size:14px;color:var(--mut)}
 #fm,#fmt{flex:1 1 140px;min-width:0;max-width:100%;text-overflow:ellipsis}
 .sticky .bar input[type=text]{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);min-width:0;width:150px}
+.wf input[type=url],.wf input[type=time],.wf input[type=week],.wf input[type=file],.wf textarea{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--bd,#c5cdd6);border-radius:6px;background:transparent;color:inherit;width:100%}
+.wf textarea{resize:vertical;min-height:2.5em}
+.wf input[type=range]{width:100%}
+.wf .req{color:#b3261e;font-style:normal;font-weight:700}
+.wf .hint{font-size:12px;color:var(--mut,#5d6b7a)}
+.wf .fgrp{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:6px}
+.wf .fgrp legend{padding:0;margin-bottom:4px;font-size:13px;color:var(--mut,#5d6b7a)}
+.wf .rng{display:flex;justify-content:space-between;font-size:12px}
+.wf .cust{border:1px dashed var(--bd,#c5cdd6);border-radius:6px;padding:12px;text-align:center;color:var(--mut,#5d6b7a);background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(128,128,128,.12) 10px 11px)}
+.wf .chk{display:flex;flex-direction:column;gap:4px}
+.wf .fsteps{display:flex;flex-wrap:wrap;gap:6px}
+.wf .fstep{font:inherit;font-size:12px;border:1px solid var(--bd,#c5cdd6);border-radius:999px;background:transparent;color:var(--mut,#5d6b7a);padding:3px 10px;cursor:pointer}
+.wf .fstep.on{background:var(--fg,#1d2733);border-color:var(--fg,#1d2733);color:var(--card,#fff);font-weight:600}
+.wf .fpage,.wf .fpw{display:flex;flex-direction:column;gap:10px}
+.wf .fpt{margin:0;font-size:16px}
+.wf .fnav{display:flex;justify-content:space-between;gap:8px}
+.wf .form.mp{border:1px solid var(--bd,#c5cdd6);border-radius:8px;padding:12px}
+.wf .samp{position:relative;outline:2px dashed var(--noteb,#d4b02a);outline-offset:3px;border-radius:4px}
+.wf .samp::after{content:"sample";position:absolute;right:0;top:-9px;font-size:10px;line-height:1.4;background:var(--note,#fff4c2);color:var(--notef,#4d3d00);padding:0 5px;border-radius:3px}
+.ehelp{grid-column:1/-1;font-size:13px;color:var(--mut);background:var(--code);border-left:3px solid var(--ac);padding:6px 10px;border-radius:0 6px 6px 0}
+.ehelp b{color:var(--fg)}
+#fdtips{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--mut)}
+#fdtips li{margin:2px 0}
 </style>
 </head>
 <body>
@@ -136,19 +159,36 @@ details pre{white-space:pre-wrap;margin:8px 0 0;color:var(--mut)}
 <div class="fgrid">
 <label>Within screen<select id="fs"></select></label>
 <label>Inside<select id="fc"></select></label>
-<label>Element<select id="ft"><optgroup label="Layout"><option value="section">Section (full-width band)</option><option value="columns">Columns (side by side, stack on mobile)</option><option value="column">Column (one column inside Columns)</option><option value="card">Card (bordered box)</option><option value="inline">Inline group (side by side, no box)</option></optgroup><optgroup label="Content"><option value="heading">Heading</option><option value="text">Text</option><option value="paragraph">Paragraph (Lorem ipsum)</option><option value="image">Image</option><option value="divider">Divider</option><option value="table">Table</option></optgroup><optgroup label="Forms"><option value="form">Form</option><option value="input">Input</option><option value="select">Select</option><option value="checkbox">Checkbox</option><option value="date">Date picker</option></optgroup><optgroup label="Special"><option value="nav">Nav</option><option value="link">Link</option><option value="links">Example links (Link 1, Link 2, Link 3)</option><option value="button">Button</option><option value="modal">Modal</option><option value="tabs">Tabs</option></optgroup><optgroup label="Utility"><option value="use">Use shared component</option><option value="note">Note</option></optgroup></select></label>
+<label>Element<select id="ft"></select></label>
+<div id="fhelp" class="ehelp"></div>
 <label><span id="fll">Label</span><input id="fl" type="text" placeholder="Name it, to find it later"><select id="fls" hidden></select></label>
 <label>On click<select id="fto" disabled></select></label>
 <label><span id="fxl">Extra</span><input id="fx" type="text" placeholder="(optional)"><select id="fly" hidden><option value="1:1">2 equal columns</option><option value="1:1:1">3 equal columns</option><option value="1:1:1:1">4 equal columns</option><option value="2:1">Main + sidebar (2:1)</option><option value="3:1">Main + narrow sidebar (3:1)</option><option value="1:2">Sidebar + main (1:2)</option><option value="1:3">Narrow sidebar + main (1:3)</option><option value="1:2:1">Sidebar + main + sidebar (1:2:1)</option></select></label>
+<label id="freqrow" hidden style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="freq" style="width:auto"> Required answer</label><label id="fhrow" hidden>Help text<input id="fh" type="text" placeholder="(optional) shown under the field"></label>
 <label>Position<select id="fp"></select></label><label id="strow" hidden>Shown in<select id="fst"></select></label>
 </div>
 <div class="bar" id="newrow" hidden><input id="fns" type="text" placeholder="New screen name"><button class="act" id="fnew">Create</button></div>
-<div class="bar"><button class="act" id="fadd">Add element</button></div>
+<div class="bar"><button class="act" id="fadd">Add element</button><span id="fmsg" class="stl" role="status"></span></div>
+</fieldset>
+<fieldset id="fdes" hidden><legend>Form designer</legend>
+<p id="fdsum" class="stl" style="margin:4px 0 0"></p>
+<div class="fgrid">
+<label>Form<select id="fdf"></select></label>
+<label id="fdprow" hidden>Page<select id="fdp"></select></label>
+<label style="grid-column:1/-1">Question (the label people see)<input id="fdq" type="text" placeholder="e.g. What is your email address?"></label>
+<label>Answer type<select id="fdt"></select></label>
+<label id="fdorow" hidden>Choices (separate with commas)<input id="fdo" type="text" placeholder="Yes, No, Not sure"></label>
+<label id="fdarow" hidden>Name the field type<input id="fda" type="text" placeholder="e.g. Signature pad"></label>
+<label>Help text (optional)<input id="fdh" type="text" placeholder="Shown under the question"></label>
+<label style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="fdr" style="width:auto"> Required</label>
+</div>
+<div class="bar" style="margin-top:8px"><button class="act" id="fdadd">Add question</button><button class="act" id="fdpage">Add page</button><button class="act" id="fdclear" hidden>Remove sample fields</button></div>
+<ul id="fdtips"></ul>
 </fieldset>
 <fieldset><legend>Edit</legend>
 <div class="bar"><select id="fm" aria-label="Element to move or delete"></select><button class="act" id="fup">Up</button><button class="act" id="fdn">Down</button><button class="act" id="fdel">Delete</button><button class="act" id="fundo">Undo</button><button class="act" id="fredo">Redo</button></div>
 <div class="bar"><button class="act" id="fcopy">Copy</button><button class="act" id="fcut">Cut</button><button class="act" id="fpaste">Paste</button><span id="pastehint" class="stl"></span></div>
-<div class="fgrid"><label>Label<input id="vl" type="text"></label><label id="vtyrow" hidden>Change to<select id="vty"></select></label><label>On click<select id="vto"></select></label><label id="vstrow" hidden>Shown in<select id="vst"></select></label><label><span id="vxl">Extra</span><select id="vly" hidden></select><input id="vx" type="text" hidden></label><div class="bar" style="align-items:end"><button class="act" id="vapply">Apply values</button></div></div>
+<div class="fgrid"><label>Label<input id="vl" type="text"></label><label id="vtyrow" hidden>Change to<select id="vty"></select></label><label>On click<select id="vto"></select></label><label id="vstrow" hidden>Shown in<select id="vst"></select></label><label><span id="vxl">Extra</span><select id="vly" hidden></select><input id="vx" type="text" hidden></label><label id="vreqrow" hidden style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="vreq" style="width:auto"> Required answer</label><label id="vhrow" hidden>Help text<input id="vh" type="text"></label><div class="bar" style="align-items:end"><button class="act" id="vapply">Apply values</button></div></div>
 <div class="bar"><select id="fmt" aria-label="Move into"></select><button class="act" id="fmv">Move into</button></div>
 </fieldset></div>
 <div class="ed"><div id="hl" aria-hidden="true"></div><textarea id="src" spellcheck="false" aria-label="Wireframe spec"></textarea></div>
@@ -159,7 +199,7 @@ Indent by 2 spaces to nest.
 # comment
 
 Reusable:   component "Name" (top level), then: use "Name" inside a screen
-Layout:     section "Title" (full-width band)
+Layout:     section "Title" (a full-width band)
             columns layout=2:1 (each child = one column; wraps)
             column, card, inline (side by side, no box)
 Other:      form, nav, modal
@@ -167,6 +207,13 @@ Elements:   heading "Text"   text "Text"   paragraph (Lorem ipsum, or give text)
             input "Label" type=email id=email placeholder="…"
             select "Label" options=One|Two|Three
             checkbox "Label"   image "Caption"   divider
+Forms:      form "Name" (one page), or a form containing formpage "Title" blocks (multi-page)
+            input "Question" type=email required hint="Help text"
+            textarea "Question" rows=6      radios "Question" options=Yes|No
+            checks "Question" options=A|B|C select "Question" options=A|B|C
+            checkbox "I agree"   date "When" kind=time   file "Upload" accept=image/*
+            range "Rating" min=1 max=5   field "Signature" as="Signature pad" (any other type)
+            sample = a placeholder field to be replaced by a real question
             table "Title" cols=Name|Status|Due rows=3
             tabs items=Overview|Tasks|Files
             button "Label" -> "Screen"   (style=secondary)
@@ -198,10 +245,12 @@ Notes become requirements in the AI handoff.</pre></details>
 <div class="bar">
 <button class="chip" data-x="ai" aria-pressed="true">AI handoff</button>
 <button class="chip" data-x="html" aria-pressed="false">Shareable HTML wireframe</button>
+<button class="chip" data-x="form" aria-pressed="false">Form code</button>
 
 <button class="act" id="dl" style="margin-left:auto">Download</button><button class="act" id="copy">Copy</button><span class="imgmsg"></span>
 </div>
 <div class="fgrid" id="aiopts" style="margin:0 0 12px"><label>Build target<select id="aitarget"><option value="demo">Demo: HTML/CSS/JS with sample content and stock images</option><option value="starter">Starter: empty HTML/CSS/JS files</option><option value="php">PHP + MySQL project files</option><option value="fw">Framework project files</option><option value="cms">Web Content Management System module, plugin or theme</option><option value="existing">Apply to existing code</option></select></label><label id="cmsrow" hidden>CMS option<select id="aicms"><option>Drupal theme</option><option>Drupal module</option><option>WordPress theme (classic)</option><option>WordPress block theme (site editor)</option><option>WordPress plugin</option><option>WordPress block (Gutenberg)</option><option>Joomla template</option><option>Joomla module</option><option>Craft CMS templates</option><option>Shopify theme</option><option>Ghost theme</option><option>Another CMS (name it in the special instructions)</option></select></label><label id="scoperow" hidden>Apply to<select id="aiscope"><option value="all">All screens</option><option value="cur">Current screen only (the one shown in the preview)</option></select></label><label id="fwrow" hidden>Framework<select id="aifw"><option>React</option><option>Next.js</option><option>Vue</option><option>Nuxt</option><option>Angular</option><option>SvelteKit</option><option>Laravel</option><option>Django</option><option>Ruby on Rails</option></select></label><label style="flex-direction:row;align-items:center;gap:6px;color:var(--fg)"><input type="checkbox" id="airef" style="width:auto"> Include reference wireframe HTML</label><label style="grid-column:1/-1">Special instructions for the AI (optional)<textarea id="aispec" rows="3" placeholder="e.g. Use British English, aim for WCAG 2.2 AA, follow our existing brand colours…" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);width:100%;min-width:0;padding:7px 8px"></textarea></label><label style="grid-column:1/-1">Reference URLs for the design (optional, one per line)<textarea id="airefs" rows="2" placeholder="https://example.com" style="font:inherit;font-size:15px;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--panel);color:var(--fg);width:100%;min-width:0;padding:7px 8px"></textarea></label></div>
+<div class="fgrid" id="fxopts" hidden style="margin:0 0 12px"><label>Form<select id="fxform"></select></label><label>Format<select id="fxfmt"></select></label><label id="fxtblrow">Database table name<input id="fxtbl" type="text"></label><p class="stl" style="grid-column:1/-1;margin:0">Code a developer can use directly, built from the questions, pages, choices, required flags and help text in the chosen form. Several files download as one .zip.</p></div>
 <textarea id="out" readonly spellcheck="false" aria-label="Export"></textarea>
 </section>
 </main>
@@ -316,15 +365,24 @@ screen "Submit event" states="Default|Form completed"
   image "Hero image"
   text "We'd love to hear about your event and put it on the site"
   form "Event details" hide-in="Form completed"
-    input "Detail"
-    input "Detail"
-    date "Event date"
-    select "Detail" options="Option 1|Option 2|Option 3"
-    select "Detail" options="Option 1|Option 2|Option 3"
-    checkbox "Detail"
-    checkbox "Detail"
-    button "Submit your event" state="Form completed"
-    text "Please note submitted events are subject to approval before publishing"
+    formpage "About the event"
+      input "Event name" required hint="Keep it short and clear"
+      textarea "Describe your event" required rows=6
+      select "Category" options="Music|Food and drink|Sport|Arts|Community" required
+      radios "Is it free to attend?" options="Free|Paid" required
+    formpage "When and where"
+      date "Event date" required
+      date "Start time" kind=time
+      input "Venue name" required
+      input "Venue postcode"
+      checks "Facilities available" options="Step-free access|Parking|Toilets|Refreshments"
+    formpage "Your details"
+      input "Your name" required
+      input "Your email address" type=email required hint="Only used to contact you about your event"
+      file "Event poster" accept=image/*
+      checkbox "I agree to the terms and conditions" required
+      text "Please note submitted events are subject to approval before publishing"
+      button "Submit your event" state="Form completed"
   section "Completion message" show-in="Form completed"
     heading "Thank you"
     text "Your event has been submitted. It will be published once it has been approved."
@@ -393,7 +451,48 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const F=String.fromCharCode(96).repeat(3);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const slug=s=>String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const TYPES=new Set(['screen','card','section','column','form','nav','columns','inline','modal','table','tabs','links','component','use','paragraph','date','heading','text','input','select','checkbox','image','divider','button','link','note']);
+const TYPES=new Set(['screen','card','section','column','form','nav','columns','inline','modal','table','tabs','links','component','use','paragraph','date','heading','text','input','select','checkbox','image','divider','button','link','note','formpage','textarea','radios','checks','file','range','field']);
+const ELS=[
+['Layout',[
+['section','Section','a full-width band for one area of the page',"A full-width band that stacks its contents vertically. Use it to divide a screen into areas such as a header, hero, main content or footer. Its title is shown on the page, so name it for what it is. Put Columns, Cards or content inside it."],
+['columns','Columns','areas side by side (they stack on mobile)',"Splits the width into side-by-side areas using a ratio, for example main content plus a sidebar. Use it when things belong next to each other on a wide screen. Pick a layout from the option that appears and one empty Column is made for each area; on mobile they stack in order."],
+['column','Column','one area inside a Columns element',"One area inside a Columns element. Columns already makes these for you, so you only need this to add a further area to existing Columns. Set Inside to the Columns element first."],
+['card','Card','a bordered box that groups related content',"A visibly bordered box that groups related things, such as one event, product or person. Use it when the grouping should be obvious to the user. Its label is a reference name only and is not shown."],
+['inline','Inline group','items in a row, with no box',"Puts items side by side in a row with no border, for example two buttons or a few links. Use it for small groups; it wraps when space runs out and stacks on mobile."]]],
+['Content',[
+['heading','Heading','a title for the page or an area',"A title for the screen or for part of it. Use one at the top of each area."],
+['text','Text','a short line of text',"A short line of text such as a caption, hint or message."],
+['paragraph','Paragraph','body text (Lorem ipsum if empty)',"A block of body text. Leave the label empty to get Lorem ipsum placeholder copy, which is normal in a wireframe."],
+['image','Image','a placeholder box for a picture',"A grey placeholder box for a picture. The label says what the image should show; the AI handoff uses it to choose a matching picture."],
+['divider','Divider','a thin separating line',"A thin line separating two parts of a screen."],
+['table','Table','rows and columns of data',"Rows and columns of data. Choose a column preset from the option that appears, or type your own."]]],
+['Forms',[
+['form','Form','a set of questions with a submit button',"A form for collecting answers. When you add one it arrives with a sample mini-form (a text box, two radio buttons, a dropdown and a Submit button) showing how it will look. A Form designer then appears below the Add box: add your real questions there and the samples are replaced. For a long form, split it into steps with Form page."],
+['formpage','Form page','one step of a multi-page form',"Splits a long form into steps. Set Inside to the form first. Each page has its own title (the label) and its own questions; the preview shows one page at a time with Back and Next, and image exports can show every page. Put the questions inside pages; a Submit button placed after the last page appears on the last page."],
+['input','Short text','one-line answer: text, email, number, phone',"A one-line answer box. Use it for names, emails, numbers and phone numbers; choose the type from the option that appears so keyboards and validation fit. The label is the question the user sees."],
+['textarea','Long text','a multi-line answer box',"A multi-line answer box for comments, descriptions and other longer answers."],
+['radios','Radio buttons','choose one from a few options',"A group of radio buttons where the user picks exactly one. Best for two to five options that should all be visible. Choose or type the options in the option that appears."],
+['checks','Checkboxes','choose several options',"A group of checkboxes where the user can pick several. Choose or type the options in the option that appears."],
+['select','Dropdown','choose one from a list',"A dropdown list where the user picks one. Best for longer lists (more than about five options) where radio buttons would take too much room."],
+['checkbox','Single checkbox','one tick box, e.g. agree to terms',"A single tick box for a yes or no answer or an agreement, such as accepting terms."],
+['date','Date picker','date, date and time, month or time',"A date picker. Choose date, date and time, month or time only from the option that appears."],
+['file','File upload','attach a file',"A file upload control. Choose what kinds of file it accepts from the option that appears."],
+['range','Slider','a number on a scale',"A slider for choosing a number on a scale, such as a rating from 1 to 10."],
+['field','Other field','any control not listed above (you name it)',"For any question control not listed here, such as a signature pad, star rating or address lookup. Type what it is in the option that appears; the AI handoff will build or ask about it. It shows in the wireframe as a labelled dashed box."]]],
+['Special',[
+['nav','Nav','a navigation bar of links',"A navigation bar that holds links (and perhaps a search box or buttons). Use one per screen, or put one in a shared component. Its label is a reference name only."],
+['link','Link','a text link',"A text link. Use On click to send the user to another screen."],
+['links','Example links','placeholder links (Link 1, Link 2, Link 3)',"A row of placeholder links for footers and menus where the destinations do not matter yet."],
+['button','Button','a clickable button',"A clickable button. Use On click to go to a screen, open a modal, close a modal or switch the screen to another state. Inside a form, a button submits it."],
+['modal','Modal','a dialog box over the page',"A dialog box that opens over the page. Add it to a screen, put its content inside, then give a button or link the On click action Open modal. Modals sit at the bottom of the screen and are drawn separately in Edit mode."],
+['tabs','Tabs','a row of tabs to switch views',"A row of tabs for switching between views. Choose a preset or type your own tab names."]]],
+['Utility',[
+['use','Use shared component','insert a block defined once',"Inserts a shared component (such as a header or footer) that you defined once, so a change to it shows everywhere it is used."],
+['note','Note','a note for the developer or AI',"A note for the developer or the AI, for example how something should behave. It is not part of the page but becomes a requirement in the handoff."]]]
+];
+const ELHELP={};
+$('#ft').innerHTML=ELS.map(([g,l])=>`<optgroup label="${g}">`+l.map(([v,n,sh,h])=>{ELHELP[v]=`<b>${n}</b>: ${h}`;return `<option value="${v}">${n} \u2013 ${sh}</option>`}).join('')+'</optgroup>').join('');
+
 const ta=$('#src');
 try{ta.value=localStorage.getItem('wfw-spec')||''}catch(e){ta.value=''}
 
@@ -410,6 +509,7 @@ function parse(src){
       else if(t[4])n.attrs[t[4]]=t[5].replace(/^"|"$/g,'');
       else if(t[6]!==undefined)n.opens=t[6];
       else if(t[7])n.closes=true;
+      else if(n.type&&(t[8]==='required'||t[8]==='sample'))n.attrs[t[8]]='yes';
       else if(!n.type)n.type=t[8].toLowerCase();
       else if(!n.label)n.label=t[8];
     }
@@ -424,7 +524,7 @@ function parse(src){
   });
   COMPS=Object.fromEntries(comps.map(c=>[slug(c.label),c]));
   const ids=new Set(screens.map(s=>slug(s.label)));
-  const walk=(n,s)=>{if(n.to&&!ids.has(slug(n.to)))errs.push(`Line ${n.line}: no screen called “${n.to}”`);if(n.type==='use'&&!COMPS[slug(n.label)])errs.push(`Line ${n.line}: no component called “${n.label}”`);n.children.forEach(c=>walk(c,s))};
+  const walk=(n,s)=>{if(n.type==='formpage'&&(!n.parent||n.parent.type!=='form'))errs.push(`Line ${n.line}: a form page must be inside a form`);if(n.to&&!ids.has(slug(n.to)))errs.push(`Line ${n.line}: no screen called “${n.to}”`);if(n.type==='use'&&!COMPS[slug(n.label)])errs.push(`Line ${n.line}: no component called “${n.label}”`);n.children.forEach(c=>walk(c,s))};
   [...screens,...comps].forEach(s=>walk(s,s));
   [...screens,...comps].forEach(t=>{
     const ms=all(t).filter(k=>k.type==='modal'),mn=new Set(ms.map(m=>slug(m.label)));
@@ -441,27 +541,48 @@ function parse(src){
 let PV=false;
 let CURST=null,EXP=false,SKIPM=false,OPEN=null;
 const STATE={};
+const FP={};let FPFORCE=null;
+const FIELDS=new Set(['input','textarea','radios','checks','select','checkbox','date','file','range','field']);
+const isQ=k=>FIELDS.has(k.type);
+const pagesOf=f=>f.children.filter(c=>c.type==='formpage');
+const fpKey=f=>slug(topOf(f).label)+'-'+slug(f.label||'form');
+const fpIdx=(key,tot)=>Math.max(0,Math.min(FPFORCE!==null?FPFORCE:(FP[key]||0),tot-1));
+const formOf=n=>{for(let k=n;k;k=k.parent)if(k.type==='form')return k;return null};
+function pageOf(n){for(let k=n;k;k=k.parent)if(k.type==='formpage'&&k.parent&&k.parent.type==='form'){const f=k.parent;return{key:fpKey(f),idx:pagesOf(f).indexOf(k)}}return null}
+const sampleLines=f=>all(f).filter(k=>isQ(k)&&k.attrs.sample).map(k=>k.line-1).sort((a,b)=>b-a);
+function endBeforeButtons(c){let k=c.children.length;while(k>0&&c.children[k-1].type==='button')k--;return k<c.children.length?c.children[k].line-1:maxLine(c)}
+function formsShown(n,inM){const out=[],seen=new Set();const walk=k=>{if(k.type==='modal'&&!inM)return;if(k.type==='form')out.push(k);if(k.type==='use'){const c=COMPS[slug(k.label)];if(c&&!seen.has(c)){seen.add(c);c.children.forEach(walk)}}k.children.forEach(walk)};walk(n);return out}
+const fpCount=(n,inM)=>Math.max(1,...formsShown(n,inM).map(f=>pagesOf(f).length));
 function R(n,notes){
   if(CURST&&!vis(n))return'';
   const h=R0(n,notes);if(!h||n.type==='use')return h;
   const at=(PV?' data-l="'+n.line+'"':'')+(EXP&&n.attrs['show-in']?' data-in="'+esc(n.attrs['show-in'])+'"':'')+(EXP&&n.attrs['hide-in']?' data-out="'+esc(n.attrs['hide-in'])+'"':'');
-  return at?h.replace(/^<(\w+)/,'<$1'+at):h;
+  let o=at?h.replace(/^<(\w+)/,'<$1'+at):h;
+  if(PV&&n.attrs.sample)o=o.replace(/^(<\w+\s[^>]*?class=")/,'$1samp ');
+  return o;
 }
 function R0(n,notes){
   const to=(n.to?` data-to="${esc(slug(n.to))}"`:'')+(n.opens?` data-opens="${esc(slug(n.opens))}"`:'')+(n.closes?' data-closes="1"':'')+(n.attrs.state?` data-state="${esc(n.attrs.state)}"`:'');
   const kids=()=>n.children.map(c=>R(c,notes)).join('');
   const a=n.attrs;
+  const rq=a.required?' required':'',sr=a.required?' <i class="req" aria-hidden="true">*</i>':'',ht=a.hint?`<small class="hint">${esc(a.hint)}</small>`:'',nmv=esc(a.name||slug(n.label||n.type).replace(/-/g,'_')),phx=a.placeholder?` placeholder="${esc(a.placeholder)}"`:'';
+  const ops=(a.options||'Option 1|Option 2|Option 3').split('|');
   switch(n.type){
     case 'heading':return `<h3>${esc(n.label)}</h3>`;
     case 'links':return `<div class="inline">${Array.from({length:Math.min(+a.count||3,8)},(_,i)=>`<a class="l" href="#">Link ${i+1}</a>`).join('')}</div>`;
-    case 'date':return `<label class="f"><span>${esc(n.label)}</span><input type="${a.kind==='datetime'?'datetime-local':a.kind==='month'?'month':'date'}"></label>`;
+    case 'date':return `<label class="f"><span>${esc(n.label)}${sr}</span><input type="${a.kind==='datetime'?'datetime-local':a.kind==='month'?'month':a.kind==='time'?'time':'date'}" name="${nmv}"${rq}>${ht}</label>`;
+    case 'textarea':return `<label class="f"><span>${esc(n.label)}${sr}</span><textarea rows="${esc(a.rows||4)}" name="${nmv}"${phx}${rq}></textarea>${ht}</label>`;
+    case 'radios':case 'checks':return `<fieldset class="fgrp"><legend>${esc(n.label)}${sr}</legend>${ops.map(o=>`<label class="c"><input type="${n.type==='radios'?'radio':'checkbox'}" name="${nmv}"${rq}> ${esc(o)}</label>`).join('')}${ht}</fieldset>`;
+    case 'file':return `<label class="f"><span>${esc(n.label)}${sr}</span><input type="file" name="${nmv}"${a.accept?` accept="${esc(a.accept)}"`:''}${rq}>${ht}</label>`;
+    case 'range':return `<label class="f"><span>${esc(n.label)}${sr}</span><input type="range" name="${nmv}" min="${esc(a.min||1)}" max="${esc(a.max||10)}"><span class="rng"><span>${esc(a.min||1)}</span><span>${esc(a.max||10)}</span></span>${ht}</label>`;
+    case 'field':{const as=(a.as||'').trim(),ty=['color','url','time','week','search','tel','email','number'].includes(as.toLowerCase())?as.toLowerCase():'';return ty?`<label class="f"><span>${esc(n.label)}${sr}</span><input type="${ty}" name="${nmv}"${rq}>${ht}</label>`:`<div class="f"><span>${esc(n.label)}${sr}</span><div class="cust">${esc(as||'Custom field')} (custom field)</div>${ht}</div>`}
     case 'paragraph':return `<p>${esc(n.label||LOREM)}</p>`;
     case 'text':return `<p>${esc(n.label)}</p>`;
-    case 'input':return `<label class="f"><span>${esc(n.label)}</span><input type="${esc(a.type||'text')}" placeholder="${esc(a.placeholder||'')}"${a.id?` id="${esc(a.id)}"`:''}></label>`;
+    case 'input':return `<label class="f"><span>${esc(n.label)}${sr}</span><input type="${esc(a.type||'text')}" name="${nmv}"${phx}${a.id?` id="${esc(a.id)}"`:''}${rq}>${ht}</label>`;
     case 'button':return `<button class="b${a.style==='secondary'?' s':''}"${to}>${esc(n.label)}</button>`;
     case 'link':return `<a class="l" href="#"${to}>${esc(n.label)}</a>`;
-    case 'checkbox':return `<label class="c"><input type="checkbox"> ${esc(n.label)}</label>`;
-    case 'select':return `<label class="f"><span>${esc(n.label)}</span><select>${(a.options||'').split('|').map(o=>`<option>${esc(o)}</option>`).join('')}</select></label>`;
+    case 'checkbox':return a.hint?`<div class="chk"><label class="c"><input type="checkbox" name="${nmv}"${rq}> ${esc(n.label)}${sr}</label>${ht}</div>`:`<label class="c"><input type="checkbox" name="${nmv}"${rq}> ${esc(n.label)}${sr}</label>`;
+    case 'select':return `<label class="f"><span>${esc(n.label)}${sr}</span><select name="${nmv}"${rq}>${(a.options||'').split('|').map(o=>`<option>${esc(o)}</option>`).join('')}</select>${ht}</label>`;
     case 'image':return `<div class="img">${esc(n.label||'Image')}</div>`;
     case 'divider':return '<hr>';
     case 'note':return notes?`<div class="note">${esc(n.label)}</div>`:'';
@@ -470,7 +591,20 @@ function R0(n,notes){
     case 'modal':return SKIPM?'':modalBox(n,notes);
     case 'table':{const cs=(a.cols||'Column 1|Column 2').split('|'),rn=+a.rows||3;return `<table>${n.label?`<caption>${esc(n.label)}</caption>`:''}<tr>${cs.map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${Array.from({length:rn},()=>`<tr>${cs.map(()=>'<td>Text</td>').join('')}</tr>`).join('')}</table>`}
     case 'tabs':return `<div class="wtabs">${(a.items||'Tab 1|Tab 2').split('|').map((t,i)=>`<button class="${i?'':'on'}">${esc(t)}</button>`).join('')}</div>`;
-    case 'column':case 'card':case 'nav':case 'form':case 'inline':return `<div class="${n.type}">${kids()}</div>`;
+    case 'column':case 'card':case 'nav':case 'inline':return `<div class="${n.type}">${kids()}</div>`;
+    case 'formpage':return `<div class="fpage"><h4 class="fpt">${esc(n.label||'Untitled page')}</h4>${kids()}</div>`;
+    case 'form':{
+      const pg=pagesOf(n);
+      if(!pg.length)return EXP?`<form class="form" novalidate>${kids()}</form>`:`<div class="form">${kids()}</div>`;
+      const key=fpKey(n),tot=pg.length,ex=n.children.filter(c=>c.type!=='formpage'),exh=()=>ex.map(c=>R(c,notes)).join(''),ttl=(p,j)=>esc(p.label||'Page '+(j+1));
+      if(EXP){
+        const ch=pg.map((p,j)=>`<button type="button" class="fstep${j?'':' on'}" data-fpset="${j}">${j+1}. ${ttl(p,j)}</button>`).join('');
+        const body=pg.map((p,j)=>`<div class="fpw"${j?' hidden':''}>${R(p,notes)}${j===tot-1?exh():''}</div>`).join('');
+        return `<form class="form mp" novalidate data-fpi="0"><div class="fsteps">${ch}</div>${body}<div class="fnav"><button type="button" class="b s" data-fpgo="-1" hidden>Back</button><button type="button" class="b" data-fpgo="1">Next</button></div></form>`;
+      }
+      const i=fpIdx(key,tot),ch=pg.map((p,j)=>`<button type="button" class="fstep${j===i?' on':''}" data-fpset="${esc(key)}|${j}">${j+1}. ${ttl(p,j)}</button>`).join('');
+      return `<div class="form mp"><div class="fsteps">${ch}</div><div class="fpw">${R(pg[i],notes)}${i===tot-1?exh():''}</div><div class="fnav">${i>0?`<button type="button" class="b s" data-fpset="${esc(key)}|${i-1}">Back</button>`:'<span></span>'}${i<tot-1?`<button type="button" class="b" data-fpset="${esc(key)}|${i+1}">Next</button>`:''}</div></div>`;
+    }
     case 'columns':{const r=(a.layout||'1:1').split(':').map(x=>+x>0?+x:1);return `<div class="columns" style="grid-template-columns:${r.map(x=>x+'fr').join(' ')}">${kids()}</div>`}
     default:return `<div class="unk">Unknown: ${esc(n.type)}</div>`;
   }
@@ -541,8 +675,8 @@ function edges(){
 function specText(){return ta.value.trim()+'\n'}
 function htmlText(only,noBar){
   const ss=only?data.screens.filter(s=>slug(s.label)===only):data.screens;
-  const body=ss.map((s,i)=>`<section class="screen" id="${slug(s.label)}"${i?' hidden':''}>\n${noBar?'':stbarHTML(s)}${secHTML(s)}\n${allModals(s).map(m=>modalBox(m,false,true)).join('\n')}\n</section>`).join('\n');
-  const js=`const show=id=>{document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==id);scrollTo(0,0)};\ndocument.addEventListener('click',e=>{const t=e.target.closest('[data-to]');if(t){e.preventDefault();show(t.dataset.to)}const b=e.target.closest('.wtabs button');if(b)b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});\nfunction setSt(sec,st){sec.querySelectorAll('[data-in],[data-out]').forEach(function(el){var i=el.dataset.in,o=el.dataset.out;el.hidden=!!((i&&i.split('|').indexOf(st)<0)||(o&&o.split('|').indexOf(st)>=0))});sec.querySelectorAll('.stbar button').forEach(function(b){b.classList.toggle('on',b.dataset.st===st)})}\ndocument.querySelectorAll('section').forEach(function(sec){var b=sec.querySelector('.stbar button');if(b)setSt(sec,b.dataset.st)});\ndocument.addEventListener('click',function(e){var o=e.target.closest('[data-opens]');if(o){var d=o.closest('section').querySelector('dialog[data-m="'+o.dataset.opens+'"]');if(d)d.showModal()}var c=e.target.closest('[data-closes]');if(c){var dd=c.closest('dialog');if(dd)dd.close()}if(e.target.tagName==='DIALOG')e.target.close();var sb=e.target.closest('.stbar button');var ss=e.target.closest('[data-state]');var cs=Array.prototype.slice.call(document.querySelectorAll('section')).filter(function(x){return !x.hidden})[0];if(cs&&sb)setSt(cs,sb.dataset.st);else if(cs&&ss)setSt(cs,ss.dataset.state)});`;
+  const body=ss.map((s,i)=>`<section class="screen" id="${slug(s.label)}"${i?' hidden':''}>\n${noBar?'':stbarHTML(s)}${secHTML(s)}\n${expModals(s)}\n</section>`).join('\n');
+  const js=`const show=id=>{document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==id);scrollTo(0,0)};\ndocument.addEventListener('click',e=>{const t=e.target.closest('[data-to]');if(t){e.preventDefault();show(t.dataset.to)}const b=e.target.closest('.wtabs button');if(b)b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));});\nfunction setSt(sec,st){sec.querySelectorAll('[data-in],[data-out]').forEach(function(el){var i=el.dataset.in,o=el.dataset.out;el.hidden=!!((i&&i.split('|').indexOf(st)<0)||(o&&o.split('|').indexOf(st)>=0))});sec.querySelectorAll('.stbar button').forEach(function(b){b.classList.toggle('on',b.dataset.st===st)})}\ndocument.querySelectorAll('section').forEach(function(sec){var b=sec.querySelector('.stbar button');if(b)setSt(sec,b.dataset.st)});\ndocument.addEventListener('click',function(e){var o=e.target.closest('[data-opens]');if(o){var d=o.closest('section').querySelector('dialog[data-m="'+o.dataset.opens+'"]');if(d)d.showModal()}var c=e.target.closest('[data-closes]');if(c){var dd=c.closest('dialog');if(dd)dd.close()}if(e.target.tagName==='DIALOG')e.target.close();var sb=e.target.closest('.stbar button');var ss=e.target.closest('[data-state]');var cs=Array.prototype.slice.call(document.querySelectorAll('section')).filter(function(x){return !x.hidden})[0];if(cs&&sb)setSt(cs,sb.dataset.st);else if(cs&&ss)setSt(cs,ss.dataset.state)});\nfunction fpShow(f,i){var w=[].slice.call(f.children).filter(function(x){return x.classList.contains('fpw')});i=Math.max(0,Math.min(i,w.length-1));w.forEach(function(x,j){x.hidden=j!==i});[].slice.call(f.querySelectorAll('.fstep')).forEach(function(b,j){b.classList.toggle('on',j===i)});var bk=f.querySelector('[data-fpgo="-1"]'),nx=f.querySelector('[data-fpgo="1"]');if(bk)bk.hidden=i===0;if(nx)nx.hidden=i===w.length-1;f.dataset.fpi=i}\ndocument.addEventListener('submit',function(e){e.preventDefault()});\ndocument.addEventListener('click',function(e){var g=e.target.closest('[data-fpgo],[data-fpset]');if(!g)return;var f=g.closest('.form');if(f)fpShow(f,g.dataset.fpset!==undefined?+g.dataset.fpset:(+f.dataset.fpi||0)+(+g.dataset.fpgo))});`;
   return `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>${esc(pn())}</title>\n<style>\nbody{margin:0}\n${respCSS()}\n</style>\n</head>\n<body class="wf">\n${body}\n<script>\n${js}\n<\/script>\n</body>\n</html>\n`;
 }
 const FWH={'React':'Vite + React + React Router; src/pages and src/components','Next.js':'App Router; app/<route>/page.tsx and a components/ folder','Vue':'Vite + Vue 3 + Vue Router; src/views and src/components','Nuxt':'Nuxt 3; pages/, components/ and layouts/','Angular':'standalone components + the Angular router; one component per screen','SvelteKit':'src/routes/<route>/+page.svelte and src/lib/components','Laravel':'Blade views in resources/views, Blade components in resources/views/components, routes in routes/web.php','Django':'templates/ with a base template and includes, urls.py and views.py','Ruby on Rails':'views with partials in app/views/shared, routes.rb, one controller action per screen'};
@@ -643,14 +777,17 @@ function aiText(){
     used.has('links')&&'links: placeholder links (Link 1, Link 2, \u2026): keep them as placeholders or ask me for the real destinations.',
     used.has('table')&&'table: a real <table> inside a wrapper with overflow-x: auto.',
     used.has('tabs')&&'tabs: an accessible tab list (role=tablist) with one panel per tab.',
+    used.has('form')&&'form: a real <form> element; every control has a visible <label> (radio and checkbox groups use <fieldset> and <legend>); required fields are marked with an asterisk and the required attribute; help text is linked with aria-describedby; validate on the client and on the server and show errors next to the field.',
+    used.has('formpage')&&'formpage: a multi-step form. Show one page at a time with a progress indicator (Step x of y) using the page titles; Back and Next keep the answers already given; validate the current page before Next; only the last page submits.',
     used.has('modal')&&'modal: a <dialog> hidden by default, opened by the control marked opens and closed by a control marked closes, Esc or the backdrop.',
     used.has('image')&&'image: responsive (max-width: 100%, fixed aspect ratio) with alt text taken from its label.',
     'Use rem units, relative spacing and CSS variables for colours and spacing.'].filter(Boolean);
-  const fields=fl.filter(k=>/^(input|select|checkbox|date)$/.test(k.type)).map(k=>`- ${tn(k)}: ${k.label} (${k.type==='input'?(k.attrs.type||'text'):k.type}${k.attrs.options?': '+k.attrs.options.split('|').join(', '):''})`);
+  const fields=fl.filter(k=>isQ(k)&&!k.attrs.sample).map(k=>`- ${tn(k)}: ${k.label} (${FTN[k.type](k)}${k.attrs.options?': '+k.attrs.options.split('|').join(', '):''}${k.attrs.required?', required':''})`);
   const tabs=fl.filter(k=>k.type==='table').map(k=>`- ${tn(k)}: table \u201c${k.label||'untitled'}\u201d with columns ${(k.attrs.cols||'').split('|').join(', ')}`);
   const ins=$('#aispec').value.trim(),instr=ins?`## Special instructions\n${ins}\n\n`:'';
   const urls=$('#airefs').value.split(/[\s,]+/).filter(u=>/^https?:\/\//i.test(u));
   const refs=`## Reference URLs\n${urls.length?urls.map(u=>'- '+u).join('\n')+'\nVisit these (if you can browse) and base the visual design on them: typography, colour, spacing and tone. Do not copy their content.':'Add one or more URLs here, one per line, for sites whose look and feel the design should follow (leave blank if none):\n- https://\n- https://'}\nIf you cannot open the URLs, ask me for screenshots or a description instead.\n\n`;
+  const formSec=formSection(fl,tn);
   const hints=(tg==='php'||tg==='fw'||tg==='cms')?`\n## Data hints (infer ${tg==='php'?'MySQL tables':tg==='cms'?'content types, fields and forms':'models and forms'} from these)\n${[...fields,...tabs].join('\n')||'- None'}\n`:'';
   const L=ta.value.split('\n'),blk=n=>L.slice(n.line-1,maxLine(n)).join('\n');
   const spec=curS?[...cs.map(blk),blk(curS)].join('\n\n')+'\n':specText();
@@ -675,8 +812,8 @@ ${nav}
 ${shared}
 ${cs.length?'\n'+shHow+'\n':''}
 ## Requirements checklist
-${[...notes,...modalReq(fl),...stateReq(ss,curS),...generic].join('\n')}
-${hints}
+${[...notes,...modalReq(fl),...formReq(fl,tn),...stateReq(ss,curS),...generic].join('\n')}
+${formSec}${hints}
 ## Design spec (indentation = nesting; -> "Screen" = navigation)
 ${F}text
 ${spec}${F}
@@ -687,8 +824,9 @@ Ask me about anything ambiguous, list your assumptions at the top of your reply,
 }
 function showExp(){
   $$('[data-x]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.x===X));
-  $('#aiopts').hidden=X!=='ai';
-  $('#out').value=X==='ai'?aiText():X==='html'?htmlText():specText();
+  $('#aiopts').hidden=X!=='ai';$('#fxopts').hidden=X!=='form';
+  $('#out').value=X==='ai'?aiText():X==='html'?htmlText():X==='form'?formText():specText();
+  $('#dl').textContent=X==='form'&&fxFiles().length>1?'Download .zip':'Download';
 }
 $$('[data-x]').forEach(b=>b.onclick=()=>{X=b.dataset.x;showExp()});
 $('#copy').onclick=async()=>{
@@ -697,8 +835,8 @@ $('#copy').onclick=async()=>{
   setTimeout(()=>$('#copy').textContent='Copy',2000);
 };
 $$('[data-d]').forEach(b=>b.onclick=()=>{D=b.dataset.d;$$('[data-d]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.d===D));showPrev()});
-const CONT=new Set(['card','section','columns','column','inline','form','nav','modal']);
-const HINT={table:'cols=Name|Status|Due rows=3',tabs:'items=Overview|Tasks|Files',input:'type=email id=email',select:'options=One|Two|Three',grid:'cols=3',button:'style=secondary'};
+const CONT=new Set(['card','section','columns','column','inline','form','formpage','nav','modal']);
+const HINT={table:'cols=Name|Status|Due rows=3',tabs:'items=Overview|Tasks|Files',input:'type=email id=email',select:'Choices, separated by commas',radios:'Choices, separated by commas',checks:'Choices, separated by commas',textarea:'rows=6',file:'accept=image/*',range:'min=1 max=5',field:'Type the field type, e.g. Signature pad',grid:'cols=3',button:'style=secondary'};
 const maxLine=n=>Math.max(n.line,...n.children.map(maxLine));
 function containers(n,out=[]){n.children.forEach(c=>{if(CONT.has(c.type)){out.push(c);containers(c,out)}});return out}
 function setOpts(sel,html){const v=sel.value;sel.innerHTML=html;if([...sel.options].some(o=>o.value===v))sel.value=v}
@@ -745,7 +883,7 @@ function mv(dir){
   const r=dir<0?swap(o,n):swap(n,o);$('#fm').value=String(dir<0?r.g:r.f);
 }
 $('#fs').onchange=()=>{fillForm();fillMore()};
-$('#fc').onchange=fillMore;
+$('#fc').onchange=()=>{fillMore();const cc=curC(),pp=cc[1]&&pageOf(cc[1]);if(pp){FP[pp.key]=pp.idx;showPrev()}};
 $('#fup').onclick=()=>mv(-1);
 $('#fdn').onclick=()=>mv(1);
 $('#fdel').onclick=()=>{const n=pick();if(!n)return;const L=ta.value.split('\n');L.splice(n.line-1,maxLine(n)-n.line+1);setText(L.join('\n'));$('#fm').value='';fillTargets()};
@@ -760,7 +898,7 @@ const nm=k=>k.type==='component'?'Shared component: '+k.label:k.label;
 const nl=k=>k.type==='screen'||k.type==='component'?nm(k):lab(k);
 function curC(){const s=tops().find(s=>String(s.line)===$('#fs').value);if(!s)return[];const cv=$('#fc').value;return[s,cv==='root'?s:containers(s).find(c=>String(c.line)===cv)||s]}
 function pick(){return flat().find(k=>String(k.line)===$('#fm').value)}
-function hilite(){$$('#stage [data-l]').forEach(x=>x.classList.toggle('sel',x.dataset.l===$('#fm').value));updateHL();fillVals()}
+function hilite(){$$('#stage [data-l]').forEach(x=>x.classList.toggle('sel',x.dataset.l===$('#fm').value));updateHL();fillVals();fdSync()}
 function fillForm(){
   setOpts($('#fs'),tops().map(s=>`<option value="${s.line}">${esc(nm(s))}</option>`).join('')+'<option value="ns">+ Add new screen…</option><option value="nc">+ Add new shared component…</option>');
   $('#newrow').hidden=!/^n[sc]$/.test($('#fs').value);
@@ -786,7 +924,7 @@ function mv(dir){
   const sib=n.parent?n.parent.children:n.type==='component'?data.comps:data.screens,o=sib[sib.indexOf(n)+dir];if(!o)return;
   const r=dir<0?swap(o,n):swap(n,o);$('#fm').value=String(dir<0?r.g:r.f);fillTargets();
 }
-$('#fm').onchange=fillTargets;
+$('#fm').onchange=()=>{const n=pick(),pp=n&&pageOf(n);if(pp){FP[pp.key]=pp.idx;if(T==='build')showPrev()}fillTargets()};
 $('#fns').onkeydown=e=>{if(e.key==='Enter')$('#fnew').click()};
 $('#fadd').onclick=()=>{
   const[s,c]=curC();if(!s)return;
@@ -811,6 +949,7 @@ $('#fmv').onclick=()=>{
   $('#fm').value=String(at+1);fillTargets();
 };
 $$('[data-m]').forEach(b=>b.onclick=()=>{M=b.dataset.m;$$('[data-m]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.m===M))});
+$('#stage').addEventListener('click',e=>{const g=e.target.closest('[data-fpset]');if(!g)return;const v=g.dataset.fpset,i=v.lastIndexOf('|');FP[v.slice(0,i)]=+v.slice(i+1);showPrev()});
 $('#stage').addEventListener('click',e=>{
   if(M!=='select')return;
   const el=e.target.closest('[data-l]');if(!el)return;
@@ -820,15 +959,27 @@ $('#sample').onclick=()=>{resetExport();setText(SAMPLE)};
 const L8=[['2 equal columns','1:1'],['3 equal columns','1:1:1'],['4 equal columns','1:1:1:1'],['Main + sidebar (2:1)','2:1'],['Main + narrow sidebar (3:1)','3:1'],['Sidebar + main (1:2)','1:2'],['Narrow sidebar + main (1:3)','1:3'],['Sidebar + main + sidebar (1:2:1)','1:2:1']];
 const T3=(l,k)=>l.map(x=>[x.replace(/\|/g,' | '),{[k]:x}]);
 const EXT={
-  input:{l:'Type',k:['type'],o:[['Text',{}],['Email',{type:'email'}],['Password',{type:'password'}],['Number',{type:'number'}],['Search',{type:'search'}],['Phone',{type:'tel'}]]},
+  input:{l:'Type',k:['type'],o:[['Text',{}],['Email',{type:'email'}],['Password',{type:'password'}],['Number',{type:'number'}],['Search',{type:'search'}],['Phone',{type:'tel'}],['Web address (URL)',{type:'url'}]]},
   button:{l:'Style',k:['style'],o:[['Primary',{}],['Secondary',{style:'secondary'}]]},
   select:{l:'Options',k:['options'],c:1,o:T3(['Option 1|Option 2|Option 3','Yes|No','Low|Medium|High','Planning|In progress|Done','All|Active|Archived'],'options')},
   table:{l:'Columns',k:['cols','rows'],c:1,o:['Name|Role|Status','Task|Owner|Due','Item|Quantity|Price','Name|Email|Date'].map(x=>[x.replace(/\|/g,' | '),{cols:x,rows:'3'}])},
   tabs:{l:'Tabs',k:['items'],c:1,o:T3(['Overview|Details|Settings','Home|Profile|Settings','Tab 1|Tab 2|Tab 3','All|Active|Archived'],'items')},
   links:{l:'Number',k:['count'],o:[['3 links',{count:'3'}],['2 links',{count:'2'}],['4 links',{count:'4'}],['5 links',{count:'5'}]]},
-  date:{l:'Kind',k:['kind'],o:[['Date',{}],['Date and time',{kind:'datetime'}],['Month',{kind:'month'}]]},
-  columns:{l:'Layout',k:['layout'],o:L8.map(([a,b])=>[a,{layout:b}])}
+  date:{l:'Kind',k:['kind'],o:[['Date',{}],['Date and time',{kind:'datetime'}],['Month',{kind:'month'}],['Time only',{kind:'time'}]]},
+  columns:{l:'Layout',k:['layout'],o:L8.map(([a,b])=>[a,{layout:b}])},
+  textarea:{l:'Height',k:['rows'],o:[['Medium (4 lines)',{}],['Short (2 lines)',{rows:'2'}],['Tall (8 lines)',{rows:'8'}]]},
+  radios:{l:'Options',k:['options'],c:1,o:T3(['Yes|No','Option 1|Option 2','Option 1|Option 2|Option 3','Low|Medium|High','Mr|Mrs|Ms|Mx|Other'],'options')},
+  checks:{l:'Options',k:['options'],c:1,o:T3(['Option 1|Option 2|Option 3','Email|Phone|Post|Text message','Mon|Tue|Wed|Thu|Fri'],'options')},
+  file:{l:'Accepts',k:['accept'],c:1,o:[['Any file',{}],['Images',{accept:'image/*'}],['Documents (PDF, Word)',{accept:'.pdf,.doc,.docx'}],['Spreadsheets',{accept:'.csv,.xls,.xlsx'}]]},
+  range:{l:'Scale',k:['min','max'],o:[['1 to 5',{min:'1',max:'5'}],['1 to 10',{min:'1',max:'10'}],['0 to 100',{min:'0',max:'100'}]]},
+  field:{l:'Field type',k:['as'],c:1,o:T3(['Signature pad','Star rating','Address lookup','Rich text editor','Tag input','Map location picker','Colour picker'],'as')}
 };
+function fxv(t,v){v=(v||'').trim();if(!v||/=/.test(v))return v;if(t==='field')return 'as='+av(v.replace(/"/g,"'"));if(t==='select'||t==='radios'||t==='checks')return 'options='+av((v.includes('|')?v.split('|'):v.split(',')).map(x=>x.trim().replace(/"/g,"'")).filter(Boolean).join('|'));return v}
+function fieldBits(t,b){
+  if(!FIELDS.has(t))return;
+  delete b.sample;
+  if(!$('#vreqrow').hidden){if($('#vreq').checked)b.required='yes';else delete b.required;const h=$('#vh').value.replace(/"/g,"'").trim();if(h)b.hint=h;else delete b.hint}
+}
 const optsOf=e=>e.o.map((o,i)=>`<option value="${i}">${esc(o[0])}</option>`).join('')+(e.c?'<option value="c">Custom\u2026</option>':'');
 function syncExtra(){
   const t=$('#ft').value,e=EXT[t],f=$('#fly'),x=$('#fx');
@@ -839,7 +990,7 @@ function syncExtra(){
   f.hidden=false;x.hidden=f.value!=='c';
 }
 const extraObj=t=>{const e=EXT[t],v=$('#fly').value;return e&&v!=='c'?e.o[+v][1]:{}};
-const extraStr=t=>{const e=EXT[t];if(!e)return'';return $('#fly').value==='c'?$('#fx').value.trim():attrStr(e.o[+$('#fly').value][1])};
+const extraStr=t=>{const e=EXT[t];if(!e)return'';return $('#fly').value==='c'?fxv(t,$('#fx').value):attrStr(e.o[+$('#fly').value][1])};
 $('#fly').addEventListener('change',syncExtra);
 const mg=(a,e)=>attrStr(Object.fromEntries(e.k.filter(k=>a[k]!==undefined).map(k=>[k,a[k]])));
 function fillVx(n){
@@ -852,11 +1003,11 @@ function fillVx(n){
   x.value=f.value==='c'?cur:'';x.hidden=f.value!=='c';
 }
 function applyAttrs(n,t){
-  const e=EXT[t],b={...n.attrs};stApply(n,b);if(t==='button'||t==='link')delete b.state;
+  const e=EXT[t],b={...n.attrs};stApply(n,b);if(t==='button'||t==='link')delete b.state;fieldBits(t,b);
   if(!e)return attrStr(b);
   e.k.forEach(k=>delete b[k]);
   const v=$('#vly').value;
-  if(v==='c')return[attrStr(b),$('#vx').value.trim()].filter(Boolean).join(' ');
+  if(v==='c')return[attrStr(b),fxv(t,$('#vx').value)].filter(Boolean).join(' ');
   return attrStr({...b,...e.o[+v][1]});
 }
 $('#vly').addEventListener('change',()=>{$('#vx').hidden=$('#vly').value!=='c'});
@@ -877,11 +1028,12 @@ $('#pfile').onchange=()=>{
 };
 const REF=new Set(['card','columns','column','nav','form','inline','tabs']);
 const RN='Reference name only (not shown): helps you find it later';
-const PH={heading:'Text shown as the heading',text:'Text shown on the page',paragraph:'Paragraph text (leave empty for Lorem ipsum)',button:'Text shown on the button',link:'Text shown for the link',input:'Label shown above the field',select:'Label shown above the dropdown',checkbox:'Text shown next to the box',image:'Caption shown in the image box',table:'Table title shown above it (optional)',note:'A note for the developer or AI (not part of the page)',section:'Section title: shown on the page and helps you find it',modal:'Dialog title: shown on the page',card:RN,columns:RN,column:RN,nav:RN,form:RN,inline:RN,tabs:'Reference name only (tab names are set in Tabs)',links:'Not needed',divider:'Not needed',date:'Label shown above the date field'};
+const PH={heading:'Text shown as the heading',text:'Text shown on the page',paragraph:'Paragraph text (leave empty for Lorem ipsum)',button:'Text shown on the button',link:'Text shown for the link',input:'Label shown above the field',select:'Label shown above the dropdown',checkbox:'Text shown next to the box',image:'Caption shown in the image box',table:'Table title shown above it (optional)',note:'A note for the developer or AI (not part of the page)',section:'Section title: shown on the page and helps you find it',modal:'Dialog title: shown on the page',card:RN,columns:RN,column:RN,nav:RN,form:RN,inline:RN,tabs:'Reference name only (tab names are set in Tabs)',links:'Not needed',divider:'Not needed',date:'Label shown above the date field',formpage:'Page title, shown at the top of this page',textarea:'The question, shown above the box',radios:'The question, shown above the choices',checks:'The question, shown above the choices',file:'Label shown above the upload control',range:'Label shown above the slider',field:'The question, shown above the field'};
 function syncNew(){
   const nw=/^n[sc]$/.test($('#fs').value);
   ['#fc','#ft','#fl','#fp'].forEach(q=>$(q).parentNode.hidden=nw);const tt=$('#ft').value;$('#fto').parentNode.hidden=nw||!(tt==='button'||tt==='link');
   $('#fadd').parentNode.hidden=nw;
+  $('#freqrow').hidden=nw||!FIELDS.has(tt);$('#fhrow').hidden=nw||!FIELDS.has(tt);$('#fhelp').hidden=nw;
   if(nw)$('#fxl').parentNode.hidden=true;
 }
 function respCSS(){
@@ -921,6 +1073,7 @@ function openersOf(s,m){
   return o.length?o.map(k=>`${k.type} \u201c${esc(k.label)}\u201d`).join(', '):'nothing yet (add a button or link that opens it)';
 }
 function pageHTML(s,nt){SKIPM=true;try{return s.children.map(c=>R(c,nt)).join('')}finally{SKIPM=false}}
+function expModals(s){EXP=true;try{return allModals(s).map(m=>modalBox(m,false,true)).join('\n')}finally{EXP=false}}
 function secHTML(s){EXP=true;SKIPM=true;try{return s.children.map(c=>R(c,false)).join('\n')}finally{EXP=false;SKIPM=false}}
 function modalBox(n,notes,dlg){
   const t=esc(n.label||'Modal'),inner=`<div class="modal" role="dialog" aria-label="${t}"><div class="st">${t}</div>${n.children.map(c=>R(c,notes)).join('')}</div>`;
@@ -1092,9 +1245,9 @@ function scopeTops(){
   if(f&&f.type==='component'&&!out.includes(f))out.push(f);
   return out;
 }
-const CONVG=[['heading','text','paragraph'],['button','link'],['input','select','checkbox','date'],['section','card','column','inline','form','nav']];
-const ALW={input:['type'],select:['options'],date:['kind'],button:['style']};
-const tyName=t=>{const o=$('#ft option[value="'+t+'"]');return o?o.textContent.replace(/ \(.*\)$/,''):t};
+const CONVG=[['heading','text','paragraph'],['button','link'],['input','textarea','select','radios','checks','checkbox','date','file','range','field'],['section','card','column','inline','form','nav']];
+const ALW={input:['type'],select:['options'],date:['kind'],button:['style'],textarea:['rows'],radios:['options'],checks:['options'],file:['accept'],range:['min','max'],field:['as']};
+const tyName=t=>{const o=$('#ft option[value="'+t+'"]');return o?o.textContent.replace(/ \u2013 .*$/,''):t};
 function fillVty(n){
   const g=n&&CONVG.find(x=>x.includes(n.type)),sel=$('#vty');
   $('#vtyrow').hidden=!g;
@@ -1103,9 +1256,10 @@ function fillVty(n){
 }
 function convAttrs(n,nt){
   const b={};
-  [...(ALW[nt]||[]),'show-in','hide-in'].forEach(k=>{if(n.attrs[k]!==undefined)b[k]=n.attrs[k]});
-  if(nt==='select'&&!b.options)b.options='Option 1|Option 2|Option 3';
-  stApply(n,b);
+  [...(ALW[nt]||[]),'show-in','hide-in',...(FIELDS.has(nt)?['required','hint','placeholder','name']:[])].forEach(k=>{if(n.attrs[k]!==undefined)b[k]=n.attrs[k]});
+  if((nt==='select'||nt==='radios'||nt==='checks')&&!b.options)b.options='Option 1|Option 2|Option 3';
+  if(nt==='field'&&!b.as)b.as='Custom field';
+  stApply(n,b);fieldBits(nt,b);
   return attrStr(b);
 }
 var CTX=null;
@@ -1132,6 +1286,7 @@ $('#fnew').onclick=()=>{
   $('#fs').value=String(tops().reduce((a,b)=>b.line>a.line?b:a).line);fillForm();fillMore();
 };
 $('#dl').onclick=()=>{
+  if(X==='form'){fxDownload();return}
   const m={ai:['handoff.md','text/markdown'],html:['wireframe.html','text/html'],spec:['spec.txt','text/plain']}[X];
   saveFile(pf(m[0]),new Blob([$('#out').value],{type:m[1]+';charset=utf-8'}));
 };
@@ -1167,16 +1322,16 @@ const S=(t,ui,d,ok,act,need)=>({t,ui,d,ok,act,need});
 const IN='Open <b>Inside</b> and choose <b>Screen</b>.';
 const BASIC=[
  S('Create the Home screen',['#fs','#fns','#fnew'],OL('In the <b>Add</b> box, open <b>Within screen</b> and choose <b>+ Add new screen\u2026</b>.','Type <b>Home</b> in the box that appears.','Press <b>Create</b>.')+'<p>Tip: give <b>every</b> element a label. Labels are how you find elements later in the Inside, Position, Edit and Move into lists. Your earlier text stays available through <b>Undo</b>.</p>',()=>!!homeN(),()=>eScr(),'a screen'),
- S('Add a header section',['#ft','#fl','#fadd'],OL('Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Header</b>.','Press <b>Add element</b>.'),()=>!!hdr(),()=>eHdr(),'a Section whose label contains \u201cHeader\u201d, directly on the screen'),
+ S('Add a header section',['#ft','#fl','#fadd'],OL('Open <b>Element</b> and choose <b>Layout \u2192 Section</b>.','In <b>Label</b> type <b>Header</b>.','Press <b>Add element</b>.'),()=>!!hdr(),()=>eHdr(),'a Section whose label contains \u201cHeader\u201d, directly on the screen'),
  S('Put a heading in the header',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Header section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Heading</b>.','In <b>Label</b> type <b>My site</b>, then press <b>Add element</b>.'),()=>{const h=hdr();return !!h&&h.children.some(c=>c.type==='heading')},()=>{eHdr();if(!hdr().children.some(c=>c.type==='heading'))addIn(hdr(),'heading "My site"')},'a Heading inside the Header section'),
  S('Add a navigation bar',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Special \u2192 Nav</b>.','In <b>Reference name</b> type <b>Main navigation</b>, then press <b>Add element</b>.'),()=>!!nv(),()=>eNv(),'a Nav on the screen'),
  S('Add three links to the navigation',['#ft','#fl','#fto','#fadd'],OL('<b>Inside</b> now shows the navigation. Leave it.','Open <b>Element</b> and choose <b>Special \u2192 Link</b>.','In <b>Label</b> type <b>Home</b>, set <b>On click</b> to <b>Go to screen \u2192 Home</b>, then press <b>Add element</b>.','Repeat for <b>About</b> and <b>Contact</b>, leaving On click on (nothing).'),()=>{const n=nv();return !!n&&n.children.filter(c=>c.type==='link').length>=3},()=>{eNv();const c=nv().children.filter(k=>k.type==='link').length;if(c<3)addIn(nv(),['link "Home" -> "Home"','link "About"','link "Contact"'].slice(c).join('\n'))},'three Links inside the Nav'),
- S('Add a search box to the navigation',['#ft','#fl','#fly','#fadd'],OL('Open <b>Element</b> and choose <b>Forms \u2192 Input</b>.','In <b>Label</b> type <b>Search</b>.','Set <b>Type</b> to <b>Search</b>, then press <b>Add element</b>.'),()=>{const n=nv();return !!n&&n.children.some(c=>c.type==='input')},()=>{eNv();if(!nv().children.some(c=>c.type==='input'))addIn(nv(),'input "Search" type=search')},'an Input inside the Nav'),
+ S('Add a search box to the navigation',['#ft','#fl','#fly','#fadd'],OL('Open <b>Element</b> and choose <b>Forms \u2192 Short text</b>.','In <b>Label</b> type <b>Search</b>.','Set <b>Type</b> to <b>Search</b>, then press <b>Add element</b>.'),()=>{const n=nv();return !!n&&n.children.some(c=>c.type==='input')},()=>{eNv();if(!nv().children.some(c=>c.type==='input'))addIn(nv(),'input "Search" type=search')},'an Input inside the Nav'),
  S('Add the main content area',['#fc','#ft','#fl','#fly','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Columns</b>.','In <b>Reference name</b> type <b>Page content</b>.','Set <b>Layout</b> to <b>Main + sidebar (2:1)</b>, then press <b>Add element</b>.')+'<p>Two columns are created for you, already labelled Main and Sidebar.</p>',()=>!!cols(),()=>eCols(),'a Columns element with at least two columns'),
- S('Fill the main column',['#fc','#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Main column. Leave it.','Add a <b>Content \u2192 Heading</b> with the label <b>Main content</b>.','Then add a <b>Content \u2192 Paragraph (Lorem ipsum)</b>. Its label can stay empty.'),()=>{const m=mainC();return !!m&&m.children.some(c=>c.type==='heading')&&m.children.some(c=>c.type==='paragraph')},()=>{eCols();const need=[];if(!mainC().children.some(c=>c.type==='heading'))need.push('heading "Main content"');if(!mainC().children.some(c=>c.type==='paragraph'))need.push('paragraph');if(need.length)addIn(mainC(),need.join('\n'))},'a Heading and a Paragraph in the first column'),
- S('Add a card to the sidebar',['#fc','#ft','#fl','#fadd'],OL('Open <b>Inside</b> and choose the <b>Sidebar</b> column.','Open <b>Element</b> and choose <b>Layout \u2192 Card (bordered box)</b>.','In <b>Reference name</b> type <b>Related links</b>, then press <b>Add element</b>.'),()=>!!cardIn(sideC()),()=>{eCols();if(!cardIn(sideC()))addIn(sideC(),'card "Related links"')},'a Card in the last column'),
+ S('Fill the main column',['#fc','#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Main column. Leave it.','Add a <b>Content \u2192 Heading</b> with the label <b>Main content</b>.','Then add a <b>Content \u2192 Paragraph</b>. Its label can stay empty.'),()=>{const m=mainC();return !!m&&m.children.some(c=>c.type==='heading')&&m.children.some(c=>c.type==='paragraph')},()=>{eCols();const need=[];if(!mainC().children.some(c=>c.type==='heading'))need.push('heading "Main content"');if(!mainC().children.some(c=>c.type==='paragraph'))need.push('paragraph');if(need.length)addIn(mainC(),need.join('\n'))},'a Heading and a Paragraph in the first column'),
+ S('Add a card to the sidebar',['#fc','#ft','#fl','#fadd'],OL('Open <b>Inside</b> and choose the <b>Sidebar</b> column.','Open <b>Element</b> and choose <b>Layout \u2192 Card</b>.','In <b>Reference name</b> type <b>Related links</b>, then press <b>Add element</b>.'),()=>!!cardIn(sideC()),()=>{eCols();if(!cardIn(sideC()))addIn(sideC(),'card "Related links"')},'a Card in the last column'),
  S('Put text in the card',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the card. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>Related links go here.</b>, then press <b>Add element</b>.'),()=>{const c=cardIn(sideC());return !!c&&c.children.some(k=>k.type==='text')},()=>{eCols();if(!cardIn(sideC()))addIn(sideC(),'card "Related links"');if(!cardIn(sideC()).children.some(k=>k.type==='text'))addIn(cardIn(sideC()),'text "Related links go here."')},'a Text inside that Card'),
- S('Add a footer section',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Section (full-width band)</b>.','In <b>Label</b> type <b>Footer</b>, then press <b>Add element</b>.'),()=>!!ftr(),()=>eFtr(),'a Section whose label contains \u201cFooter\u201d, directly on the screen'),
+ S('Add a footer section',['#fc','#ft','#fl','#fadd'],OL(IN,'Open <b>Element</b> and choose <b>Layout \u2192 Section</b>.','In <b>Label</b> type <b>Footer</b>, then press <b>Add element</b>.'),()=>!!ftr(),()=>eFtr(),'a Section whose label contains \u201cFooter\u201d, directly on the screen'),
  S('Put text in the footer',['#ft','#fl','#fadd'],OL('<b>Inside</b> now shows the Footer section. Leave it.','Open <b>Element</b> and choose <b>Content \u2192 Text</b>.','In <b>Label</b> type <b>\u00a9 2026 My site</b>, then press <b>Add element</b>.'),()=>{const f=ftr();return !!f&&f.children.some(k=>k.type==='text')},()=>{eFtr();if(!ftr().children.some(k=>k.type==='text'))addIn(ftr(),'text "\u00a9 2026 My site"')},'a Text inside the Footer section'),
  S('Check it on mobile',['[data-d=mobile]','[data-m=select]'],OL('Above the preview, press <b>Mobile</b>, then <b>Widescreen</b>, and watch the columns stack.','Make sure <b>Edit</b> is selected, click any element in the preview, then change its values in the <b>Edit</b> box and press <b>Apply values</b>.')+'<p>You have built a basic page.</p>',undefined,()=>$('[data-d=mobile]').click())
 ];
@@ -1192,7 +1347,7 @@ const ADV=[
  S('Add a screen state',['#stbar','#ft','#fl','#fst','#fadd'],OL('In the <b>State</b> row above the preview, type <b>Empty</b> and press <b>Add state</b>.','Choose <b>Content \u2192 Text</b>, type the label <b>No team members yet.</b>, set <b>Shown in</b> to <b>Only in: Empty</b> and press <b>Add element</b>.','Click <b>Default</b> and <b>Empty</b> in the State row to compare them.'),()=>an().some(k=>k.attrs['show-in']),()=>{eAbout();if(!stateList(aboutN()).includes('Empty'))addState(aboutN(),'Empty');if(!an().some(k=>k.attrs['show-in']))addIn(aboutN(),'text "No team members yet." show-in=Empty')},'an element on the second screen with a \u201cshow-in\u201d state'),
  S('Add a modal',['#fc','#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Modal</b>, label it <b>Thanks for signing up</b> and press <b>Add element</b>. Modals always go at the bottom of the screen.','<b>Inside</b> now shows the modal. Add a <b>Content \u2192 Text</b> labelled <b>We will be in touch.</b>, then a <b>Special \u2192 Button</b> labelled <b>Close</b> with <b>On click</b> set to <b>Close this modal</b>.')+'<p>In Edit mode the modal appears below the page, separate from it.</p>',()=>{const m=mdl();return !!m&&m.children.some(k=>k.type==='text')&&m.children.some(k=>k.closes)},()=>{eMdl();if(!mdl().children.some(k=>k.type==='text'))addIn(mdl(),'text "We will be in touch."');if(!mdl().children.some(k=>k.closes))addIn(mdl(),'button "Close" closes')},'a Modal with some Text and a button that closes it'),
  S('Open the modal from a button',['#fc','#ft','#fl','#fto','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Special \u2192 Button</b> and label it <b>Sign up</b>.','Set <b>On click</b> to <b>Open modal \u2192 Thanks for signing up</b>, then press <b>Add element</b>.','Press <b>Run</b> above the preview and click the button.'),()=>an().some(k=>k.opens),()=>{const m=eMdl();if(!an().some(k=>k.opens))addIn(aboutN(),'button "Sign up" opens "'+m.label+'"')},'a Button or Link that opens the modal'),
- S('Add a form with a date picker',['#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Forms \u2192 Form</b>, label it <b>Contact us</b> and press <b>Add element</b>.','<b>Inside</b> now shows the form. Add a <b>Forms \u2192 Input</b> labelled <b>Your name</b>, a <b>Forms \u2192 Date picker</b> labelled <b>Preferred date</b>, and a <b>Special \u2192 Button</b> labelled <b>Send</b>.'),()=>{const f=frm();return !!f&&f.children.some(k=>k.type==='date')&&f.children.some(k=>k.type==='button')},()=>{eFrm();const add=[];if(!frm().children.some(k=>k.type==='date'))add.push('date "Preferred date"');if(!frm().children.some(k=>k.type==='button'))add.push('button "Send"');if(add.length)addIn(frm(),add.join('\n'))},'a Form with a Date picker and a Button'),
+ S('Add a form with a date picker',['#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Forms \u2192 Form</b>, label it <b>Contact us</b> and press <b>Add element</b>. The form arrives with sample fields (dashed outline) and a Submit button so you can see how it will look.','<b>Inside</b> now shows the form and a <b>Form designer</b> panel appears. Add a <b>Forms \u2192 Short text</b> labelled <b>Your name</b>: your first real field replaces the samples. Add a <b>Forms \u2192 Date picker</b> labelled <b>Preferred date</b>. Then select the <b>Submit</b> button in the preview and rename it <b>Send</b> in the Edit box (or add your own <b>Special \u2192 Button</b> labelled <b>Send</b>).'),()=>{const f=frm();return !!f&&f.children.some(k=>k.type==='date')&&f.children.some(k=>k.type==='button')},()=>{eFrm();const add=[];if(!frm().children.some(k=>k.type==='date'))add.push('date "Preferred date"');if(!frm().children.some(k=>k.type==='button'))add.push('button "Send"');if(add.length)addIn(frm(),add.join('\n'))},'a Form with a Date picker and a Button'),
  S('Add a form completion message',['#newst','#addst'],OL('In the <b>State</b> row above the preview, type <b>Form completed</b> (or pick it from the list) and press <b>Add state</b>.','A thank-you message is added for you, the form is hidden in that state, and the Send button switches to it.','Press <b>Run</b>, then click <b>Send</b> to see the message.'),()=>!!aboutN()&&stateList(aboutN()).includes('Form completed')&&an().some(k=>k.attrs['show-in']==='Form completed'),()=>{eFrm();if(!stateList(aboutN()).includes('Form completed'))addState(aboutN(),'Form completed')},'a \u201cForm completed\u201d state with its message'),
  S('Copy and paste an element',['#fcopy','#fc','#fpaste'],OL('Make sure <b>Edit</b> is on, then click the heading on <b>About</b> in the preview.','Press <b>Copy</b> in the Edit box.','Open <b>Within screen</b>, choose <b>Home</b>, and set <b>Inside</b> to <b>Screen</b>. The line beside <b>Paste</b> shows exactly where it will go.','Press <b>Paste</b>.'),()=>!!CLIP&&flat().filter(k=>k.type===CLIP.type&&k.label===CLIP.label).length>=2,()=>{eAbout();if(!fnd(an(),'heading',/./))addIn(aboutN(),'heading "About us"');CLIP=copyNode(fnd(an(),'heading',/./));addIn(homeN(),CLIP.lines.join('\n'))},'the copied element pasted a second time'),
  S('Add a note',['#ft','#fl','#fadd'],OL('Set <b>Inside</b> to <b>Screen</b>.','Choose <b>Utility \u2192 Note</b>, type <b>Search filters the team table</b> as the label and press <b>Add element</b>.')+'<p>Notes become requirements in the AI handoff.</p>',()=>an().some(k=>k.type==='note'),()=>{eAbout();if(!an().some(k=>k.type==='note'))addIn(aboutN(),'note "Search filters the team table"')},'a Note on the second screen'),
@@ -1223,24 +1378,49 @@ $('#tut').addEventListener('click',e=>{
 $('#tutload').onclick=()=>{resetExport();TUT={name:'Tutorial',steps:BASIC,i:0,msg:''};setText('')};
 $('#imgscope').addEventListener('change',()=>{$('#imgdir').hidden=$('#imgscope').value!=='all'});
 ['#aitarget','#aifw','#aicms','#airef','#aiscope'].forEach(q=>$(q).addEventListener('change',()=>{$('#fwrow').hidden=$('#aitarget').value!=='fw';$('#cmsrow').hidden=$('#aitarget').value!=='cms';$('#scoperow').hidden=$('#aitarget').value!=='existing';showExp()}));
+const FORMPH=['input "Text field" sample','radios "Choose one" options="Option 1|Option 2" sample','select "Dropdown" options="Option 1|Option 2|Option 3" sample','button "Submit"'];
+function addPage(f,title){
+  const L=ta.value.split('\n'),ind=' '.repeat((f.depth+1)*2),pg=pagesOf(f);
+  if(pg.length){
+    L.splice(maxLine(pg[pg.length-1]),0,ind+'formpage "'+(title||'Page '+(pg.length+1))+'"');
+    FP[fpKey(f)]=pg.length;
+  }else{
+    let k=f.children.length;while(k>0&&f.children[k-1].type==='button')k--;
+    const blk=c=>L.slice(c.line-1,maxLine(c)),body=f.children.slice(0,k).flatMap(blk).map(l=>'  '+l),tail=f.children.slice(k).flatMap(blk);
+    L.splice(f.line,maxLine(f)-f.line,ind+'formpage "Page 1"',...body,ind+'formpage "'+(title||'Page 2')+'"',...tail);
+    FP[fpKey(f)]=1;
+  }
+  setText(L.join('\n'));
+}
 $('#fadd').onclick=()=>{
   const[s,c0]=curC();if(!s)return;
-  const t=$('#ft').value,col=t==='columns',c=t==='modal'?s:c0,pv=t==='modal'?'end':$('#fp').value;
+  const t=$('#ft').value,col=t==='columns',c=t==='modal'?s:c0,pv=t==='modal'?'end':$('#fp').value,msg=$('#fmsg');
+  msg.textContent='';
+  if(t==='formpage'){
+    if(c.type!=='form'){msg.textContent='A form page goes inside a form: set Inside to the form first (add a Form if there is not one yet).';return}
+    addPage(c,$('#fl').value.replace(/"/g,"'").trim());$('#fl').value='';return;
+  }
   const label=(t==='use'?$('#fls').value:$('#fl').value).replace(/"/g,"'").trim();
   const to=$('#fto').disabled?'':$('#fto').value,x=extraStr(t);
-  const ind=' '.repeat((c.depth+1)*2);
-  const txt=[ind+t+(label?` "${label}"`:'')+act(to)+(x?' '+x:'')+stAttr()];
+  const ind=' '.repeat((c.depth+1)*2),isF=FIELDS.has(t),hv=$('#fh').value.replace(/"/g,"'").trim();
+  const flag=isF?($('#freq').checked?' required':'')+(hv?' hint='+av(hv):''):'';
+  const txt=[ind+t+(label?` "${label}"`:'')+act(to)+(x?' '+x:'')+flag+stAttr()];
   if(col){const ly=extraObj(t).layout;ly.split(':').forEach((_,i)=>txt.push(ind+'  column "'+((CN[ly]||[])[i]||'Column '+(i+1))+'"'))}
-  const at=pv==='end'?endAt(c,t==='modal'):+pv-1,L=ta.value.split('\n');
-  L.splice(at,0,...txt);setText(L.join('\n'));
-  if(col||CONT.has(t)){$('#fc').value=String(at+1+(col?1:0));fillMore()}
+  if(t==='form')FORMPH.forEach(l=>txt.push(ind+'  '+l));
+  let at=pv==='end'?(isF&&(c.type==='form'||c.type==='formpage')?endBeforeButtons(c):endAt(c,t==='modal')):+pv-1;
+  const L=ta.value.split('\n'),fm=isF?formOf(c):null;
+  if(fm){const rm=sampleLines(fm);rm.forEach(i=>{L.splice(i,1);if(i<at)at--});if(rm.length)msg.textContent='The sample fields in this form were replaced by your first real field.'}
+  L.splice(at,0,...txt);
+  const pp=pageOf(c);if(pp)FP[pp.key]=pp.idx;
+  setText(L.join('\n'));
+  if(col||CONT.has(t)){$('#fc').value=String(at+1+(col?1:0));fillMore();if(t==='form')msg.textContent='Added a form with sample fields (dashed outline). Use the Form designer below to add your real questions; the samples are replaced automatically.'}
   else if(pv!=='end')$('#fp').value=String(+pv+txt.length);
-  $('#fl').value='';$('#fx').value='';$('#fl').focus();
+  $('#fl').value='';$('#fx').value='';$('#fh').value='';$('#freq').checked=false;$('#fl').focus();
 };
 const LOREM='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 function syncLabel(){
   const u=$('#ft').value==='use',l=$('#fl');
-  l.hidden=u;$('#fls').hidden=!u;$('#fll').textContent=u?'Shared component':(REF.has($('#ft').value)?'Reference name':'Label');l.placeholder=PH[$('#ft').value]||'Label';
+  l.hidden=u;$('#fls').hidden=!u;$('#fll').textContent=u?'Shared component':(REF.has($('#ft').value)?'Reference name':'Label');l.placeholder=PH[$('#ft').value]||'Label';$('#fhelp').innerHTML=ELHELP[$('#ft').value]||'';
   syncExtra();syncNew();
   setOpts($('#fls'),data.comps.length?data.comps.map(c=>`<option>${esc(c.label)}</option>`).join(''):'<option value="">(none defined yet)</option>');
   if(u){l.value=$('#fls').value;l.dataset.u='1'}else if(l.dataset.u){l.value='';l.dataset.u=''}
@@ -1258,7 +1438,7 @@ function syncToNode(n){
   $('#fs').value=String(t.line);fillForm();$('#fc').value=c&&c!==t?String(c.line):'root';fillMore();
 }
 const qt=v=>`"${v}"`;
-const attrStr=a=>Object.entries(a).map(([k,v])=>k+'='+(/\s/.test(v)?`"${v}"`:v)).join(' ');
+const attrStr=a=>Object.entries(a).map(([k,v])=>(k==='required'||k==='sample')&&v==='yes'?k:k+'='+(/\s/.test(v)?`"${v}"`:v)).join(' ');
 function fillVals(){
   const n=pick(),on=!!n,lk=on&&(n.type==='button'||n.type==='link');
   setOpts($('#vto'),actOpts(on?topOf(n):null,on&&inModal(n)));
@@ -1268,7 +1448,8 @@ function fillVals(){
   setOpts($('#vst'),so?so+'<option value="?">Several (edit in the text)</option>':'');$('#vstrow').hidden=!so;
   if(so)$('#vst').value=stCur(n);
   fillVty(n);
-  ['#vl','#vx','#vly','#vapply'].forEach(s=>$(s).disabled=!on);$('#vto').disabled=!lk;$('#vto').parentNode.hidden=!lk;
+  {const fq=on&&FIELDS.has(n.type);$('#vreqrow').hidden=!fq;$('#vhrow').hidden=!fq;$('#vreq').checked=fq&&!!n.attrs.required;$('#vh').value=fq?(n.attrs.hint||''):''}
+  ['#vl','#vx','#vly','#vapply','#vreq','#vh'].forEach(s=>$(s).disabled=!on);$('#vto').disabled=!lk;$('#vto').parentNode.hidden=!lk;
 }
 $('#vapply').onclick=()=>{
   const n=pick();if(!n)return;
@@ -1281,6 +1462,303 @@ $('#vapply').onclick=()=>{
   }
   setText(L.join('\n'));$('#fm').value=String(ln);fillTargets();
 };
+/* ---------- Form designer ---------- */
+const FD={last:null};
+const FQT=[['input','Short text',{}],['input','Email address',{type:'email'}],['input','Phone number',{type:'tel'}],['input','Number',{type:'number'}],['input','Web address (URL)',{type:'url'}],['input','Password',{type:'password'}],['textarea','Long text (several lines)',{}],['radios','Choose one (radio buttons)',{}],['checks','Choose several (checkboxes)',{}],['select','Dropdown list',{}],['checkbox','Single checkbox (e.g. agree to terms)',{}],['date','Date',{}],['date','Date and time',{kind:'datetime'}],['file','File upload',{}],['range','Slider (1 to 10)',{min:'1',max:'10'}],['field','Other (name the type yourself)',{}]];
+$('#fdt').innerHTML=FQT.map((q,i)=>`<option value="${i}">${esc(q[1])}</option>`).join('');
+const parseOpts=v=>(v||'').trim()?((v.includes('|')?v.split('|'):v.split(/[,\n]/)).map(x=>x.trim().replace(/"/g,"'")).filter(Boolean).join('|')):'';
+function fdTypeSync(){const t=FQT[+$('#fdt').value][0];$('#fdorow').hidden=!(t==='radios'||t==='checks'||t==='select');$('#fdarow').hidden=t!=='field'}
+$('#fdt').onchange=fdTypeSync;fdTypeSync();
+const formsInScope=()=>scopeTops().flatMap(t=>all(t).filter(k=>k.type==='form'));
+function fdForm(){const fs=formsInScope();return fs.find(f=>String(f.line)===$('#fdf').value)||fs[0]}
+function fdTarget(f){const pg=pagesOf(f);return pg.length?(pg.find(p=>String(p.line)===$('#fdp').value)||pg[0]):f}
+function fdSync(){
+  const box=$('#fdes');if(!box)return;
+  const fs=formsInScope();box.hidden=!fs.length;if(!fs.length)return;
+  const sel=pick(),pref=formOf(sel)||formOf((curC()||[])[1]);
+  setOpts($('#fdf'),fs.map(f=>`<option value="${f.line}">${esc(f.label||'Untitled form')}${topOf(f).type==='component'?' (shared component)':''}</option>`).join(''));
+  if(pref&&fs.includes(pref)&&FD.last!==pref.line){$('#fdf').value=String(pref.line);FD.last=pref.line}
+  const f=fdForm(),pg=pagesOf(f);
+  setOpts($('#fdp'),pg.map((p,i)=>`<option value="${p.line}">Page ${i+1}: ${esc(p.label||'(untitled)')}</option>`).join(''));
+  const sp=sel&&pg.find(p=>p===sel||all(p).includes(sel));
+  const cp=Math.min(FP[fpKey(f)]||0,Math.max(pg.length-1,0)),sig=f.line+':'+cp+':'+pg.length;
+  if(sp){$('#fdp').value=String(sp.line);FD.sig=sig}
+  else if(pg.length&&FD.sig!==sig){$('#fdp').value=String(pg[cp].line);FD.sig=sig}
+  $('#fdprow').hidden=!pg.length;
+  const qs=all(f).filter(isQ),smp=qs.filter(k=>k.attrs.sample),real=qs.filter(k=>!k.attrs.sample),rq=real.filter(k=>k.attrs.required).length;
+  $('#fdsum').innerHTML=`Designing form <b>${esc(f.label||'untitled')}</b>: ${pg.length?pg.length+' pages':'one page'}, ${real.length} question${real.length===1?'':'s'}${rq?' ('+rq+' required)':''}${smp.length?', plus '+smp.length+' sample field'+(smp.length===1?'':'s'):''}.`;
+  $('#fdclear').hidden=!smp.length;
+  const tips=[];
+  if(smp.length)tips.push('Fields with a dashed outline are <b>samples</b> showing how a form looks. Add your own questions with <b>Add question</b> and they are replaced automatically, or use <b>Remove sample fields</b>.');
+  else if(!real.length)tips.push('No questions yet. Type your first question above, choose an answer type and press <b>Add question</b>.');
+  if(real.length&&!rq)tips.push('Mark the questions people must answer as <b>Required</b>.');
+  if(!all(f).some(k=>k.type==='button'))tips.push('There is no submit button. Add a <b>Special \u2192 Button</b> inside the form (for example \u201cSubmit\u201d).');
+  if(!pg.length&&real.length>7)tips.push('That is a lot of questions for one page. Press <b>Add page</b> to split the form into steps.');
+  if(!pg.length&&real.length>0&&real.length<=7)tips.push('Need several steps? <b>Add page</b> turns this into a multi-page form.');
+  pg.forEach((p,i)=>{if(!p.label)tips.push(`Page ${i+1} has no title: select it in the Edit box and give it a label.`);if(!all(p).some(isQ))tips.push(`Page ${i+1} has no questions yet.`)});
+  if(pg.length)tips.push('Pages show one at a time in the preview, with Back and Next added for you. Put the Submit button on the last page.');
+  real.filter(k=>/^option 1\|option 2/i.test(k.attrs.options||'')).forEach(k=>tips.push(`\u201c${esc(k.label)}\u201d still uses the sample choices: select it in the preview and change its Options.`));
+  const ts=topOf(f);if(ts.type==='screen'&&real.length&&!stateList(ts).some(x=>/complet|thank|success|sent/i.test(x)))tips.push('Decide what happens after submitting: add a <b>Form completed</b> state (State row above the preview) to design the thank-you message.');
+  $('#fdtips').innerHTML=tips.slice(0,7).map(t=>`<li>${t}</li>`).join('');
+}
+$('#fdf').onchange=()=>{const f=fdForm();FD.last=f&&f.line;fdSync()};
+$('#fdp').onchange=()=>{const f=fdForm(),p=pagesOf(f).findIndex(x=>String(x.line)===$('#fdp').value);if(p>=0){FP[fpKey(f)]=p;showPrev()}};
+$('#fdq').onkeydown=e=>{if(e.key==='Enter')$('#fdadd').click()};
+$('#fdadd').onclick=()=>{
+  const f=fdForm();if(!f)return;
+  const q=$('#fdq').value.replace(/"/g,"'").trim();if(!q){$('#fdq').focus();return}
+  const[t,,base]=FQT[+$('#fdt').value],at={...base},c=fdTarget(f);
+  if(t==='radios'||t==='checks'||t==='select')at.options=parseOpts($('#fdo').value)||'Option 1|Option 2|Option 3';
+  if(t==='field')at.as=$('#fda').value.replace(/"/g,"'").trim()||'Custom field';
+  if($('#fdr').checked)at.required='yes';
+  const h=$('#fdh').value.replace(/"/g,"'").trim();if(h)at.hint=h;
+  const line=' '.repeat((c.depth+1)*2)+t+` "${q}"`+(Object.keys(at).length?' '+attrStr(at):'');
+  const L=ta.value.split('\n'),rm=sampleLines(f);let pos=endBeforeButtons(c);
+  rm.forEach(i=>{L.splice(i,1);if(i<pos)pos--});
+  L.splice(pos,0,line);
+  const pp=pageOf(c);if(pp)FP[pp.key]=pp.idx;
+  FD.last=f.line;
+  setText(L.join('\n'));
+  $('#fdq').value='';$('#fdh').value='';$('#fdo').value='';$('#fda').value='';$('#fdq').focus();
+};
+$('#fdpage').onclick=()=>{const f=fdForm();if(f)addPage(f)};
+$('#fdclear').onclick=()=>{const f=fdForm();if(!f)return;const L=ta.value.split('\n');sampleLines(f).forEach(i=>L.splice(i,1));setText(L.join('\n'))};
+/* ---------- Form details for the AI handoff ---------- */
+const FTN={input:k=>'short text, type '+(k.attrs.type||'text'),textarea:()=>'long text',radios:()=>'radio buttons (choose one)',checks:()=>'checkboxes (choose several)',select:()=>'dropdown',checkbox:()=>'single checkbox',date:k=>'date picker'+(k.attrs.kind?' ('+k.attrs.kind+')':''),file:k=>'file upload'+(k.attrs.accept?' accepting '+k.attrs.accept:''),range:k=>'slider '+(k.attrs.min||'1')+' to '+(k.attrs.max||'10'),field:k=>'CUSTOM field type: '+(k.attrs.as||'unspecified')};
+const fline=k=>`- ${k.label||'(unlabelled)'}: ${FTN[k.type](k)}${k.attrs.options?' \u2014 choices: '+k.attrs.options.split('|').join(', '):''}${k.attrs.required?'; required':'; optional'}${k.attrs.hint?'; help text \u201c'+k.attrs.hint+'\u201d':''}${k.attrs.placeholder?'; placeholder \u201c'+k.attrs.placeholder+'\u201d':''}${k.attrs.sample?' [SAMPLE placeholder]':''}`;
+function formSection(fl,tn){
+  const fs=fl.filter(k=>k.type==='form');if(!fs.length)return'';
+  let hasS=false,hasC=false;
+  const line=k=>{if(k.attrs.sample)hasS=true;if(k.type==='field')hasC=true;return fline(k)};
+  const qs=arr=>arr.flatMap(c=>[c,...all(c)]).filter(isQ).map(line);
+  const blk=fs.map(f=>{
+    const pg=pagesOf(f),ex=f.children.filter(c=>c.type!=='formpage');
+    const bt=all(f).filter(k=>k.type==='button').map(b=>`\u201c${b.label}\u201d${b.attrs.state?' (switches the screen to state \u201c'+b.attrs.state+'\u201d)':b.to?' (goes to \u201c'+b.to+'\u201d)':''}`);
+    const body=pg.length?pg.map((p,i)=>`Page ${i+1} of ${pg.length}: \u201c${p.label||'untitled'}\u201d\n${qs(p.children).join('\n')||'- (no questions)'}`).join('\n\n')+(qs(ex).length?'\n\nOutside the pages (shown on the last page):\n'+qs(ex).join('\n'):''):(qs(f.children).join('\n')||'- (no questions)');
+    return `### ${tn(f)}: form \u201c${f.label||'untitled'}\u201d \u2014 ${pg.length?pg.length+' pages (multi-step)':'one page'}\n${body}\nButtons: ${bt.join(', ')||'none yet (ask me)'}`;
+  }).join('\n\n');
+  return `\n## Forms (the real questions this interface asks)\nBuild each form exactly as listed: labels, order, field types, choices, required and help text.\n${hasS?'Fields marked [SAMPLE placeholder] only show how the layout looks: do not build them as real questions; ask me what to ask instead.\n':''}${hasC?'Fields of type CUSTOM have no standard HTML control: build the closest accessible equivalent and say what you chose.\n':''}\n${blk}\n`;
+}
+function formReq(fl,tn){
+  const out=[];
+  fl.filter(k=>k.type==='form').forEach(f=>{
+    const pg=pagesOf(f),qs=all(f).filter(k=>isQ(k)&&!k.attrs.sample),rq=qs.filter(k=>k.attrs.required);
+    out.push(`- [ ] ${tn(f)}: form \u201c${f.label||'untitled'}\u201d has ${qs.length} question${qs.length===1?'':'s'}${pg.length?' over '+pg.length+' pages ('+pg.map(p=>'\u201c'+(p.label||'untitled')+'\u201d').join(', ')+')':''}; required: ${rq.length?rq.map(k=>'\u201c'+k.label+'\u201d').join(', '):'none'}`);
+    if(pg.length)out.push('  - progress indicator, Back and Next that keep answers, validation before moving on, the final page submits');
+  });
+  return out;
+}
+const FX_TPL={"html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>{{TITLE_H}}<\/title>\n<style>\n  .wsf { max-width: 40rem; margin: 0 auto; padding: 1rem; font-family: system-ui, sans-serif; line-height: 1.5; color: #1d2733; }\n  .wsf .field { margin: 0 0 1.25rem; }\n  .wsf label, .wsf legend { display: block; font-weight: 600; margin-bottom: .25rem; }\n  .wsf .choice { font-weight: 400; display: flex; gap: .5rem; align-items: center; }\n  .wsf fieldset { border: 0; margin: 0; padding: 0; }\n  .wsf input:not([type=checkbox]):not([type=radio]):not([type=range]), .wsf select, .wsf textarea { width: 100%; box-sizing: border-box; font: inherit; padding: .5rem; border: 1px solid #8a96a3; border-radius: 4px; }\n  .wsf .hint { color: #5d6b7a; font-size: .875rem; margin: 0 0 .25rem; }\n  .wsf .error { color: #b3261e; font-size: .875rem; margin: .25rem 0 0; }\n  .wsf .has-error input, .wsf .has-error select, .wsf .has-error textarea { border-color: #b3261e; }\n  .wsf .steps { color: #5d6b7a; margin: 0 0 1rem; }\n  .wsf .nav { display: flex; gap: .5rem; }\n  .wsf button { font: inherit; padding: .5rem 1rem; border-radius: 4px; border: 1px solid #1d2733; background: #1d2733; color: #fff; cursor: pointer; }\n  .wsf button.secondary { background: #fff; color: #1d2733; }\n  .wsf [hidden] { display: none; }\n<\/style>\n<\/head>\n<body>\n<!-- Form generated by WireframeSpace. Set the action to where the answers should be sent. -->\n<form class=\"wsf\" method=\"post\" action=\"{{ACTION}}\"{{ENCTYPE}} novalidate>\n<h1>{{TITLE_H}}<\/h1>\n{{BODY}}\n<\/form>\n<script>\n(function () {\n  var form = document.querySelector('.wsf');\n  var pages = [].slice.call(form.querySelectorAll('.page'));\n  var steps = form.querySelector('.steps');\n  var back = form.querySelector('[data-back]');\n  var next = form.querySelector('[data-next]');\n  var current = 0;\n\n  function showError(field, message) {\n    var old = field.querySelector('.error');\n    if (old) { old.remove(); }\n    field.classList.toggle('has-error', !!message);\n    if (message) {\n      var p = document.createElement('p');\n      p.className = 'error';\n      p.textContent = message;\n      field.appendChild(p);\n    }\n  }\n\n  function validate(scope) {\n    var ok = true;\n    [].slice.call(scope.querySelectorAll('.field')).forEach(function (field) {\n      var message = '';\n      var group = field.querySelector('fieldset[data-required-group]');\n      if (group && !group.querySelector('input:checked')) {\n        message = 'Choose at least one option';\n      } else {\n        var control = field.querySelector('input, select, textarea');\n        if (control && !control.checkValidity()) { message = control.validationMessage; }\n      }\n      showError(field, message);\n      if (message) { ok = false; }\n    });\n    return ok;\n  }\n\n  function show(i) {\n    current = i;\n    pages.forEach(function (p, n) { p.hidden = n !== i; });\n    if (steps) { steps.textContent = 'Step ' + (i + 1) + ' of ' + pages.length + ': ' + pages[i].getAttribute('data-title'); }\n    if (back) { back.hidden = i === 0; }\n    if (next) { next.hidden = i === pages.length - 1; }\n    var submit = form.querySelector('[type=submit]');\n    if (submit) { submit.hidden = i !== pages.length - 1; }\n  }\n\n  if (pages.length > 1) {\n    show(0);\n    if (next) { next.addEventListener('click', function () { if (validate(pages[current])) { show(current + 1); } }); }\n    if (back) { back.addEventListener('click', function () { show(current - 1); }); }\n  }\n  form.addEventListener('submit', function (e) {\n    if (!validate(form)) {\n      e.preventDefault();\n      var firstPage = pages.findIndex(function (p) { return p.querySelector('.has-error'); });\n      if (firstPage > -1) { show(firstPage); }\n    }\n  });\n})();\n<\/script>\n<\/body>\n<\/html>\n", "config": "<?php\ndeclare(strict_types=1);\n\n// Database connection. Set these environment variables, or edit the fallbacks.\nfunction db(): PDO\n{\n    static $pdo = null;\n    if ($pdo === null) {\n        $dsn = sprintf(\n            'mysql:host=%s;dbname=%s;charset=utf8mb4',\n            getenv('DB_HOST') ?: 'localhost',\n            getenv('DB_NAME') ?: 'CHANGE_ME'\n        );\n        $pdo = new PDO($dsn, getenv('DB_USER') ?: 'CHANGE_ME', getenv('DB_PASS') ?: '', [\n            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,\n            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,\n            PDO::ATTR_EMULATE_PREPARES => false,\n        ]);\n    }\n    return $pdo;\n}\n\n// Escape text for HTML output.\nfunction h(mixed $s): string\n{\n    return htmlspecialchars((string) $s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');\n}\n\nif (session_status() === PHP_SESSION_NONE) {\n    session_start();\n}\n", "form": "<?php\ndeclare(strict_types=1);\n/**\n * {{TITLE_C}}: generated by WireframeSpace.\n *\n * form.php        creates a new record\n * form.php?id=12  edits record 12 (add your own access control first)\n *\n * Answers are kept in the session while the person moves between pages\n * and are saved to the database once, when the last page is submitted.\n */\nrequire __DIR__ . '/config.php';\n\nconst TABLE = {{TABLE_PHP}};\nconst TITLE = {{TITLE_PHP}};\nconst SUBMIT_LABEL = {{SUBMIT_PHP}};\nconst UPLOAD_DIR = __DIR__ . '/uploads'; // better: a folder outside the web root\n\n$PAGES = {{PAGES}};\n$FIELDS = {{FIELDS}};\n\nfunction field_error(array $f, mixed $v): string\n{\n    $label = $f['label'];\n    $empty = $f['type'] === 'checkbox' ? !$v : ($v === '' || $v === null || $v === []);\n    if ($empty) {\n        return $f['required'] ? ($f['type'] === 'checkbox' ? $label . ' must be ticked' : $label . ' is required') : '';\n    }\n    switch ($f['type']) {\n        case 'email':\n            return filter_var($v, FILTER_VALIDATE_EMAIL) ? '' : $label . ' must be a valid email address';\n        case 'url':\n            return filter_var($v, FILTER_VALIDATE_URL) ? '' : $label . ' must be a valid web address';\n        case 'tel':\n            return preg_match('/^[0-9 +().-]{6,32}$/', (string) $v) ? '' : $label . ' must be a valid phone number';\n        case 'number':\n            return is_numeric($v) ? '' : $label . ' must be a number';\n        case 'range':\n            return is_numeric($v) && $v >= $f['min'] && $v <= $f['max'] ? '' : $label . ' must be between ' . $f['min'] . ' and ' . $f['max'];\n        case 'date':\n            $d = DateTime::createFromFormat('Y-m-d', (string) $v);\n            return $d && $d->format('Y-m-d') === $v ? '' : $label . ' must be a real date';\n        case 'datetime':\n            return strtotime((string) $v) !== false ? '' : $label . ' must be a real date and time';\n        case 'month':\n            return preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])$/', (string) $v) ? '' : $label . ' must be a month';\n        case 'time':\n            return preg_match('/^([01][0-9]|2[0-3]):[0-5][0-9]/', (string) $v) ? '' : $label . ' must be a time';\n        case 'color':\n            return preg_match('/^#[0-9a-fA-F]{6}$/', (string) $v) ? '' : $label . ' must be a colour';\n        case 'radios':\n        case 'select':\n            return in_array($v, $f['options'], true) ? '' : 'Choose one of the options for ' . $label;\n        case 'textarea':\n            return mb_strlen((string) $v) <= 65000 ? '' : $label . ' is too long';\n        case 'checks':\n        case 'checkbox':\n        case 'file':\n        case 'password':\n            return '';\n        default:\n            return mb_strlen((string) $v) <= 255 ? '' : $label . ' must be 255 characters or fewer';\n    }\n}\n\nfunction accepted(array $allowed, string $ext, string $mime): bool\n{\n    foreach ($allowed as $a) {\n        if ($a === '') {\n            continue;\n        }\n        if ($a[0] === '.') {\n            if (strtolower(substr($a, 1)) === $ext) {\n                return true;\n            }\n        } elseif (substr($a, -2) === '/*') {\n            if (str_starts_with($mime, substr($a, 0, -1))) {\n                return true;\n            }\n        } elseif ($a === $mime) {\n            return true;\n        }\n    }\n    return false;\n}\n\nfunction handle_upload(array $f, ?string $current, array &$errors): ?string\n{\n    $n = $f['name'];\n    if (!isset($_FILES[$n]) || $_FILES[$n]['error'] === UPLOAD_ERR_NO_FILE) {\n        return $current;\n    }\n    if ($_FILES[$n]['error'] !== UPLOAD_ERR_OK) {\n        $errors[$n] = 'The file could not be uploaded';\n        return $current;\n    }\n    $ext = preg_replace('/[^a-z0-9]/', '', strtolower(pathinfo($_FILES[$n]['name'], PATHINFO_EXTENSION)));\n    $mime = (new finfo(FILEINFO_MIME_TYPE))->file($_FILES[$n]['tmp_name']);\n    $blocked = ['php', 'phtml', 'phar', 'pht', 'php3', 'php4', 'php5', 'php7', 'php8', 'phps', 'cgi', 'pl', 'sh', 'exe', 'htaccess'];\n    $allowed = $f['accept'] === '' ? [] : array_map('trim', explode(',', $f['accept']));\n    if (in_array($ext, $blocked, true) || ($allowed && !accepted($allowed, $ext, (string) $mime))) {\n        $errors[$n] = 'That type of file is not allowed';\n        return $current;\n    }\n    if ($_FILES[$n]['size'] > 5 * 1024 * 1024) {\n        $errors[$n] = 'The file must be smaller than 5 MB';\n        return $current;\n    }\n    if (!is_dir(UPLOAD_DIR)) {\n        mkdir(UPLOAD_DIR, 0755, true);\n    }\n    $name = bin2hex(random_bytes(12)) . ($ext !== '' ? '.' . $ext : '');\n    move_uploaded_file($_FILES[$n]['tmp_name'], UPLOAD_DIR . '/' . $name);\n    return $name;\n}\n\nfunction save_record(array $FIELDS, array $data, int $id): int\n{\n    $vals = [];\n    foreach ($FIELDS as $f) {\n        $v = $data[$f['name']] ?? null;\n        if ($f['type'] === 'checks') {\n            $v = json_encode($v ?? [], JSON_UNESCAPED_UNICODE);\n        }\n        $vals[$f['name']] = $v === '' ? null : $v;\n    }\n    $cols = array_keys($vals);\n    if (!$cols) {\n        return $id;\n    }\n    $pdo = db();\n    if ($id) {\n        $set = implode(', ', array_map(fn($c) => '`' . $c . '` = :' . $c, $cols));\n        $vals['id'] = $id;\n        $pdo->prepare('UPDATE `' . TABLE . '` SET ' . $set . ' WHERE id = :id')->execute($vals);\n        return $id;\n    }\n    $names = implode(', ', array_map(fn($c) => '`' . $c . '`', $cols));\n    $marks = implode(', ', array_map(fn($c) => ':' . $c, $cols));\n    $pdo->prepare('INSERT INTO `' . TABLE . '` (' . $names . ') VALUES (' . $marks . ')')->execute($vals);\n    return (int) $pdo->lastInsertId();\n}\n\nfunction render_field(array $f, mixed $value, string $error): void\n{\n    $n = $f['name'];\n    $id = 'f-' . $n;\n    $req = $f['required'] ? ' required' : '';\n    $star = $f['required'] ? ' <span aria-hidden=\"true\">*<\/span>' : '';\n    $desc = trim(($f['hint'] !== '' ? $id . '-hint ' : '') . ($error !== '' ? $id . '-err' : ''));\n    $aria = ($desc !== '' ? ' aria-describedby=\"' . h($desc) . '\"' : '') . ($error !== '' ? ' aria-invalid=\"true\"' : '');\n    $group = in_array($f['type'], ['radios', 'checks'], true);\n\n    echo '<div class=\"field' . ($error !== '' ? ' has-error' : '') . '\">';\n    if ($group) {\n        echo '<fieldset><legend>' . h($f['label']) . $star . '<\/legend>';\n    } elseif ($f['type'] !== 'checkbox') {\n        echo '<label for=\"' . h($id) . '\">' . h($f['label']) . $star . '<\/label>';\n    }\n    if ($f['hint'] !== '') {\n        echo '<p class=\"hint\" id=\"' . h($id) . '-hint\">' . h($f['hint']) . '<\/p>';\n    }\n    if ($error !== '') {\n        echo '<p class=\"error\" id=\"' . h($id) . '-err\">' . h($error) . '<\/p>';\n    }\n    switch ($f['type']) {\n        case 'textarea':\n            echo '<textarea id=\"' . h($id) . '\" name=\"' . h($n) . '\" rows=\"' . (int) $f['rows'] . '\"' . $req . $aria . '>' . h($value) . '<\/textarea>';\n            break;\n        case 'select':\n            echo '<select id=\"' . h($id) . '\" name=\"' . h($n) . '\"' . $req . $aria . '><option value=\"\">Choose an option<\/option>';\n            foreach ($f['options'] as $o) {\n                echo '<option value=\"' . h($o) . '\"' . ($o === $value ? ' selected' : '') . '>' . h($o) . '<\/option>';\n            }\n            echo '<\/select>';\n            break;\n        case 'radios':\n            foreach ($f['options'] as $o) {\n                echo '<label class=\"choice\"><input type=\"radio\" name=\"' . h($n) . '\" value=\"' . h($o) . '\"' . ($o === $value ? ' checked' : '') . $req . '> ' . h($o) . '<\/label>';\n            }\n            break;\n        case 'checks':\n            foreach ($f['options'] as $o) {\n                echo '<label class=\"choice\"><input type=\"checkbox\" name=\"' . h($n) . '[]\" value=\"' . h($o) . '\"' . (in_array($o, (array) $value, true) ? ' checked' : '') . '> ' . h($o) . '<\/label>';\n            }\n            break;\n        case 'checkbox':\n            echo '<label class=\"choice\"><input type=\"checkbox\" id=\"' . h($id) . '\" name=\"' . h($n) . '\" value=\"1\"' . ($value ? ' checked' : '') . $req . $aria . '> ' . h($f['label']) . $star . '<\/label>';\n            break;\n        case 'file':\n            echo '<input type=\"file\" id=\"' . h($id) . '\" name=\"' . h($n) . '\"' . ($f['accept'] !== '' ? ' accept=\"' . h($f['accept']) . '\"' : '') . $aria . '>';\n            if ($value) {\n                echo '<p class=\"hint\">Current file: ' . h($value) . '<\/p>';\n            }\n            break;\n        case 'range':\n            echo '<input type=\"range\" id=\"' . h($id) . '\" name=\"' . h($n) . '\" min=\"' . h($f['min']) . '\" max=\"' . h($f['max']) . '\" value=\"' . h($value ?? $f['min']) . '\"' . $aria . '>';\n            break;\n        case 'password':\n            echo '<input type=\"password\" id=\"' . h($id) . '\" name=\"' . h($n) . '\" autocomplete=\"new-password\"' . ($value ? '' : $req) . $aria . '>';\n            break;\n        default:\n            $types = ['datetime' => 'datetime-local'];\n            $type = $types[$f['type']] ?? ($f['type'] === 'custom' ? 'text' : $f['type']);\n            if ($f['type'] === 'datetime' && $value) {\n                $value = str_replace(' ', 'T', substr((string) $value, 0, 16));\n            }\n            echo '<input type=\"' . h($type) . '\" id=\"' . h($id) . '\" name=\"' . h($n) . '\" value=\"' . h($value) . '\"' . $req . $aria . '>';\n    }\n    if ($group) {\n        echo '<\/fieldset>';\n    }\n    echo '<\/div>';\n}\n\n$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;\n$key = 'form_' . TABLE . '_' . $id;\nif (empty($_SESSION['csrf'])) {\n    $_SESSION['csrf'] = bin2hex(random_bytes(16));\n}\n\nif (!isset($_SESSION[$key])) {\n    $_SESSION[$key] = ['step' => 0, 'data' => []];\n    if ($id) {\n        $st = db()->prepare('SELECT * FROM `' . TABLE . '` WHERE id = ?');\n        $st->execute([$id]);\n        $row = $st->fetch();\n        if (!$row) {\n            http_response_code(404);\n            exit('Record not found');\n        }\n        foreach ($FIELDS as $f) {\n            if ($f['type'] === 'checks') {\n                $row[$f['name']] = json_decode((string) ($row[$f['name']] ?? '[]'), true) ?: [];\n            }\n        }\n        $_SESSION[$key]['data'] = $row;\n    }\n}\n$state = &$_SESSION[$key];\n$step = (int) $state['step'];\n$data = &$state['data'];\n$errors = [];\n\nif ($_SERVER['REQUEST_METHOD'] === 'POST') {\n    if (!hash_equals($_SESSION['csrf'], (string) ($_POST['csrf'] ?? ''))) {\n        http_response_code(400);\n        exit('Invalid request');\n    }\n    $nav = $_POST['nav'] ?? 'next';\n    foreach ($FIELDS as $f) {\n        if ($f['page'] !== $step) {\n            continue;\n        }\n        $n = $f['name'];\n        switch ($f['type']) {\n            case 'checks':\n                $v = array_values(array_intersect($f['options'], (array) ($_POST[$n] ?? [])));\n                break;\n            case 'checkbox':\n                $v = isset($_POST[$n]) ? 1 : 0;\n                break;\n            case 'file':\n                $v = handle_upload($f, $data[$n] ?? null, $errors);\n                break;\n            case 'password':\n                $plain = (string) ($_POST[$n] ?? '');\n                if ($plain !== '') {\n                    $data[$n] = password_hash($plain, PASSWORD_DEFAULT); // only the hash is kept\n                }\n                $v = $data[$n] ?? '';\n                break;\n            default:\n                $v = trim((string) ($_POST[$n] ?? ''));\n        }\n        if ($f['type'] !== 'password') {\n            $data[$n] = $v;\n        }\n        $msg = field_error($f, $v);\n        if ($msg !== '' && !isset($errors[$n])) {\n            $errors[$n] = $msg;\n        }\n    }\n    if ($nav === 'back' && $step > 0) {\n        $errors = [];\n        $state['step'] = $step = $step - 1;\n    } elseif (!$errors) {\n        if ($step < count($PAGES) - 1) {\n            $state['step'] = $step = $step + 1;\n        } else {\n            $savedId = save_record($FIELDS, $data, $id);\n            unset($_SESSION[$key]);\n            header('Location: thanks.php?id=' . $savedId);\n            exit;\n        }\n    }\n}\n?>\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title><?= h(TITLE) ?><\/title>\n<style>\nbody { font-family: system-ui, sans-serif; line-height: 1.5; margin: 0; padding: 1rem; color: #1d2733; }\nmain { max-width: 40rem; margin: 0 auto; }\n.field { margin: 0 0 1.25rem; }\nlabel, legend { display: block; font-weight: 600; margin-bottom: .25rem; }\n.choice { font-weight: 400; display: flex; gap: .5rem; align-items: center; }\nfieldset { border: 0; margin: 0; padding: 0; }\ninput:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea { width: 100%; box-sizing: border-box; font: inherit; padding: .5rem; border: 1px solid #8a96a3; border-radius: 4px; }\n.hint { color: #5d6b7a; font-size: .875rem; margin: 0 0 .25rem; }\n.error, .errors { color: #b3261e; }\n.has-error input, .has-error select, .has-error textarea { border-color: #b3261e; }\n.errors { border: 2px solid #b3261e; padding: .5rem 1rem; margin-bottom: 1rem; }\n.nav { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: .5rem; }\nbutton { font: inherit; padding: .5rem 1rem; border-radius: 4px; border: 1px solid #1d2733; background: #1d2733; color: #fff; cursor: pointer; }\nbutton.secondary { background: #fff; color: #1d2733; }\n<\/style>\n<\/head>\n<body>\n<main>\n<h1><?= h(TITLE) ?><\/h1>\n<?php if (count($PAGES) > 1): ?>\n<p>Step <?= $step + 1 ?> of <?= count($PAGES) ?>: <?= h($PAGES[$step]) ?><\/p>\n<?php endif; ?>\n<?php if ($errors): ?>\n<div class=\"errors\" role=\"alert\">\n<p><strong>There is a problem<\/strong><\/p>\n<ul>\n<?php foreach ($errors as $n => $msg): ?>\n<li><a href=\"#f-<?= h($n) ?>\"><?= h($msg) ?><\/a><\/li>\n<?php endforeach; ?>\n<\/ul>\n<\/div>\n<?php endif; ?>\n<form method=\"post\" enctype=\"multipart/form-data\" novalidate>\n<input type=\"hidden\" name=\"csrf\" value=\"<?= h($_SESSION['csrf']) ?>\">\n<?php foreach ($FIELDS as $f): ?>\n<?php if ($f['page'] === $step) { render_field($f, $data[$f['name']] ?? null, $errors[$f['name']] ?? ''); } ?>\n<?php endforeach; ?>\n<div class=\"nav\">\n<button type=\"submit\" name=\"nav\" value=\"next\"><?= h($step < count($PAGES) - 1 ? 'Next' : SUBMIT_LABEL) ?><\/button>\n<?php if ($step > 0): ?>\n<button type=\"submit\" name=\"nav\" value=\"back\" class=\"secondary\">Back<\/button>\n<?php endif; ?>\n<\/div>\n<\/form>\n<\/main>\n<\/body>\n<\/html>\n", "thanks": "<?php\ndeclare(strict_types=1);\nrequire __DIR__ . '/config.php';\n$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;\n?>\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Thank you<\/title>\n<\/head>\n<body>\n<main style=\"max-width:40rem;margin:2rem auto;font-family:system-ui,sans-serif\">\n<h1>Thank you<\/h1>\n<p>Your answers have been saved.<\/p>\n<p><a href=\"form.php?id=<?= $id ?>\">Change your answers<\/a> | <a href=\"form.php\">Start again<\/a><\/p>\n<\/main>\n<\/body>\n<\/html>\n", "list": "<?php\ndeclare(strict_types=1);\n/** A simple list of saved records with links to the edit form. Protect this page before using it for real. */\nrequire __DIR__ . '/config.php';\n\nconst TABLE = {{TABLE_PHP}};\n$cols = {{LISTCOLS}};\n\n$rows = db()->query('SELECT * FROM `' . TABLE . '` ORDER BY id DESC LIMIT 100')->fetchAll();\n?>\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>{{TITLE_H}}: saved records<\/title>\n<\/head>\n<body>\n<main style=\"max-width:60rem;margin:2rem auto;font-family:system-ui,sans-serif\">\n<h1>{{TITLE_H}}: saved records<\/h1>\n<table>\n<thead><tr><th>ID<\/th><?php foreach ($cols as $label): ?><th><?= h($label) ?><\/th><?php endforeach; ?><th>Created<\/th><th><\/th><\/tr><\/thead>\n<tbody>\n<?php foreach ($rows as $r): ?>\n<tr>\n<td><?= (int) $r['id'] ?><\/td>\n<?php foreach ($cols as $c => $label): ?><td><?= h($r[$c] ?? '') ?><\/td><?php endforeach; ?>\n<td><?= h($r['created_at']) ?><\/td>\n<td><a href=\"form.php?id=<?= (int) $r['id'] ?>\">Edit<\/a><\/td>\n<\/tr>\n<?php endforeach; ?>\n<\/tbody>\n<\/table>\n<p><a href=\"form.php\">Add a new record<\/a><\/p>\n<\/main>\n<\/body>\n<\/html>\n", "readme": "# {{TITLE_C}}: PHP and MySQL form\n\nGenerated by WireframeSpace from the form \"{{TITLE_C}}\".\n\n## Files\n\n- `schema.sql`: creates the `{{TABLE}}` table (MySQL 5.7+ or MariaDB 10.3+).\n- `config.php`: the database connection (PDO) and an HTML escaping helper.\n- `form.php`: the form. `form.php` creates a record, `form.php?id=12` edits record 12.\n- `thanks.php`: shown after saving.\n- `list.php`: a simple list of saved records with Edit links.\n\n## Set up\n\n1. Create a database and run `schema.sql` against it.\n2. Set the `DB_HOST`, `DB_NAME`, `DB_USER` and `DB_PASS` environment variables, or edit the fallbacks in `config.php`.\n3. Needs PHP 8.0 or later with the PDO MySQL extension (and fileinfo if the form has file uploads).\n4. Open `form.php` in a browser through your web server.\n\n## What it does\n\n- Validates every field on the server, page by page, and shows an error summary and messages next to the fields.\n- {{MULTINOTE}}\n- Protects the form with a session CSRF token and uses prepared statements. Column names come from the generated field list only.\n- Passwords (if any) are stored as `password_hash` values.\n- File uploads are checked for type and size and saved with a random name in `uploads/`. Move that folder outside the web root if you can.\n\n## Before you use it for real\n\n- Assumed structure: one table named `{{TABLE}}` with a column per question, an `id`, and `created_at` and `updated_at` timestamps. Change `schema.sql` and the `$FIELDS` list in `form.php` together.\n- The edit form and `list.php` have no access control. Add authentication and check that the person may edit a record before exposing them.\n- Serve the form over HTTPS.\n", "dform": "<?php\n\nnamespace Drupal\\{{MODULE}}\\Form;\n\nuse Drupal\\Core\\Form\\FormBase;\nuse Drupal\\Core\\Form\\FormStateInterface;\nuse Drupal\\file\\Entity\\File;\n\n/**\n * {{TITLE_C}}: generated by WireframeSpace.\n *\n * Multi-page forms use the standard Drupal pattern: one page is built at a\n * time, answers are kept in form state and the form is rebuilt for each step.\n */\nclass {{CLASS}} extends FormBase {\n\n  /**\n   * The page titles.\n   */\n  const PAGES = {{PAGES}};\n\n  /**\n   * {@inheritdoc}\n   */\n  public function getFormId(): string {\n    return '{{MODULE}}_form';\n  }\n\n  /**\n   * {@inheritdoc}\n   */\n  public function buildForm(array $form, FormStateInterface $form_state): array {\n    $page = (int) ($form_state->get('page') ?? 0);\n    $stored = $form_state->get('stored_values') ?? [];\n\n    if (count(self::PAGES) > 1) {\n      $form['progress'] = [\n        '#markup' => '<p>' . $this->t('Step @current of @total: @title', [\n          '@current' => $page + 1,\n          '@total' => count(self::PAGES),\n          '@title' => self::PAGES[$page],\n        ]) . '<\/p>',\n      ];\n    }\n{{PAGE_BLOCKS}}\n    $form['actions'] = ['#type' => 'actions'];\n    if ($page > 0) {\n      $form['actions']['back'] = [\n        '#type' => 'submit',\n        '#value' => $this->t('Back'),\n        '#submit' => ['::backSubmit'],\n        '#limit_validation_errors' => [],\n      ];\n    }\n    if ($page < count(self::PAGES) - 1) {\n      $form['actions']['next'] = [\n        '#type' => 'submit',\n        '#value' => $this->t('Next'),\n        '#submit' => ['::nextSubmit'],\n      ];\n    }\n    else {\n      $form['actions']['submit'] = [\n        '#type' => 'submit',\n        '#value' => $this->t({{SUBMIT_PHP}}),\n      ];\n    }\n    return $form;\n  }\n\n  /**\n   * Moves to the next page.\n   */\n  public function nextSubmit(array &$form, FormStateInterface $form_state): void {\n    $this->rememberValues($form_state);\n    $form_state->set('page', (int) $form_state->get('page') + 1);\n    $form_state->setRebuild();\n  }\n\n  /**\n   * Moves back a page without validating.\n   */\n  public function backSubmit(array &$form, FormStateInterface $form_state): void {\n    $this->rememberValues($form_state);\n    $form_state->set('page', max(0, (int) $form_state->get('page') - 1));\n    $form_state->setRebuild();\n  }\n\n  /**\n   * Keeps the answers from the current page.\n   */\n  protected function rememberValues(FormStateInterface $form_state): void {\n    $stored = $form_state->get('stored_values') ?? [];\n    $skip = ['op', 'form_build_id', 'form_token', 'form_id', 'submit', 'next', 'back', 'actions'];\n    foreach ($form_state->getValues() as $key => $value) {\n      if (!in_array($key, $skip, TRUE)) {\n        $stored[$key] = $value;\n      }\n    }\n    $form_state->set('stored_values', $stored);\n  }\n\n  /**\n   * {@inheritdoc}\n   */\n  public function validateForm(array &$form, FormStateInterface $form_state): void {\n    // Required fields, options, email, url and number fields are validated by\n    // the Form API. Add any extra rules here with $form_state->setErrorByName().\n  }\n\n  /**\n   * {@inheritdoc}\n   */\n  public function submitForm(array &$form, FormStateInterface $form_state): void {\n    $this->rememberValues($form_state);\n    $values = $form_state->get('stored_values');\n{{SAVE_CODE}}\n    $this->messenger()->addStatus($this->t('Thank you. Your answers have been saved.'));\n  }\n\n}\n", "dinfo": "name: {{TITLE_Y}}\ntype: module\ndescription: 'A form generated by WireframeSpace.'\ncore_version_requirement: ^10.2 || ^11\npackage: Custom\ndependencies:\n  - drupal:file\n", "drouting": "{{MODULE}}.form:\n  path: '/{{SLUG}}'\n  defaults:\n    _form: '\\Drupal\\{{MODULE}}\\Form\\{{CLASS}}'\n    _title: {{TITLE_Y}}\n  requirements:\n    _permission: 'access content'\n", "dinstall": "<?php\n\n/**\n * @file\n * Install and uninstall code for {{TITLE_C}}.\n */\n\n/**\n * Implements hook_schema().\n */\nfunction {{MODULE}}_schema(): array {\n  $schema['{{TABLE}}'] = [\n    'description' => 'Answers submitted through the {{TITLE_C}} form.',\n    'fields' => [\n      'id' => ['type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE],\n{{SCHEMA_FIELDS}}\n      'created' => ['type' => 'int', 'not null' => TRUE, 'default' => 0],\n    ],\n    'primary key' => ['id'],\n  ];\n  return $schema;\n}\n"};
+/* ---------- Developer-ready form code ---------- */
+const snake=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
+const camel=s=>snake(s).split('_').filter(Boolean).map(w=>w[0].toUpperCase()+w.slice(1)).join('')||'Form';
+const ps=s=>"'"+String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"'";
+const ys=s=>"'"+String(s).replace(/'/g,"''")+"'";
+const sqs=s=>String(s).replace(/'/g,"''");
+const tpl=(t,m)=>Object.keys(m).reduce((r,k)=>r.split('{{'+k+'}}').join(m[k]),t);
+function fkind(k){
+  const a=k.attrs;
+  if(k.type==='input')return['text','email','tel','number','url','password','search'].includes(a.type)?a.type:'text';
+  if(k.type==='date')return a.kind==='datetime'?'datetime':a.kind==='month'?'month':a.kind==='time'?'time':'date';
+  if(k.type==='field'){const as=(a.as||'').toLowerCase();if(as==='colour')return'color';return['color','url','time','week','search','tel','email','number'].includes(as)?as:'custom'}
+  return k.type;
+}
+function formModel(f){
+  const used=new Set(),pg=pagesOf(f);
+  const fieldsOf=arr=>arr.flatMap(c=>[c,...all(c)]).filter(k=>isQ(k)&&!k.attrs.sample).map(k=>{
+    let nm=snake(k.attrs.name||k.label)||'field';if(/^\d/.test(nm))nm='f_'+nm;nm=nm.slice(0,56);
+    let u=nm,i=2;while(used.has(u))u=nm+'_'+i++;used.add(u);
+    const kind=fkind(k),hasOpts=kind==='radios'||kind==='checks'||kind==='select';
+    return{name:u,label:k.label||u,kind,required:!!k.attrs.required,hint:k.attrs.hint||'',options:hasOpts?(k.attrs.options||'Option 1|Option 2|Option 3').split('|'):[],accept:k.attrs.accept||'',min:k.attrs.min||'1',max:k.attrs.max||'10',rows:k.attrs.rows||'4',as:k.attrs.as||'',placeholder:k.attrs.placeholder||''};
+  });
+  const ex=f.children.filter(c=>c.type!=='formpage');
+  let pages;
+  if(pg.length){pages=pg.map(p=>({title:p.label||'Page',fields:fieldsOf(p.children)}));pages[pages.length-1].fields.push(...fieldsOf(ex))}
+  else pages=[{title:f.label||'Form',fields:fieldsOf(f.children)}];
+  const btn=all(f).filter(k=>k.type==='button').pop();
+  return{title:f.label||'Form',id:snake(f.label)||'form',pages,multi:pg.length>0,submit:btn&&btn.label?btn.label:'Submit',fields:pages.flatMap(p=>p.fields)};
+}
+const SQLT={text:'VARCHAR(255)',email:'VARCHAR(255)',tel:'VARCHAR(32)',number:'DECIMAL(12,2)',url:'VARCHAR(2048)',password:'VARCHAR(255)',search:'VARCHAR(255)',textarea:'TEXT',radios:'VARCHAR(255)',select:'VARCHAR(255)',checks:'TEXT',checkbox:'TINYINT(1)',date:'DATE',datetime:'DATETIME',month:'CHAR(7)',time:'TIME',file:'VARCHAR(255)',range:'INT',color:'CHAR(7)',week:'VARCHAR(8)',custom:'TEXT'};
+function sqlText(m,tbl){
+  const cols=m.fields.map(f=>{
+    const t=SQLT[f.kind]||'VARCHAR(255)',nul=f.kind==='checkbox'?'NOT NULL DEFAULT 0':f.required?'NOT NULL':'NULL';
+    const note=f.kind==='checks'?' (JSON list of the chosen options)':f.kind==='password'?' (password hash)':f.kind==='file'?' (stored file name)':'';
+    return `  \`${f.name}\` ${t} ${nul} COMMENT '${sqs(f.label+note)}'`;
+  });
+  return `-- ${m.title}: generated by WireframeSpace (MySQL 5.7+ / MariaDB 10.3+)\nCREATE TABLE \`${tbl}\` (\n  \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n${cols.join(',\n')}${cols.length?',':''}\n  \`created_at\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  \`updated_at\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (\`id\`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n`;
+}
+/* --- HTML --- */
+function htmlField(f,ind){
+  const id='f-'+f.name,req=f.required?' required':'',star=f.required?' <span aria-hidden="true">*</span>':'',hid=id+'-hint';
+  const aria=f.hint?` aria-describedby="${hid}"`:'';
+  const hint=f.hint?`<p class="hint" id="${hid}">${esc(f.hint)}</p>`:'';
+  const nm=` name="${f.name}"`,ph=f.placeholder?` placeholder="${esc(f.placeholder)}"`:'';
+  let h;
+  if(f.kind==='radios'||f.kind==='checks'){
+    const t=f.kind==='radios'?'radio':'checkbox',n=f.kind==='radios'?f.name:f.name+'[]';
+    h=`<fieldset${f.required&&f.kind==='checks'?' data-required-group':''}>\n${ind}  <legend>${esc(f.label)}${star}</legend>\n${hint?ind+'  '+hint+'\n':''}${f.options.map(o=>`${ind}  <label class="choice"><input type="${t}" name="${n}" value="${esc(o)}"${f.kind==='radios'?req:''}> ${esc(o)}</label>`).join('\n')}\n${ind}</fieldset>`;
+  }else if(f.kind==='checkbox'){
+    h=`${hint?hint+'\n'+ind:''}<label class="choice"><input type="checkbox" id="${id}"${nm} value="1"${req}${aria}> ${esc(f.label)}${star}</label>`;
+  }else{
+    const lab=`<label for="${id}">${esc(f.label)}${star}</label>`;let c;
+    if(f.kind==='textarea')c=`<textarea id="${id}"${nm} rows="${esc(f.rows)}"${ph}${req}${aria}></textarea>`;
+    else if(f.kind==='select')c=`<select id="${id}"${nm}${req}${aria}><option value="">Choose an option</option>${f.options.map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select>`;
+    else if(f.kind==='file')c=`<input type="file" id="${id}"${nm}${f.accept?` accept="${esc(f.accept)}"`:''}${req}${aria}>`;
+    else if(f.kind==='range')c=`<input type="range" id="${id}"${nm} min="${esc(f.min)}" max="${esc(f.max)}"${aria}>`;
+    else{const ty={datetime:'datetime-local',custom:'text'}[f.kind]||f.kind;c=`<input type="${ty}" id="${id}"${nm}${ph}${req}${aria}>`+(f.kind==='custom'?`<!-- TODO: custom field type: ${esc(f.as||'unspecified')} -->`:'')}
+    h=`${lab}\n${ind}${hint?hint+'\n'+ind:''}${c}`;
+  }
+  return `${ind.slice(2)}<div class="field">\n${ind}${h}\n${ind.slice(2)}</div>`;
+}
+function htmlFormText(m){
+  const I='    ',hasFile=m.fields.some(f=>f.kind==='file');
+  let body;
+  if(m.multi){
+    body='  <p class="steps" aria-live="polite"></p>\n'+m.pages.map(p=>`  <div class="page" data-title="${esc(p.title)}">\n    <h2>${esc(p.title)}</h2>\n${p.fields.map(f=>htmlField(f,I+'  ')).join('\n')}\n  </div>`).join('\n')+`\n  <div class="nav">\n    <button type="button" class="secondary" data-back>Back</button>\n    <button type="button" data-next>Next</button>\n    <button type="submit">${esc(m.submit)}</button>\n  </div>`;
+  }else body=m.pages[0].fields.map(f=>htmlField(f,I+'  ')).join('\n')+`\n  <div class="nav">\n    <button type="submit">${esc(m.submit)}</button>\n  </div>`;
+  return tpl(FX_TPL.html,{TITLE_H:esc(m.title),ACTION:'/submit',ENCTYPE:hasFile?' enctype="multipart/form-data"':'',BODY:body});
+}
+/* --- PHP + MySQL --- */
+function phpArr(a){return '['+a.map(ps).join(', ')+']'}
+function phpFields(m){
+  return '[\n'+m.pages.flatMap((p,pi)=>p.fields.map(f=>`    ['name' => ${ps(f.name)}, 'label' => ${ps(f.label)}, 'type' => ${ps(f.kind)}, 'page' => ${pi}, 'required' => ${f.required?'true':'false'}, 'hint' => ${ps(f.hint)}, 'options' => ${phpArr(f.options)}, 'accept' => ${ps(f.accept)}, 'min' => ${+f.min||0}, 'max' => ${+f.max||0}, 'rows' => ${+f.rows||4}],`)).join('\n')+'\n]';
+}
+function phpFiles(m,tbl){
+  const listCols='[\n'+m.fields.filter(f=>!['password','file','textarea','checks'].includes(f.kind)).slice(0,4).map(f=>`    ${ps(f.name)} => ${ps(f.label)},`).join('\n')+'\n]';
+  const mp={TITLE_C:m.title.replace(/\*\//g,'* /'),TITLE_PHP:ps(m.title),TITLE_H:esc(m.title),TABLE:tbl,TABLE_PHP:ps(tbl),SUBMIT_PHP:ps(m.submit),PAGES:phpArr(m.pages.map(p=>p.title)),FIELDS:phpFields(m),LISTCOLS:listCols,MULTINOTE:m.multi?'Splits the form over '+m.pages.length+' pages with Back and Next. Answers are kept in the session and saved once, on the last page.':'Saves the answers to the database when the form is submitted.'};
+  return[
+    {path:'schema.sql',content:sqlText(m,tbl)},
+    {path:'config.php',content:FX_TPL.config},
+    {path:'form.php',content:tpl(FX_TPL.form,mp)},
+    {path:'thanks.php',content:FX_TPL.thanks},
+    {path:'list.php',content:tpl(FX_TPL.list,mp)},
+    {path:'README.md',content:tpl(FX_TPL.readme,mp)}
+  ];
+}
+/* --- Drupal Form API --- */
+const dExts=a=>{const l=(a||'').split(',').map(x=>x.trim()).filter(Boolean),o=new Set();l.forEach(x=>{if(x==='image/*')['png','gif','jpg','jpeg','webp'].forEach(e=>o.add(e));else if(x[0]==='.')o.add(x.slice(1));else if(x==='application/pdf')o.add('pdf')});return o.size?[...o].join(' '):'txt pdf doc docx png jpg jpeg'};
+function drupalEl(f){
+  const t=s=>`$this->t(${ps(s)})`,L=[`'#title' => ${t(f.label)}`];
+  const dv=`$stored[${ps(f.name)}] ?? ${f.kind==='checks'?'[]':f.kind==='checkbox'?'0':"''"}`;
+  const opt=`array_combine(${phpArr(f.options)}, ${phpArr(f.options)})`;
+  let ty,x=[];
+  switch(f.kind){
+    case 'textarea':ty='textarea';x=[`'#rows' => ${+f.rows||4}`];break;
+    case 'radios':ty='radios';x=[`'#options' => ${opt}`];break;
+    case 'checks':ty='checkboxes';x=[`'#options' => ${opt}`];break;
+    case 'select':ty='select';x=[`'#options' => ${opt}`,`'#empty_option' => ${t('Choose an option')}`];break;
+    case 'checkbox':ty='checkbox';break;
+    case 'date':ty='date';break;
+    case 'file':ty='managed_file';x=[`'#upload_location' => 'public://{{MODULE}}'`,`'#upload_validators' => ['FileExtension' => ['extensions' => ${ps(dExts(f.accept))}]]`];break;
+    case 'range':ty='range';x=[`'#min' => ${+f.min||0}`,`'#max' => ${+f.max||0}`,`'#step' => 1`];break;
+    case 'datetime':case 'month':case 'time':case 'week':ty='textfield';x=[`'#attributes' => ['type' => ${ps(f.kind==='datetime'?'datetime-local':f.kind)}]`];break;
+    case 'color':ty='color';break;
+    case 'custom':ty='textfield';x=[`'#maxlength' => 255`];break;
+    case 'text':ty='textfield';x=[`'#maxlength' => 255`];break;
+    default:ty=f.kind;
+  }
+  const c=[`'#type' => '${ty}'`,...L,...x];
+  if(f.hint)c.push(`'#description' => ${t(f.hint)}`);
+  if(f.required)c.push(`'#required' => TRUE`);
+  if(f.kind!=='file'&&f.kind!=='password')c.push(`'#default_value' => ${dv}`);
+  return `${f.kind==='custom'?`      // TODO: custom field type "${f.as||'unspecified'}": replace with the right element.\n`:''}      $form[${ps(f.name)}] = [\n        ${c.join(',\n        ')},\n      ];`;
+}
+const dbType=f=>({number:"['type' => 'numeric', 'precision' => 12, 'scale' => 2]",range:"['type' => 'int']",checkbox:"['type' => 'int', 'size' => 'tiny']",textarea:"['type' => 'text', 'size' => 'big']",checks:"['type' => 'text', 'size' => 'big']",custom:"['type' => 'text', 'size' => 'big']",file:"['type' => 'int', 'unsigned' => TRUE]",tel:"['type' => 'varchar', 'length' => 32]",url:"['type' => 'varchar', 'length' => 2048]"}[f.kind]||"['type' => 'varchar', 'length' => 255]");
+function drupalFiles(m,tbl){
+  const mod=(m.id+'_form').replace(/^(\d)/,'f_$1').slice(0,50),cls=camel(m.title)+'Form',slug_=(slug(m.title)||'form');
+  const blocks=m.pages.map((p,i)=>`\n    if ($page === ${i}) {\n${p.fields.map(drupalEl).join('\n')||'      // This page has no questions yet.'}\n    }`).join('');
+  const sv=m.fields.map(f=>{
+    const v=`$values[${ps(f.name)}]`;
+    const e=f.kind==='checks'?`json_encode(array_values(array_filter(${v} ?? [])))`:f.kind==='checkbox'?`(int) (${v} ?? 0)`:f.kind==='file'?`${v}[0] ?? NULL`:f.kind==='password'?`!empty(${v}) ? \\Drupal::service('password')->hash(${v}) : NULL`:`${v} ?? NULL`;
+    return `        ${ps(f.name)} => ${e},`;
+  }).join('\n');
+  const fileFix=m.fields.filter(f=>f.kind==='file').map(f=>`    // Make the uploaded file permanent.\n    if (!empty($values[${ps(f.name)}][0]) && ($file = File::load($values[${ps(f.name)}][0]))) {\n      $file->setPermanent();\n      $file->save();\n    }\n`).join('');
+  const save=`${fileFix}    \\Drupal::database()->insert(${ps(tbl)})\n      ->fields([\n${sv}\n        'created' => \\Drupal::time()->getRequestTime(),\n      ])\n      ->execute();`;
+  const sch=m.fields.map(f=>`      ${ps(f.name)} => ${dbType(f).slice(0,-1)}, 'not null' => FALSE],`).join('\n');
+  const mp={MODULE:mod,CLASS:cls,SLUG:slug_,TABLE:tbl,TITLE_C:m.title.replace(/\*\//g,'* /'),TITLE_Y:ys(m.title),PAGES:phpArr(m.pages.map(p=>p.title)),SUBMIT_PHP:ps(m.submit),SAVE_CODE:save,SCHEMA_FIELDS:sch};
+  return[
+    {path:`${mod}/${mod}.info.yml`,content:tpl(FX_TPL.dinfo,mp)},
+    {path:`${mod}/${mod}.routing.yml`,content:tpl(FX_TPL.drouting,mp)},
+    {path:`${mod}/${mod}.install`,content:tpl(FX_TPL.dinstall,mp)},
+    {path:`${mod}/src/Form/${cls}.php`,content:tpl(tpl(FX_TPL.dform,{PAGE_BLOCKS:blocks}),mp)}
+  ];
+}
+/* --- Drupal Webform --- */
+function webformFiles(m){
+  const q=ys,I=n=>' '.repeat(n);
+  const el=(f,n)=>{
+    const L=[],map={text:'textfield',email:'email',tel:'tel',number:'number',url:'url',password:'textfield',search:'search',textarea:'textarea',radios:'radios',checks:'checkboxes',select:'select',checkbox:'checkbox',date:'date',datetime:'datetime',month:'textfield',time:'webform_time',file:'managed_file',range:'range',color:'color',week:'textfield',custom:'textfield'};
+    L.push(`${I(n)}${f.name}:`);
+    if(f.kind==='password')L.push(`${I(n+2)}# Webform has no password element: this stores the answer as plain text. Avoid collecting passwords here.`);
+    if(f.kind==='custom')L.push(`${I(n+2)}# TODO: custom field type ${ys(f.as||'unspecified')}: choose the right element.`);
+    L.push(`${I(n+2)}'#type': ${map[f.kind]||'textfield'}`,`${I(n+2)}'#title': ${q(f.label)}`);
+    if(f.hint)L.push(`${I(n+2)}'#description': ${q(f.hint)}`);
+    if(f.required)L.push(`${I(n+2)}'#required': true`);
+    if(f.options.length){L.push(`${I(n+2)}'#options':`);f.options.forEach(o=>L.push(`${I(n+4)}${q(o)}: ${q(o)}`))}
+    if(f.kind==='textarea')L.push(`${I(n+2)}'#rows': ${+f.rows||4}`);
+    if(f.kind==='range')L.push(`${I(n+2)}'#min': ${+f.min||0}`,`${I(n+2)}'#max': ${+f.max||0}`);
+    if(f.kind==='file')L.push(`${I(n+2)}'#file_extensions': ${q(dExts(f.accept))}`);
+    if(f.kind==='month'||f.kind==='week')L.push(`${I(n+2)}'#attributes':`,`${I(n+4)}type: ${f.kind}`);
+    return L.join('\n');
+  };
+  const els=m.multi?m.pages.map((p,i)=>`${snake(p.title)||'page'}_${i+1}:\n  '#type': webform_wizard_page\n  '#title': ${q(p.title)}\n${p.fields.map(f=>el(f,2)).join('\n')}`).join('\n'):m.fields.map(f=>el(f,0)).join('\n');
+  const cfg=`langcode: en\nstatus: open\ndependencies: {  }\nweight: 0\nuid: null\ntemplate: false\narchive: false\nid: ${m.id.slice(0,32)}\ntitle: ${q(m.title)}\ndescription: ''\ncategories: {  }\nelements: |\n${els.split('\n').map(l=>'  '+l).join('\n')}\ncss: ''\njavascript: ''\n`;
+  return[
+    {path:'webform-elements.yml',content:`# Paste into: Structure > Webforms > (your webform) > Build > Source (YAML).\n# ${m.multi?'Each wizard page becomes a step with Previous and Next buttons.':'A single-page webform.'}\n${els}\n`},
+    {path:`webform.webform.${m.id.slice(0,32)}.yml`,content:`# Importable Webform configuration (Configuration > Development > Configuration synchronization > Single import).\n# Settings such as emails and confirmation use Webform defaults: review them after importing.\n${cfg}`}
+  ];
+}
+/* --- JSON --- */
+function jsonFiles(m){
+  const def={title:m.title,id:m.id,submitLabel:m.submit,pages:m.pages.map(p=>({title:p.title,fields:p.fields.map(f=>{const o={name:f.name,label:f.label,type:f.kind,required:f.required};if(f.hint)o.hint=f.hint;if(f.options.length)o.options=f.options;if(f.accept)o.accept=f.accept;if(f.kind==='range'){o.min=+f.min;o.max=+f.max}if(f.kind==='textarea')o.rows=+f.rows;if(f.kind==='custom')o.customType=f.as;if(f.placeholder)o.placeholder=f.placeholder;return o})}))};
+  return[{path:`${m.id}.form.json`,content:JSON.stringify(def,null,2)+'\n'}];
+}
+const FX_FMT=[['html','Standalone HTML form (accessible, validated, multi-page ready)'],['php','PHP + MySQL: form, save and edit, with schema'],['drupal-api','Drupal module: Form API class, route and database table'],['drupal-webform','Drupal Webform: paste-in YAML and importable config'],['sql','MySQL table only'],['json','JSON form definition (for other tools)']];
+$('#fxfmt').innerHTML=FX_FMT.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+function fxForms(){return all({children:data.screens.concat(data.comps)}).filter(k=>k.type==='form')}
+function fxFiles(){
+  const fs=fxForms(),f=fs.find(k=>String(k.line)===$('#fxform').value)||fs[0];
+  if(!f)return[];
+  const m=formModel(f),fmt=$('#fxfmt').value,tbl=snake($('#fxtbl').value)||m.id;
+  if(!m.fields.length)return[{path:'README.txt',content:'This form has no real questions yet (only sample fields, which are left out). Add your questions in the Form designer, then export again.\n'}];
+  return {html:()=>[{path:`${m.id}.html`,content:htmlFormText(m)}],php:()=>phpFiles(m,tbl),'drupal-api':()=>drupalFiles(m,tbl),'drupal-webform':()=>webformFiles(m),sql:()=>[{path:'schema.sql',content:sqlText(m,tbl)}],json:()=>jsonFiles(m)}[fmt]();
+}
+function fxSync(){
+  const fs=fxForms();
+  setOpts($('#fxform'),fs.map(f=>`<option value="${f.line}">${esc(topOf(f).label)}: ${esc(f.label||'Untitled form')}</option>`).join(''));
+  $('#fxtblrow').hidden=!['php','drupal-api','sql'].includes($('#fxfmt').value);
+  const f=fs.find(k=>String(k.line)===$('#fxform').value)||fs[0];
+  if(f&&FX.f!==f.line){FX.f=f.line;$('#fxtbl').value=snake(f.label)||'form'}
+}
+const FX={f:null};
+function formText(){
+  fxSync();
+  if(!fxForms().length)return'There are no forms in this project yet. Add a Form element, design its questions, then come back here to export code for it.';
+  const files=fxFiles();
+  return files.length===1?files[0].content:files.map(f=>`=== FILE: ${f.path} ===\n${f.content}`).join('\n');
+}
+function crc32(u8){let t=crc32.t;if(!t){t=crc32.t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}}let r=-1;for(let i=0;i<u8.length;i++)r=t[(r^u8[i])&255]^(r>>>8);return(r^-1)>>>0}
+function makeZip(files){
+  const enc=new TextEncoder(),parts=[],cd=[];let off=0;
+  const u16=v=>[v&255,(v>>>8)&255],u32=v=>[v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255];
+  files.forEach(f=>{
+    const nm=enc.encode(f.path),d=enc.encode(f.content),c=crc32(d);
+    const common=[...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(c),...u32(d.length),...u32(d.length),...u16(nm.length),...u16(0)];
+    parts.push(new Uint8Array([0x50,0x4b,3,4,...u16(20),...common]),nm,d);
+    cd.push(new Uint8Array([0x50,0x4b,1,2,...u16(20),...u16(20),...common,...u16(0),...u16(0),...u16(0),...u32(0),...u32(off)]),nm);
+    off+=30+nm.length+d.length;
+  });
+  const cdLen=cd.reduce((a,b)=>a+b.length,0);
+  parts.push(...cd,new Uint8Array([0x50,0x4b,5,6,0,0,0,0,...u16(files.length),...u16(files.length),...u32(cdLen),...u32(off),0,0]));
+  return new Blob(parts,{type:'application/zip'});
+}
+function fxDownload(){
+  const files=fxFiles();if(!files.length)return;
+  const fs=fxForms(),f=fs.find(k=>String(k.line)===$('#fxform').value)||fs[0];
+  if(files.length>1)saveFile(pf((slug(f.label||'form')||'form')+'-'+$('#fxfmt').value+'.zip'),makeZip(files));
+  else saveFile(pf(files[0].path),new Blob([files[0].content],{type:'text/plain;charset=utf-8'}));
+}
+['#fxform','#fxfmt','#fxtbl'].forEach(q=>['input','change'].forEach(e=>$(q).addEventListener(e,()=>{if(X==='form')showExp()})));
 const LIGHT='--card:#fff;--fg:#1d2733;--mut:#5d6b7a;--bd:#c5cdd6;--ac:#1f5fbf;--note:#fff4c2;--noteb:#d4b02a;--notef:#4d3d00';
 function sheet(all){
   const ss=all?data.screens:data.screens.filter(s=>slug(s.label)===cur),w=D==='wide'?960:420;
@@ -1288,9 +1766,9 @@ function sheet(all){
   b.style.cssText=LIGHT+';position:fixed;left:-99999px;top:0;display:flex;flex-direction:'+(all&&$('#imgdir').value==='h'?'row':'column')+';gap:24px;align-items:flex-start;padding:24px;background:#fff;color:#1d2733';
   const nt=$('#shownotes').checked,cap=t=>`<div style="text-align:center;color:#5d6b7a;font-size:13px;margin-bottom:6px">${esc(t)}</div>`,frames=[];
   ss.forEach(s=>{
-    const sl=stateList(s),sts=all?(sl.length?sl:[null]):[stateOf(s)];
-    sts.forEach(st=>{CURST=st;const pg=pageHTML(s,nt);CURST=null;frames.push([s.label+(st?' \u00b7 '+st:''),pg,''])});
-    allModals(s).forEach(m=>{CURST=sts[0];const pg=pageHTML(s,nt),mb=R(m,nt);CURST=null;frames.push([s.label+' \u00b7 modal open: '+m.label,pg,`<div class="mover">${mb}</div>`])});
+    const sl=stateList(s),sts=all?(sl.length?sl:[null]):[stateOf(s)],np=all?fpCount(s,false):1;
+    sts.forEach(st=>{for(let p=0;p<np;p++){CURST=st;FPFORCE=np>1?p:null;const pg=pageHTML(s,nt);CURST=null;FPFORCE=null;frames.push([s.label+(st?' \u00b7 '+st:'')+(np>1?' \u00b7 form page '+(p+1)+' of '+np:''),pg,''])}});
+    allModals(s).forEach(m=>{const mp=all?fpCount(m,true):1;for(let p=0;p<mp;p++){CURST=sts[0];FPFORCE=mp>1?p:null;const pg=pageHTML(s,nt),mb=R(m,nt);CURST=null;FPFORCE=null;frames.push([s.label+' \u00b7 modal open: '+m.label+(mp>1?' \u00b7 form page '+(p+1)+' of '+mp:''),pg,`<div class="mover">${mb}</div>`])}});
   });
   b.innerHTML=frames.map(([c,pg,ov])=>`<div style="width:${w}px">${cap(c)}<div class="screen${D==='wide'?' wide':''}" style="max-width:none">${pg}${ov}</div></div>`).join('');
   document.body.appendChild(b);return b;
